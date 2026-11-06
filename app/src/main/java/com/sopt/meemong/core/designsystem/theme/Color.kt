@@ -1,4 +1,4 @@
-package com.sopt.meemong.ui.theme
+package com.sopt.meemong.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
