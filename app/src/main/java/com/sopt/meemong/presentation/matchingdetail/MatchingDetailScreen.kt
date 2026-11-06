@@ -11,10 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sopt.meemong.core.di.ViewModelFactory
 
 @Composable
 fun MatchingDetailRoute(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MatchingDetailViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     MatchingDetailScreen(
         modifier = modifier
