@@ -1,7 +1,5 @@
 package com.sopt.meemong.core.designsystem.theme
 
-import android.R.attr.name
-import android.graphics.Color.blue
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
