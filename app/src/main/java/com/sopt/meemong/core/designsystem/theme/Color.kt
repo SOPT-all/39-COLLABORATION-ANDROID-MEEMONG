@@ -1,9 +1,26 @@
 package com.sopt.meemong.core.designsystem.theme
 
+import android.R.attr.name
+import android.graphics.Color.blue
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 private val MeemongBlue = Color(0XFF4674FF)
 
@@ -27,8 +44,10 @@ private val White = Color(0XFFFFFFFF)
 
 private val Background = Color(0XFFE6F2FF)
 
-private val GradientIcon = Brush.verticalGradient(colors = listOf(Color(0xFF3779FD), Color(0xFF5A44C9)))
-private val GradientHero = Brush.verticalGradient(colors = listOf(Black.copy(alpha = 0.6f), Black.copy(alpha = 0.0f)))
+private val GradientIcon =
+    Brush.verticalGradient(colors = listOf(Color(0xFF3779FD), Color(0xFF5A44C9)))
+private val GradientHero =
+    Brush.verticalGradient(colors = listOf(Black.copy(alpha = 0.6f), Black.copy(alpha = 0.0f)))
 
 @Immutable
 data class MeemongColors(
@@ -86,3 +105,124 @@ val defaultMeemongColors = MeemongColors(
 )
 
 val LocalMeemongColors = staticCompositionLocalOf { defaultMeemongColors }
+
+@Preview(showBackground = true)
+@Composable
+private fun MeemongColorsPreview() {
+    MeemongTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF262626))
+                .padding(10.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = "primary",
+                color = MeemongTheme.colors.white,
+                style = MeemongTheme.typography.headline.sb18,
+            )
+            Column {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .background(MeemongTheme.colors.meemongBlue),
+                )
+                Text(text = "meemong_blue", color = Color.White, fontSize = 8.sp)
+
+            }
+
+            Text(
+                text = "secondary",
+                color = MeemongTheme.colors.white,
+                style = MeemongTheme.typography.headline.sb18,
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                listOf(
+                    "red" to MeemongTheme.colors.red,
+                    "green" to MeemongTheme.colors.green,
+                    "dark_blue" to MeemongTheme.colors.darkBlue,
+                ).forEach { (name, color) ->
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .background(color),
+                        )
+                        Text(text = name, color = Color.White, fontSize = 8.sp)
+                    }
+                }
+            }
+
+            Text(
+                text = "gray",
+                color = MeemongTheme.colors.white,
+                style = MeemongTheme.typography.headline.sb18,
+            )
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                listOf(
+                    "black" to MeemongTheme.colors.black,
+                    "gray950" to MeemongTheme.colors.gray950,
+                    "gray900" to MeemongTheme.colors.gray900,
+                    "gray800" to MeemongTheme.colors.gray800,
+                    "gray700" to MeemongTheme.colors.gray700,
+                    "gray600" to MeemongTheme.colors.gray600,
+                    "gray500" to MeemongTheme.colors.gray500,
+                    "gray400" to MeemongTheme.colors.gray400,
+                    "gray300" to MeemongTheme.colors.gray300,
+                    "gray200" to MeemongTheme.colors.gray200,
+                    "gray100" to MeemongTheme.colors.gray100,
+                    "gray50" to MeemongTheme.colors.gray50,
+                    "white" to MeemongTheme.colors.white,
+                ).forEach { (name, color) ->
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .background(color),
+                        )
+                        Text(text = name, color = Color.White, fontSize = 8.sp)
+                    }
+                }
+            }
+
+            Text(
+                text = "background",
+                color = MeemongTheme.colors.white,
+                style = MeemongTheme.typography.headline.sb18,
+            )
+            Row {
+                Column {
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .background(MeemongTheme.colors.background),
+                    )
+                    Text(text = "bg/blue", color = Color.White, fontSize = 8.sp)
+
+                }
+            }
+
+            Text(
+                text = "gradient",
+                color = MeemongTheme.colors.white,
+                style = MeemongTheme.typography.headline.sb18,
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                listOf(
+                    "gradient/icon" to MeemongTheme.colors.gradientIcon,
+                    "gradient/hero" to MeemongTheme.colors.gradientHero,
+                ).forEach { (name, brush) ->
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .background(brush),
+                        )
+                        Text(text = name, color = Color.White, fontSize = 8.sp)
+                    }
+                }
+            }
+        }
+    }
+}

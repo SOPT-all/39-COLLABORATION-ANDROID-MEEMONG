@@ -1,13 +1,24 @@
 package com.sopt.meemong.core.designsystem.theme
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.sopt.meemong.R
@@ -165,3 +176,78 @@ val defaultMeemongTypography = MeemongTypography(
 )
 
 val LocalMeemongTypography = staticCompositionLocalOf { defaultMeemongTypography }
+
+@Preview(showBackground = true)
+@Composable
+private fun MeemongTypographyPreview() {
+    MeemongTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF262626))
+                .padding(10.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            Text(
+                text = "Title / SemiBold 20",
+                style = MeemongTheme.typography.title.sb20,
+                color = Color.White,
+            )
+
+            Text(
+                text = "Headline / SemiBold 18",
+                style = MeemongTheme.typography.headline.sb18,
+                color = Color.White,
+            )
+
+            Text(
+                text = "Body1 / SemiBold 16",
+                style = MeemongTheme.typography.body1.sb16,
+                color = Color.White,
+            )
+            Text(
+                text = "Body1 / Regular 16",
+                style = MeemongTheme.typography.body1.r16,
+                color = Color.White,
+            )
+
+            Text(
+                text = "Body2 / SemiBold 14",
+                style = MeemongTheme.typography.body2.sb14,
+                color = Color.White,
+            )
+            Text(
+                text = "Body2 / Medium 14",
+                style = MeemongTheme.typography.body2.m14,
+                color = Color.White,
+            )
+            Text(
+                text = "Body2 / Regular 14",
+                style = MeemongTheme.typography.body2.r14,
+                color = Color.White,
+            )
+
+            Text(
+                text = "Caption1 / Medium 12",
+                style = MeemongTheme.typography.caption1.m12,
+                color = Color.White,
+            )
+            Text(
+                text = "Caption1 / Regular 12",
+                style = MeemongTheme.typography.caption1.r12,
+                color = Color.White,
+            )
+
+            Text(
+                text = "Caption2 / SemiBold 10",
+                style = MeemongTheme.typography.caption2.sb10,
+                color = Color.White,
+            )
+            Text(
+                text = "Caption2 / Medium 10",
+                style = MeemongTheme.typography.caption2.m10,
+                color = Color.White,
+            )
+        }
+    }
+}
