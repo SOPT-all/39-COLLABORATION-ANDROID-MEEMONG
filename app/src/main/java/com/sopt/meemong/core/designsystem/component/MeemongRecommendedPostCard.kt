@@ -3,6 +3,7 @@ package com.sopt.meemong.core.designsystem.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -85,6 +87,10 @@ fun MeemongRecommendedPostCard(
     modifier: Modifier = Modifier,
     size: MeemongPostCardSize = MeemongPostCardSize.REGULAR,
 ) {
+    val likeInteractionSource = remember {
+        MutableInteractionSource()
+    }
+
     Surface(
         onClick = onClick,
         modifier = modifier.width(size.width),
@@ -147,6 +153,8 @@ fun MeemongRecommendedPostCard(
                                     value = isLiked,
                                     enabled = !isLikeLoading,
                                     role = Role.Checkbox,
+                                    interactionSource = likeInteractionSource,
+                                    indication = null,
                                     onValueChange = onLikeChange,
                                 ),
                             tint = if (isLiked) {
