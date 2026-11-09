@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.di.ViewModelFactory
 
 @Composable
@@ -45,5 +46,7 @@ private fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    MeemongTheme {
+        HomeScreen()
+    }
 }
