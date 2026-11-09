@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
 import com.sopt.meemong.core.common.util.formatPostTime
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import androidx.compose.foundation.layout.heightIn
 
 enum class MeemongPostCardSize(
     val width: Dp,
@@ -116,7 +117,7 @@ fun MeemongRecommendedPostCard(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(24.dp),
+                            .heightIn(min = 24.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                     ) {
@@ -158,7 +159,7 @@ fun MeemongRecommendedPostCard(
                     ) {
                         PostInfoRow(
                             iconRes = R.drawable.ic_price_14,
-                            modifier = Modifier.height(20.dp),
+                            modifier = Modifier.heightIn(min = 20.dp),
                         ) {
                             Text(
                                 text = costType.label,
@@ -200,7 +201,7 @@ fun MeemongRecommendedPostCard(
 
                         PostInfoRow(
                             iconRes = R.drawable.ic_location_14,
-                            modifier = Modifier.height(18.dp),
+                            modifier = Modifier.heightIn(min = 18.dp),
                         ) {
                             Text(
                                 text = location,
@@ -232,7 +233,7 @@ fun MeemongRecommendedPostCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(24.dp),
+                    .heightIn(min = 24.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
