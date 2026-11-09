@@ -1,6 +1,5 @@
 package com.sopt.meemong.core.designsystem.component
 
-import android.R.attr.category
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -10,7 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,7 +36,8 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
 import com.sopt.meemong.core.common.util.formatPostTime
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import androidx.compose.foundation.layout.heightIn
+import java.text.NumberFormat
+import java.util.Locale
 
 enum class MeemongPostCardSize(
     val width: Dp,
@@ -57,24 +57,25 @@ enum class MeemongPostCostType(
 /**
  * 미몽 추천 공고 카드입니다.
  *
- * @param postedAtMillis 공고 등록 시각. 밀리초 단위 Unix timestamp입니다.
- * @param tags 전체 시술 태그 목록입니다.
+ * @param availableTimes 한글로 변환된 시술 가능 시간 목록입니다.
+ * @param treatmentTypes 한글로 변환된 전체 시술 태그 목록입니다.
+ * @param createdAtMillis 공고 등록 시각. 밀리초 단위 Unix timestamp입니다.
  * @param isLiked 현재 좋아요 상태입니다.
  * @param isLikeLoading 좋아요 API 요청 진행 여부입니다.
  * @param onLikeChange 변경하려는 좋아요 상태를 전달합니다.
  *
- * API 요청과 상태 갱신, 상세 화면 이동은 호출부에서 처리합니다.
+ * API 데이터 변환, 요청과 상태 갱신, 상세 화면 이동은 호출부에서 처리합니다.
  */
 @Composable
 fun MeemongRecommendedPostCard(
-    imageUrl: String,
+    thumbnailUrl: String,
     title: String,
-    costType: MeemongPostCostType,
-    description: String,
-    location: String,
-    schedule: String,
-    tags: List<String>,
-    postedAtMillis: Long,
+    priceType: MeemongPostCostType,
+    displayPrice: Int,
+    region: String,
+    availableTimes: List<String>,
+    treatmentTypes: List<String>,
+    createdAtMillis: Long,
     isLiked: Boolean,
     isLikeLoading: Boolean,
     onLikeChange: (Boolean) -> Unit,
@@ -103,7 +104,7 @@ fun MeemongRecommendedPostCard(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 UrlImage(
-                    url = imageUrl,
+                    url = thumbnailUrl,
                     modifier = Modifier
                         .size(92.dp)
                         .clip(RoundedCornerShape(6.dp)),
@@ -162,8 +163,8 @@ fun MeemongRecommendedPostCard(
                             modifier = Modifier.heightIn(min = 20.dp),
                         ) {
                             Text(
-                                text = costType.label,
-                                color = when (costType) {
+                                text = priceType.label,
+                                color = when (priceType) {
                                     MeemongPostCostType.FREE,
                                     MeemongPostCostType.REVIEW_SPECIAL -> {
                                         MeemongTheme.colors.meemongBlue
@@ -178,7 +179,7 @@ fun MeemongRecommendedPostCard(
                                 softWrap = false,
                             )
 
-                            if (description.isNotBlank()) {
+                            if (priceType != MeemongPostCostType.FREE) {
                                 Box(
                                     modifier = Modifier
                                         .size(4.dp)
@@ -189,7 +190,9 @@ fun MeemongRecommendedPostCard(
                                 )
 
                                 Text(
-                                    text = description,
+                                    text = NumberFormat
+                                        .getIntegerInstance(Locale.KOREA)
+                                        .format(displayPrice),
                                     modifier = Modifier.weight(1f),
                                     color = MeemongTheme.colors.gray900,
                                     style = MeemongTheme.typography.body2.r14,
@@ -204,7 +207,7 @@ fun MeemongRecommendedPostCard(
                             modifier = Modifier.heightIn(min = 18.dp),
                         ) {
                             Text(
-                                text = location,
+                                text = region,
                                 modifier = Modifier.weight(1f),
                                 color = MeemongTheme.colors.gray900,
                                 style = MeemongTheme.typography.caption1.r12,
@@ -215,10 +218,10 @@ fun MeemongRecommendedPostCard(
 
                         PostInfoRow(
                             iconRes = R.drawable.ic_time_14,
-                            modifier = Modifier.height(18.dp),
+                            modifier = Modifier.heightIn(min = 18.dp),
                         ) {
                             Text(
-                                text = schedule,
+                                text = availableTimes.joinToString(", "),
                                 modifier = Modifier.weight(1f),
                                 color = MeemongTheme.colors.gray900,
                                 style = MeemongTheme.typography.caption1.r12,
@@ -242,11 +245,12 @@ fun MeemongRecommendedPostCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    tags.take(VISIBLE_TAG_COUNT).forEach { tag ->
+                    treatmentTypes.take(VISIBLE_TAG_COUNT).forEach { tag ->
                         PostTag(text = tag)
                     }
 
-                    val remainingCount = tags.size - VISIBLE_TAG_COUNT
+                    val remainingCount =
+                        treatmentTypes.size - VISIBLE_TAG_COUNT
 
                     if (remainingCount > 0) {
                         PostTag(text = "+ $remainingCount")
@@ -254,7 +258,7 @@ fun MeemongRecommendedPostCard(
                 }
 
                 Text(
-                    text = formatPostTime(postedAtMillis),
+                    text = formatPostTime(createdAtMillis),
                     color = MeemongTheme.colors.gray600,
                     style = MeemongTheme.typography.body2.r14,
                     maxLines = 1,
@@ -316,19 +320,22 @@ private fun MeemongRecommendedPostCardPreview() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             MeemongPostCardSize.entries.forEach { cardSize ->
-                MeemongPostCostType.entries.forEach { costType ->
+                MeemongPostCostType.entries.forEach { priceType ->
                     MeemongRecommendedPostCard(
-                        imageUrl = "",
+                        thumbnailUrl = "",
                         title = "긴 기장 붙임머리 희망해요",
-                        costType = costType,
-                        description = when (costType) {
-                            MeemongPostCostType.FREE -> ""
-                            MeemongPostCostType.REVIEW_SPECIAL -> "5,000원"
-                            MeemongPostCostType.MATERIAL_FEE -> "10,000원"
+                        priceType = priceType,
+                        displayPrice = when (priceType) {
+                            MeemongPostCostType.FREE -> 0
+                            MeemongPostCostType.REVIEW_SPECIAL -> 5_000
+                            MeemongPostCostType.MATERIAL_FEE -> 10_000
                         },
-                        location = "고양시 덕양구",
-                        schedule = "평일 오전, 평일 오후",
-                        tags = listOf(
+                        region = "고양시 덕양구",
+                        availableTimes = listOf(
+                            "평일 오전",
+                            "평일 오후",
+                        ),
+                        treatmentTypes = listOf(
                             "염색",
                             "탈색",
                             "매직",
@@ -337,7 +344,7 @@ private fun MeemongRecommendedPostCardPreview() {
                             "클리닉",
                             "붙임머리",
                         ),
-                        postedAtMillis = System.currentTimeMillis(),
+                        createdAtMillis = System.currentTimeMillis(),
                         isLiked = cardSize == MeemongPostCardSize.REGULAR,
                         isLikeLoading = false,
                         onLikeChange = {},
