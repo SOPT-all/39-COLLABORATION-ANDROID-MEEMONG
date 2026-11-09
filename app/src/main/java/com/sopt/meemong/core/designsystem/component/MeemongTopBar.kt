@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -28,27 +29,38 @@ fun MeemongTopBar(
         modifier = modifier
             .fillMaxWidth()
             .height(44.dp)
-            .background(MeemongTheme.colors.white)
-            .padding(horizontal = 12.dp),
+            .background(MeemongTheme.colors.white),
     ) {
-        IconButton(
-            onClick = onBackClick,
+        Box(
             modifier = Modifier
-                .align(Alignment.CenterStart)
-                .size(44.dp),
+                .matchParentSize()
+                .padding(horizontal = 12.dp),
         ) {
-            Icon(
-                painter = painterResource(R.drawable.ic_back_24),
-                contentDescription = "뒤로가기",
-                tint = MeemongTheme.colors.gray900,
+            IconButton(
+                onClick = onBackClick,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .size(44.dp),
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_back_24),
+                    contentDescription = "뒤로가기",
+                    tint = MeemongTheme.colors.gray900,
+                )
+            }
+
+            Text(
+                text = title,
+                modifier = Modifier.align(Alignment.Center),
+                color = MeemongTheme.colors.gray900,
+                style = MeemongTheme.typography.headline.sb18,
             )
         }
 
-        Text(
-            text = title,
-            modifier = Modifier.align(Alignment.Center),
-            color = MeemongTheme.colors.gray900,
-            style = MeemongTheme.typography.headline.sb18,
+        HorizontalDivider(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            thickness = 1.dp,
+            color = MeemongTheme.colors.gray100,
         )
     }
 }
