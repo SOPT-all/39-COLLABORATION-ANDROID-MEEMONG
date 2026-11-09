@@ -1,5 +1,6 @@
 package com.sopt.meemong.core.designsystem.component
 
+import android.R.attr.category
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -44,6 +45,14 @@ enum class MeemongPostCardSize(
     REGULAR(335.dp),
 }
 
+enum class MeemongPostCostType(
+    val label: String,
+) {
+    FREE("무료시술"),
+    REVIEW_SPECIAL("리뷰특가"),
+    MATERIAL_FEE("재료비 발생"),
+}
+
 /**
  * 미몽 추천 공고 카드입니다.
  *
@@ -59,7 +68,7 @@ enum class MeemongPostCardSize(
 fun MeemongRecommendedPostCard(
     imageUrl: String,
     title: String,
-    category: String,
+    costType: MeemongPostCostType,
     description: String,
     location: String,
     schedule: String,
@@ -152,8 +161,17 @@ fun MeemongRecommendedPostCard(
                             modifier = Modifier.height(20.dp),
                         ) {
                             Text(
-                                text = category,
-                                color = MeemongTheme.colors.meemongBlue,
+                                text = costType.label,
+                                color = when (costType) {
+                                    MeemongPostCostType.FREE,
+                                    MeemongPostCostType.REVIEW_SPECIAL -> {
+                                        MeemongTheme.colors.meemongBlue
+                                    }
+
+                                    MeemongPostCostType.MATERIAL_FEE -> {
+                                        MeemongTheme.colors.gray700
+                                    }
+                                },
                                 style = MeemongTheme.typography.body2.sb14,
                                 maxLines = 1,
                                 softWrap = false,
@@ -297,29 +315,35 @@ private fun MeemongRecommendedPostCardPreview() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             MeemongPostCardSize.entries.forEach { cardSize ->
-                MeemongRecommendedPostCard(
-                    imageUrl = "",
-                    title = "긴 기장 붙임머리 희망해요",
-                    category = "Text",
-                    description = "Text",
-                    location = "고양시 덕양구",
-                    schedule = "평일 오전, 평일 오후",
-                    tags = listOf(
-                        "염색",
-                        "탈색",
-                        "매직",
-                        "펌",
-                        "커트",
-                        "클리닉",
-                        "붙임머리",
-                    ),
-                    postedAtMillis = System.currentTimeMillis(),
-                    isLiked = cardSize == MeemongPostCardSize.REGULAR,
-                    isLikeLoading = false,
-                    onLikeChange = {},
-                    onClick = {},
-                    size = cardSize,
-                )
+                MeemongPostCostType.entries.forEach { costType ->
+                    MeemongRecommendedPostCard(
+                        imageUrl = "",
+                        title = "긴 기장 붙임머리 희망해요",
+                        costType = costType,
+                        description = when (costType) {
+                            MeemongPostCostType.FREE -> ""
+                            MeemongPostCostType.REVIEW_SPECIAL -> "5,000원"
+                            MeemongPostCostType.MATERIAL_FEE -> "10,000원"
+                        },
+                        location = "고양시 덕양구",
+                        schedule = "평일 오전, 평일 오후",
+                        tags = listOf(
+                            "염색",
+                            "탈색",
+                            "매직",
+                            "펌",
+                            "커트",
+                            "클리닉",
+                            "붙임머리",
+                        ),
+                        postedAtMillis = System.currentTimeMillis(),
+                        isLiked = cardSize == MeemongPostCardSize.REGULAR,
+                        isLikeLoading = false,
+                        onLikeChange = {},
+                        onClick = {},
+                        size = cardSize,
+                    )
+                }
             }
         }
     }
