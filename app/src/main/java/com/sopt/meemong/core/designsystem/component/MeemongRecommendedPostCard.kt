@@ -291,25 +291,6 @@ private fun PostInfoRow(
     }
 }
 
-@Composable
-private fun PostTag(
-    text: String,
-) {
-    Text(
-        text = text,
-        modifier = Modifier
-            .background(
-                color = MeemongTheme.colors.gray100,
-                shape = CircleShape,
-            )
-            .padding(horizontal = 7.dp, vertical = 3.dp),
-        color = MeemongTheme.colors.gray600,
-        style = MeemongTheme.typography.caption1.m12,
-        maxLines = 1,
-        softWrap = false,
-    )
-}
-
 private const val VISIBLE_TAG_COUNT = 3
 
 @Preview(showBackground = true)
