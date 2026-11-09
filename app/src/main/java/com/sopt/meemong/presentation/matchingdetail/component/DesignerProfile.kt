@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,25 +44,36 @@ fun DesignerProfile(
     itemCount: Int,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .background(MeemongTheme.colors.white)
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+            .padding(horizontal = 16.dp)
     ) {
-        ProfileSection(
-            profileImage = profileImage,
-            name = name,
-            location = location,
-            distance = distance,
-        )
-
-        if (itemCount > 0) {
-            ProfileChip(
-                itemCount = itemCount,
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            ProfileSection(
+                profileImage = profileImage,
+                name = name,
+                location = location,
+                distance = distance,
             )
+
+            if (itemCount > 0) {
+                ProfileChip(
+                    itemCount = itemCount,
+                )
+            }
         }
+
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = MeemongTheme.colors.gray100,
+        )
     }
 }
 
