@@ -4,9 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,7 +45,8 @@ fun ServiceInfoCard(
         modifier = modifier
             .fillMaxWidth()
             .background(MeemongTheme.colors.white)
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Header(
             title = title,
@@ -53,6 +55,13 @@ fun ServiceInfoCard(
             discountRate = discountRate,
             originalPrice = originalPrice,
             displayPrice = displayPrice,
+        )
+
+        InfoSection(
+            treatmentTypes = treatmentTypes,
+            signatures = signatures,
+            shootingRanges = shootingRanges,
+            shopName = shopName,
         )
     }
 }
@@ -111,6 +120,70 @@ private fun Header(
 }
 
 @Composable
+private fun InfoSection(
+    treatmentTypes: List<String>,
+    signatures: List<String>,
+    shootingRanges: List<String>,
+    shopName: String,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                shape = RoundedCornerShape(12.dp),
+                color = MeemongTheme.colors.gray50,
+            )
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Column(
+            modifier = Modifier,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            val infoLabelList: List<String> = listOf("시술 종류", "시그니처", "촬영범위", "매장명")
+
+            infoLabelList.forEach { label ->
+                Text(
+                    text = label,
+                    style = MeemongTheme.typography.body2.sb14,
+                    color = MeemongTheme.colors.gray500,
+                )
+            }
+        }
+
+        Column(
+            modifier = Modifier,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = treatmentTypes.joinToString(", "),
+                style = MeemongTheme.typography.body2.r14,
+                color = MeemongTheme.colors.black,
+            )
+
+            Text(
+                text = signatures.joinToString(", "),
+                style = MeemongTheme.typography.body2.r14,
+                color = MeemongTheme.colors.black,
+            )
+
+            Text(
+                text = shootingRanges.joinToString(", "),
+                style = MeemongTheme.typography.body2.r14,
+                color = MeemongTheme.colors.black,
+            )
+
+            Text(
+                text = shopName,
+                style = MeemongTheme.typography.body2.r14,
+                color = MeemongTheme.colors.black,
+            )
+        }
+    }
+}
+
+@Composable
 private fun TitleRow(
     title: String,
     isLiked: Boolean,
@@ -120,10 +193,12 @@ private fun TitleRow(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             text = title,
+            modifier = Modifier.weight(1f),
             style = MeemongTheme.typography.headline.sb18,
             color = MeemongTheme.colors.black,
         )
@@ -133,6 +208,7 @@ private fun TitleRow(
                 if (isLiked) R.drawable.ic_like_filled_24 else R.drawable.ic_like_default_24
             ),
             contentDescription = if (isLiked) "좋아요 취소" else "좋아요",
+            modifier = Modifier.size(24.dp),
             tint = if (isLiked) MeemongTheme.colors.red else MeemongTheme.colors.black,
         )
     }
@@ -152,20 +228,20 @@ private fun ServiceInfoCardPreview() {
                 discountRate = 50f,
                 originalPrice = 35_000,
                 displayPrice = 5_000,
-                treatmentTypes = listOf("CUTS", "YES"),
-                signatures = listOf("CUTS"),
+                treatmentTypes = listOf("컷트"),
+                signatures = listOf("컷트", "펌"),
                 shootingRanges = listOf("얼굴 노출", "영상"),
                 shopName = "아벨라움",
             )
 
             ServiceInfoCard(
-                title = "뭘 해야 될 지 모르겠다면?",
+                title = "뭘 해야 될 지 두 번이나 진짜진짜로 모르겠다면??",
                 priceType = PriceType.FREE.label,
                 discountRate = 50f,
-                originalPrice = 35_000,
-                displayPrice = 5_000,
-                treatmentTypes = listOf("CUTS", "YES"),
-                signatures = listOf("CUTS"),
+                originalPrice = 1_000,
+                displayPrice = 500,
+                treatmentTypes = listOf("컷트"),
+                signatures = listOf("컷트", "펌", "염색"),
                 shootingRanges = listOf("얼굴 노출", "영상"),
                 shopName = "아벨라움",
                 isLiked = true,
