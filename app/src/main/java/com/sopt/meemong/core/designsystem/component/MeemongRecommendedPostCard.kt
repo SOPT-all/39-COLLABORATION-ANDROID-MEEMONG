@@ -147,7 +147,11 @@ fun MeemongRecommendedPostCard(
                             modifier = Modifier
                                 .size(20.dp)
                                 .semantics {
-                                    contentDescription = "좋아요"
+                                    contentDescription = if (isLiked) {
+                                        "좋아요 취소"
+                                    } else {
+                                        "좋아요"
+                                    }
                                 }
                                 .toggleable(
                                     value = isLiked,
