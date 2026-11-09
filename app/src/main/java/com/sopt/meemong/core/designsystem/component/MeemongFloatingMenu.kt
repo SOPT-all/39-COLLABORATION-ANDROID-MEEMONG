@@ -146,6 +146,66 @@ private fun FloatingMenuPanel(
     }
 }
 
+@Composable
+private fun FloatingMenuButton(
+    expanded: Boolean,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .size(60.dp)
+            .floatingMenuShadow(
+                shape = CircleShape,
+                spread = if (expanded) 0.dp else 1.dp,
+            )
+            .clip(CircleShape)
+            .background(MeemongTheme.colors.gray900)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick,
+            )
+            .semantics(mergeDescendants = true) {
+                contentDescription = if (expanded) {
+                    "글쓰기 메뉴 닫기"
+                } else {
+                    "글쓰기 메뉴 열기"
+                }
+                stateDescription = if (expanded) {
+                    "펼쳐짐"
+                } else {
+                    "접힘"
+                }
+            },
+        contentAlignment = Alignment.Center,
+    ) {
+        if (expanded) {
+            Icon(
+                painter = painterResource(R.drawable.ic_cancel_24),
+                contentDescription = "닫기 버튼",
+                modifier = Modifier.size(24.dp),
+                tint = MeemongTheme.colors.white,
+            )
+        } else {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_pen_20),
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = MeemongTheme.colors.white,
+                )
+
+                Text(
+                    text = "글쓰기",
+                    color = MeemongTheme.colors.white,
+                    style = MeemongTheme.typography.caption2.sb10,
+                )
+            }
+        }
+    }
+}
+
 private fun Modifier.floatingMenuShadow(
     shape: Shape,
     spread: Dp = 0.dp,
