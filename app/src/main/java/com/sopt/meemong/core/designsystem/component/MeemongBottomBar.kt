@@ -126,11 +126,7 @@ private fun MeemongBottomBarItem(
             } else {
                 MeemongTheme.colors.gray700
             },
-            style = if (selected) {
-                MeemongTheme.typography.caption1.m12
-            } else {
-                MeemongTheme.typography.caption1.r12
-            },
+            style = MeemongTheme.typography.caption2.m10,
             softWrap = false,
         )
     }
