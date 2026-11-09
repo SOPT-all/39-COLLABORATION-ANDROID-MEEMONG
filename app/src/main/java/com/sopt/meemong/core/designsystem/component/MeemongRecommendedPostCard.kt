@@ -296,7 +296,7 @@ private fun PostTag(
         modifier = Modifier
             .background(
                 color = MeemongTheme.colors.gray100,
-                shape = RoundedCornerShape(999.dp),
+                shape = CircleShape,
             )
             .padding(horizontal = 7.dp, vertical = 3.dp),
         color = MeemongTheme.colors.gray600,
