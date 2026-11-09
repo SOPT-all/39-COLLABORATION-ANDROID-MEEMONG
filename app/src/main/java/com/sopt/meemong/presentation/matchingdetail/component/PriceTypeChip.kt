@@ -15,9 +15,9 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 enum class PriceType(
     val label: String,
 ) {
-    REVIEW("리뷰 특가"),
-    FREE("무료 시술"),
-    NEGOTIABLE("재료비 발생")
+    REVIEW("리뷰특가"),
+    FREE("무료시술"),
+    NEGOTIABLE("재료비발생")
 }
 
 @Composable
