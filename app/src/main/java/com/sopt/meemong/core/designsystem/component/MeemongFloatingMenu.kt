@@ -97,7 +97,36 @@ fun MeemongFloatingMenu(
     onItemClick: (MeemongFloatingMenuItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // 뒤로 가기 시에 화면 이동 대신 열려있는 메뉴를 닫는다.
+    BackHandler(enabled = expanded) {
+        onExpandedChange(false)
+    }
 
+    Column(
+         modifier = modifier.padding(
+             end = 20.dp,
+             bottom = 20.dp,
+         ),
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        if (expanded) {
+            FloatingMenuPanel(
+                items = type.items,
+                onItemClick = { item ->
+                    onExpandedChange(false)
+                    onItemClick(item)
+                },
+            )
+        }
+
+        FloatingMenuButton(
+            expanded = expanded,
+            onClick = {
+                onExpandedChange(!expanded)
+            },
+        )
+    }
 }
 
 @Composable
@@ -218,3 +247,38 @@ private fun Modifier.floatingMenuShadow(
         offset = DpOffset.Zero,
     ),
 )
+
+@Preview(showBackground = true)
+@Composable
+private fun MeemongFloatingMenuPreview() {
+    MeemongTheme {
+        Row(
+            modifier = Modifier.padding(
+                start = 12.dp,
+                top = 12.dp,
+            ),
+            verticalAlignment = Alignment.Bottom,
+        ) {
+            MeemongFloatingMenu(
+                type = MeemongFloatingMenuType.HOME,
+                expanded = false,
+                onExpandedChange = {},
+                onItemClick = {},
+            )
+
+            MeemongFloatingMenu(
+                type = MeemongFloatingMenuType.QUICK_MATCHING,
+                expanded = true,
+                onExpandedChange = {},
+                onItemClick = {},
+            )
+
+            MeemongFloatingMenu(
+                type = MeemongFloatingMenuType.HOME,
+                expanded = true,
+                onExpandedChange = {},
+                onItemClick = {},
+            )
+        }
+    }
+}
