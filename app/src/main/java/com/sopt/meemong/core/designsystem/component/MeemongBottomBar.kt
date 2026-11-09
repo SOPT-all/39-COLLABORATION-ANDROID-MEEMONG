@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Icon
@@ -98,12 +99,6 @@ private fun MeemongBottomBarItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val contentColor = if (selected) {
-        MeemongTheme.colors.gray950
-    } else {
-        MeemongTheme.colors.gray700
-    }
-
     Column(
         modifier = modifier
             .width(32.dp)
@@ -121,12 +116,17 @@ private fun MeemongBottomBarItem(
                 if (selected) tab.selectedIconRes else tab.iconRes,
             ),
             contentDescription = null,
-            tint = contentColor,
+            tint = MeemongTheme.colors.gray950,
         )
 
         Text(
             text = tab.title,
-            color = contentColor,
+            modifier = Modifier.wrapContentWidth(unbounded = true),
+            color = if (selected) {
+                MeemongTheme.colors.gray950
+            } else {
+                MeemongTheme.colors.gray700
+            },
             style = if (selected) {
                 MeemongTheme.typography.caption1.m12
             } else {
