@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.UrlImage
@@ -83,6 +84,7 @@ private fun ProfileSection(
             modifier = Modifier
                 .size(52.dp)
                 .clip(CircleShape),
+            contentScale = ContentScale.Crop,
         )
 
         Spacer(modifier = Modifier.width(8.dp))
