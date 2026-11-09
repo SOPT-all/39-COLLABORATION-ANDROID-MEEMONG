@@ -1,4 +1,4 @@
-package com.sopt.meemong.core.designsystem.component
+package com.sopt.meemong.presentation.quickmatching.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
