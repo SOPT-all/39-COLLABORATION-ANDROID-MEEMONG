@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -72,7 +73,8 @@ fun MeemongBottomBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(MeemongTheme.colors.white),
+            .background(MeemongTheme.colors.white)
+            .navigationBarsPadding(),
     ) {
         Row(
             modifier = Modifier
@@ -82,7 +84,6 @@ fun MeemongBottomBar(
                     start = 31.5.dp,
                     top = 8.dp,
                     end = 31.5.dp,
-                    bottom = 36.dp,
                 )
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
