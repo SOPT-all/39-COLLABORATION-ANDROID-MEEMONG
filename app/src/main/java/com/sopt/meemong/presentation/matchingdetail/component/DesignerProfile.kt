@@ -169,7 +169,11 @@ private fun ProfileChip(
 @Composable
 private fun DesignerProfilePreview() {
     MeemongTheme {
-        Column {
+        Column(
+            modifier = Modifier
+                .background(MeemongTheme.colors.gray50)
+                .padding(20.dp)
+        ) {
             DesignerProfile(
                 profileImage = "",
                 name = "승환",
