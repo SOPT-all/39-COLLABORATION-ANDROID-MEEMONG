@@ -1,23 +1,34 @@
 package com.sopt.meemong.presentation.matchingdetail.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
+import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.common.extensions.toPriceFormat
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
@@ -38,6 +49,7 @@ fun ServiceInfoCard(
     signatures: List<String>,
     shootingRanges: List<String>,
     shopName: String,
+    onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
     isLiked: Boolean = false,
 ) {
@@ -55,6 +67,7 @@ fun ServiceInfoCard(
             discountRate = discountRate,
             originalPrice = originalPrice,
             displayPrice = displayPrice,
+            onLikeClick = onLikeClick,
         )
 
         InfoSection(
@@ -74,6 +87,7 @@ private fun Header(
     discountRate: Float,
     originalPrice: Int,
     displayPrice: Int,
+    onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -83,6 +97,7 @@ private fun Header(
         TitleRow(
             title = title,
             isLiked = isLiked,
+            onLikeClick = onLikeClick,
         )
 
         Row(
@@ -187,6 +202,7 @@ private fun InfoSection(
 private fun TitleRow(
     title: String,
     isLiked: Boolean,
+    onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -207,17 +223,23 @@ private fun TitleRow(
             imageVector = ImageVector.vectorResource(
                 if (isLiked) R.drawable.ic_like_filled_24 else R.drawable.ic_like_default_24
             ),
+            modifier = Modifier
+                .size(24.dp)
+                .noRippleClickable(onLikeClick),
             contentDescription = if (isLiked) "좋아요 취소" else "좋아요",
-            modifier = Modifier.size(24.dp),
             tint = if (isLiked) MeemongTheme.colors.red else MeemongTheme.colors.black,
         )
     }
+
 }
 
 @Preview
 @Composable
 private fun ServiceInfoCardPreview() {
     MeemongTheme {
+        var firstLiked by remember { mutableStateOf(false) }
+        var secondLiked by remember { mutableStateOf(true) }
+
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -232,6 +254,8 @@ private fun ServiceInfoCardPreview() {
                 signatures = listOf("컷트", "펌"),
                 shootingRanges = listOf("얼굴 노출", "영상"),
                 shopName = "아벨라움",
+                onLikeClick = { firstLiked = !firstLiked },
+                isLiked = firstLiked,
             )
 
             ServiceInfoCard(
@@ -244,7 +268,8 @@ private fun ServiceInfoCardPreview() {
                 signatures = listOf("컷트", "펌", "염색"),
                 shootingRanges = listOf("얼굴 노출", "영상"),
                 shopName = "아벨라움",
-                isLiked = true,
+                onLikeClick = { secondLiked = !secondLiked },
+                isLiked = secondLiked,
             )
         }
     }
