@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -70,7 +70,7 @@ fun MeemongBottomBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(89.dp)
+            .heightIn(min = 89.dp)
             .background(MeemongTheme.colors.white)
             .padding(
                 start = 31.5.dp,
@@ -80,7 +80,6 @@ fun MeemongBottomBar(
             )
             .selectableGroup(),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Top,
     ) {
         MeemongBottomTab.entries.forEach { tab ->
             MeemongBottomBarItem(
@@ -102,7 +101,7 @@ private fun MeemongBottomBarItem(
     Column(
         modifier = modifier
             .width(32.dp)
-            .height(44.dp)
+            .heightIn(min = 44.dp)
             .selectable(
                 selected = selected,
                 role = Role.Tab,
