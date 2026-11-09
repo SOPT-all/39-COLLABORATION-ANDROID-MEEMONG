@@ -28,7 +28,16 @@ import androidx.compose.ui.unit.sp
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
-// Todo: K-doc 작성
+/**
+ * 디자이너 프로필 컴포넌트
+ *
+ * @param profileImage 프로필 이미지 URL입니다.
+ * @param name 디자이너 이름입니다.
+ * @param location 디자이너의 활동 지역입니다.
+ * @param distance 사용자 위치와 디자이너 활동 지역 간의 거리입니다.
+ *                  합동 세미나 단계에서는 11.6으로 고정합니다.
+ * @param itemCount 디자이너의 활동 건수입니다.
+ */
 @Composable
 fun DesignerProfile(
     profileImage: String,
@@ -72,6 +81,7 @@ private fun ProfileSection(
 ) {
     Row(
         modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         UrlImage(
             url = profileImage,
