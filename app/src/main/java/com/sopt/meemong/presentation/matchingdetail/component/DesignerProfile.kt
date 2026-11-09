@@ -48,20 +48,18 @@ fun DesignerProfile(
             .fillMaxWidth()
             .background(MeemongTheme.colors.white)
             .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         ProfileSection(
             profileImage = profileImage,
             name = name,
             location = location,
             distance = distance,
-            modifier = Modifier,
         )
 
         if (itemCount > 0) {
             ProfileChip(
                 itemCount = itemCount,
-                modifier = Modifier,
             )
         }
     }
