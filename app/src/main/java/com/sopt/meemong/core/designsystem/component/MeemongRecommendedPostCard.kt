@@ -149,7 +149,7 @@ fun MeemongRecommendedPostCard(
                             tint = if (isLiked) {
                                 Color.Unspecified
                             } else {
-                                MeemongTheme.colors.gray200
+                                MeemongTheme.colors.gray300
                             },
                         )
                     }
