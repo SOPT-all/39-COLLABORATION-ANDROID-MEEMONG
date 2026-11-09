@@ -3,6 +3,7 @@ package com.sopt.meemong.core.designsystem.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,29 +69,41 @@ fun MeemongBottomBar(
     onTabClick: (MeemongBottomTab) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 89.dp)
-            .background(MeemongTheme.colors.white)
-            .padding(
-                start = 31.5.dp,
-                top = 8.dp,
-                end = 31.5.dp,
-                bottom = 36.dp,
-            )
-            .selectableGroup(),
-        horizontalArrangement = Arrangement.SpaceBetween,
+            .background(MeemongTheme.colors.white),
     ) {
-        MeemongBottomTab.entries.forEach { tab ->
-            MeemongBottomBarItem(
-                tab = tab,
-                selected = selectedTab == tab,
-                onClick = { onTabClick(tab) },
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 89.dp)
+                .padding(
+                    start = 31.5.dp,
+                    top = 8.dp,
+                    end = 31.5.dp,
+                    bottom = 36.dp,
+                )
+                .selectableGroup(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            MeemongBottomTab.entries.forEach { tab ->
+                MeemongBottomBarItem(
+                    tab = tab,
+                    selected = selectedTab == tab,
+                    onClick = { onTabClick(tab) },
+                )
+            }
         }
+
+        HorizontalDivider(
+            modifier = Modifier.align(Alignment.TopCenter),
+            thickness = 1.dp,
+            color = MeemongTheme.colors.gray300,
+        )
     }
 }
+
 
 @Composable
 private fun MeemongBottomBarItem(
