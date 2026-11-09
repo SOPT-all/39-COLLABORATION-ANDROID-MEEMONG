@@ -103,10 +103,6 @@ fun MeemongFloatingMenu(
     }
 
     Column(
-         modifier = modifier.padding(
-             end = 20.dp,
-             bottom = 20.dp,
-         ),
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
