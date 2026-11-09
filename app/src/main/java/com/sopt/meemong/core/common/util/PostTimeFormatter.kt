@@ -26,7 +26,7 @@ fun formatPostTime(
 
     return when {
         postedCalendar.isSameDate(todayCalendar) -> {
-            formatDate(postedAtMillis, "a h:mm", timeZone)
+            formatDate(postedAtMillis, "a hh:mm", timeZone)
         }
 
         postedCalendar.isSameDate(yesterdayCalendar) -> {
@@ -35,11 +35,11 @@ fun formatPostTime(
 
         postedCalendar.get(Calendar.YEAR) ==
                 todayCalendar.get(Calendar.YEAR) -> {
-            formatDate(postedAtMillis, "M월 d일", timeZone)
+            formatDate(postedAtMillis, "M월 dd일", timeZone)
         }
 
         else -> {
-            formatDate(postedAtMillis, "yyyy년 M월 d일", timeZone)
+            formatDate(postedAtMillis, "yyyy년 MM월 d일", timeZone)
         }
     }
 }
