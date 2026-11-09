@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sopt.meemong.core.designsystem.component.UrlImage
+import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 // Todo: K-doc 작성
 @Composable
@@ -40,7 +41,7 @@ fun DesignerProfile(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White) // Todo: 색상 변경
+            .background(MeemongTheme.colors.white)
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -84,12 +85,8 @@ private fun ProfileSection(
         Column {
             Text(
                 text = name,
-                style = TextStyle(
-                    // Todo: 타이포 변경
-                    fontSize = 18.sp,
-                    lineHeight = 27.sp,
-                    fontWeight = FontWeight(600),
-                ),
+                style = MeemongTheme.typography.headline.sb18,
+                color = MeemongTheme.colors.black,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -101,18 +98,14 @@ private fun ProfileSection(
 
                 Text(
                     text = location,
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 19.6.sp,
-                        fontWeight = FontWeight(400),
-                        color = Color(0xFF757E8C),
-                    )
+                    style = MeemongTheme.typography.body2.r14,
+                    color = MeemongTheme.colors.gray600,
                 )
 
                 Box(
                     modifier = Modifier
                         .background(
-                            color = Color.Gray, // Todo: 색상 변경
+                            color = MeemongTheme.colors.gray600,
                             shape = CircleShape,
                         )
                         .size(3.dp)
@@ -120,12 +113,8 @@ private fun ProfileSection(
 
                 Text(
                     text = "${"%.1f".format(distance)}km",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 19.6.sp,
-                        fontWeight = FontWeight(400),
-                        color = Color(0xFF757E8C),
-                    )
+                    style = MeemongTheme.typography.body2.r14,
+                    color = MeemongTheme.colors.gray600,
                 )
             }
         }
@@ -140,7 +129,7 @@ private fun ProfileChip(
     Row(
         modifier = modifier
             .background(
-                color = Color.LightGray,
+                color = MeemongTheme.colors.gray100,
                 shape = RoundedCornerShape(6.dp),
             )
             .widthIn(min = 61.dp)
@@ -148,25 +137,14 @@ private fun ProfileChip(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "${itemCount}",
-            color = Color.Blue, // Todo: 색상 적용
-            style = TextStyle(
-                // Todo: 타이포 적용
-                fontSize = 12.sp,
-                lineHeight = 18.sp,
-                fontWeight = FontWeight(500),
-                color = Color(0xFF757E8C),
-            ),
+            text = "$itemCount",
+            style = MeemongTheme.typography.caption1.m12,
+            color = MeemongTheme.colors.meemongBlue,
         )
         Text(
             text = "건 진행",
-            style = TextStyle(
-                // Todo: 타이포 적용
-                fontSize = 12.sp,
-                lineHeight = 18.sp,
-                fontWeight = FontWeight(500),
-                color = Color(0xFF757E8C),
-            )
+            style = MeemongTheme.typography.caption1.m12,
+            color = MeemongTheme.colors.gray600,
         )
     }
 }
@@ -174,34 +152,25 @@ private fun ProfileChip(
 @Preview
 @Composable
 private fun DesignerProfilePreview() {
-    Column() {
-        // Todo: 테마 적용
-        DesignerProfile(
-            profileImage = "",
-            name = "승환",
-            location = "경기 고양시",
-            distance = 11.6f,
-            itemCount = 43,
-        )
+    MeemongTheme {
+        Column {
+            DesignerProfile(
+                profileImage = "",
+                name = "승환",
+                location = "경기 고양시",
+                distance = 11.6f,
+                itemCount = 43,
+            )
 
-        Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-        DesignerProfile(
-            profileImage = "",
-            name = "승환",
-            location = "경기 고양시",
-            distance = 11.6f,
-            itemCount = 0,
-        )
-
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        DesignerProfile(
-//            profileImage = "",
-//            name = "승환임둥캬캬캬캬승환임둥캬캬캬캬승환임둥캬캬캬캬",
-//            location = "경기 고양시",
-//            distance = 11.6f,
-//            itemCount = 77,
-//        )
+            DesignerProfile(
+                profileImage = "",
+                name = "승환",
+                location = "경기 고양시",
+                distance = 11.6f,
+                itemCount = 0,
+            )
+        }
     }
 }
