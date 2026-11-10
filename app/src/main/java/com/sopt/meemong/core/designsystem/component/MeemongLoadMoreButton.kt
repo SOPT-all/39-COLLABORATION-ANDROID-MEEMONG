@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,6 +31,7 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
  */
 @Composable
 fun MeemongLoadMoreButton(
+    text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -59,7 +61,7 @@ fun MeemongLoadMoreButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "미몽추천 공고 더보기",
+            text = text,
             color = MeemongTheme.colors.gray700,
             style = MeemongTheme.typography.body1.r16,
             maxLines = 1,
@@ -75,12 +77,23 @@ fun MeemongLoadMoreButton(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 375)
 @Composable
 private fun MeemongLoadMoreButtonPreview() {
     MeemongTheme {
-        MeemongLoadMoreButton(
-            onClick = {},
-        )
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            MeemongLoadMoreButton(
+                text = "미몽추천 공고 더보기",
+                onClick = {},
+            )
+
+            MeemongLoadMoreButton(
+                text = "포트폴리오 더보기",
+                onClick = {},
+            )
+        }
     }
 }
