@@ -32,7 +32,7 @@ fun HomeTopBar(
             .height(44.dp)
             .background(MeemongTheme.colors.white)
             .padding(horizontal = 12.dp),
-        verticalAlignment = Alignment. CenterVertically,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(com.sopt.meemong.R.drawable.img_meemong_logo),
