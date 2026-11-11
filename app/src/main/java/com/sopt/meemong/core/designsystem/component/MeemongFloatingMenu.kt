@@ -91,13 +91,13 @@ enum class MeemongFloatingMenuType(
 @Composable
 fun MeemongFloatingMenu(
     type: MeemongFloatingMenuType,
-    expanded: Boolean,
+    isExpanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
     onItemClick: (MeemongFloatingMenuItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     // 뒤로 가기 시에 화면 이동 대신 열려있는 메뉴를 닫는다.
-    BackHandler(enabled = expanded) {
+    BackHandler(enabled = isExpanded) {
         onExpandedChange(false)
     }
 
@@ -106,7 +106,7 @@ fun MeemongFloatingMenu(
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (expanded) {
+        if (isExpanded) {
             FloatingMenuPanel(
                 items = type.items,
                 onItemClick = { item ->
@@ -117,9 +117,9 @@ fun MeemongFloatingMenu(
         }
 
         FloatingMenuButton(
-            expanded = expanded,
+            expanded = isExpanded,
             onClick = {
-                onExpandedChange(!expanded)
+                onExpandedChange(!isExpanded)
             },
         )
     }
@@ -257,21 +257,21 @@ private fun MeemongFloatingMenuPreview() {
         ) {
             MeemongFloatingMenu(
                 type = MeemongFloatingMenuType.HOME,
-                expanded = false,
+                isExpanded = false,
                 onExpandedChange = {},
                 onItemClick = {},
             )
 
             MeemongFloatingMenu(
                 type = MeemongFloatingMenuType.QUICK_MATCHING,
-                expanded = true,
+                isExpanded = true,
                 onExpandedChange = {},
                 onItemClick = {},
             )
 
             MeemongFloatingMenu(
                 type = MeemongFloatingMenuType.HOME,
-                expanded = true,
+                isExpanded = true,
                 onExpandedChange = {},
                 onItemClick = {},
             )
