@@ -7,10 +7,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -133,6 +135,7 @@ private fun FloatingMenuPanel(
     Column(
         modifier = Modifier
             .widthIn(min = 102.dp)
+            .width(IntrinsicSize.Max)
             .floatingMenuShadow(shape = RoundedCornerShape(8.dp))
             .clip(RoundedCornerShape(8.dp))
             .background(MeemongTheme.colors.gray900)
@@ -205,7 +208,7 @@ private fun FloatingMenuButton(
     ) {
         if (expanded) {
             Icon(
-                painter = painterResource(R.drawable.ic_cancel_24),
+                painter = painterResource(R.drawable.ic_close_24),
                 contentDescription = "닫기 버튼",
                 modifier = Modifier.size(24.dp),
                 tint = MeemongTheme.colors.white,
@@ -249,10 +252,8 @@ private fun Modifier.floatingMenuShadow(
 private fun MeemongFloatingMenuPreview() {
     MeemongTheme {
         Row(
-            modifier = Modifier.padding(
-                start = 12.dp,
-                top = 12.dp,
-            ),
+            modifier = Modifier.padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(24.dp),
             verticalAlignment = Alignment.Bottom,
         ) {
             MeemongFloatingMenu(
