@@ -51,9 +51,13 @@ fun DetailTab(
                 .background(MeemongTheme.colors.gray100),
         )
 
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+        ) {
             Tab.entries.forEach { tab ->
                 TabItem(
+                    modifier = Modifier.weight(1f),
                     tab = tab,
                     currentTab = currentTab,
                     onClick = { onTabClick(tab) },
@@ -70,27 +74,31 @@ private fun TabItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    Box(
         modifier = modifier
             .clickable(onClick = onClick)
-            .width(IntrinsicSize.Max)
-            .padding(top = 12.dp)
-            .padding(horizontal = 42.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(
-            text = tab.label,
-            color = if (currentTab == tab) MeemongTheme.colors.gray900 else MeemongTheme.colors.gray700,
-            style = MeemongTheme.typography.body1.sb16,
-        )
+            .padding(top = 12.dp),
+        contentAlignment = Alignment.Center,
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(2.dp)
-                .background(if (currentTab == tab) MeemongTheme.colors.gray800 else Color.Unspecified),
-        )
+        ) {
+        Column(
+            modifier = Modifier.width(IntrinsicSize.Max),
+            verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = tab.label,
+                color = if (currentTab == tab) MeemongTheme.colors.gray900 else MeemongTheme.colors.gray700,
+                style = MeemongTheme.typography.body1.sb16,
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(2.dp)
+                    .background(if (currentTab == tab) MeemongTheme.colors.gray800 else Color.Unspecified),
+            )
+        }
     }
 }
 
