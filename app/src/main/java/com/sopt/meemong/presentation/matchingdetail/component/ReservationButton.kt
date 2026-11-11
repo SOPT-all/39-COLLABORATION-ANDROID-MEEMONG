@@ -16,6 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
+/**
+ * 예약 진행 버튼입니다.
+ *
+ * @param onClick 버튼 클릭 이벤트
+ * @param isEnabled 버튼 활성화 여부
+ */
 @Composable
 fun ReservationButton(
     onClick: () -> Unit,
