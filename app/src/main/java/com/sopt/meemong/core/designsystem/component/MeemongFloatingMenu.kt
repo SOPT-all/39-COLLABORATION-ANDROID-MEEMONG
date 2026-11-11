@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -132,7 +132,7 @@ private fun FloatingMenuPanel(
 ) {
     Column(
         modifier = Modifier
-            .width(102.dp)
+            .widthIn(min = 102.dp)
             .floatingMenuShadow(shape = RoundedCornerShape(8.dp))
             .clip(RoundedCornerShape(8.dp))
             .background(MeemongTheme.colors.gray900)
