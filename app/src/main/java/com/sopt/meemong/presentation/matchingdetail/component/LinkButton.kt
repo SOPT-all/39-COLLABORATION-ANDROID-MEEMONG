@@ -14,17 +14,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
 fun LinkButton(
-    onButtonClick: () -> Unit,
+    uri: String,
     modifier: Modifier = Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+
+    val uriHandler = LocalUriHandler.current
 
     Text(
         text = "바로가기",
@@ -34,7 +37,7 @@ fun LinkButton(
             .clip(shape = RoundedCornerShape(6.dp))
             .clickable(
                 interactionSource = interactionSource,
-                onClick = onButtonClick
+                onClick = { uriHandler.openUri(uri) }
             )
             .background(
                 color = if (isPressed) MeemongTheme.colors.gray500 else MeemongTheme.colors.gray100,
@@ -52,9 +55,7 @@ private fun LinkButtonPreview() {
             modifier = Modifier.padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            LinkButton(
-                onButtonClick = {},
-            )
+            LinkButton(uri = "https://developer.android.com/develop/ui/compose/text/user-interactions")
         }
     }
 }

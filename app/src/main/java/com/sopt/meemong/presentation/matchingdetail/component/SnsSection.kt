@@ -30,7 +30,7 @@ enum class Sns(
     INSTAGRAM(
         iconRes = R.drawable.ic_instagram_24,
         label = "인스타그램",
-        link = ""
+        link = "https://www.instagram.com/gaman._.and/" // TODO: 미몽 인스타그램으로 수정
     ),
     NAVER_PLACE(
         iconRes = R.drawable.ic_naver_24,
@@ -107,7 +107,7 @@ private fun SnsRow(
         }
 
         LinkButton(
-            onButtonClick = {},
+            uri = link,
         )
     }
 }
