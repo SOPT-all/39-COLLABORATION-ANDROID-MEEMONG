@@ -1,6 +1,7 @@
 package com.sopt.meemong.presentation.matchingdetail.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +33,7 @@ enum class Tab(
 
 @Composable
 fun DetailTab(
+    onTabClick: (Tab) -> Unit,
     modifier: Modifier = Modifier,
     currentTab: Tab = Tab.DESIGNER_INFO,
 ) {
@@ -50,6 +56,7 @@ fun DetailTab(
                 TabItem(
                     tab = tab,
                     currentTab = currentTab,
+                    onClick = { onTabClick(tab) },
                 )
             }
         }
@@ -60,10 +67,12 @@ fun DetailTab(
 private fun TabItem(
     tab: Tab,
     currentTab: Tab,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
+            .clickable(onClick = onClick)
             .width(IntrinsicSize.Max)
             .padding(top = 12.dp)
             .padding(horizontal = 42.dp),
@@ -89,14 +98,25 @@ private fun TabItem(
 @Composable
 private fun DetailTabPreview() {
     MeemongTheme {
+        var currentTab by remember { mutableStateOf(Tab.DESIGNER_INFO) }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            DetailTab()
-            DetailTab(currentTab = Tab.RESERVATION)
+            DetailTab(
+                currentTab = currentTab,
+                onTabClick = { tab ->
+                    currentTab = tab
+                },
+            )
+
+            DetailTab(
+                onTabClick = {},
+                currentTab = Tab.RESERVATION,
+            )
         }
     }
 }
