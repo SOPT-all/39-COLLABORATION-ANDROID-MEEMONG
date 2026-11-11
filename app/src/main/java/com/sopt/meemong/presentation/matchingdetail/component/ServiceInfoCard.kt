@@ -1,30 +1,24 @@
 package com.sopt.meemong.presentation.matchingdetail.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
@@ -35,8 +29,11 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 /**
  * 게시물 상세 페이지 > 내용 상세 조회에서 보이는 정보 컴포넌트입니다.
  *
-// * @param title 카드의 타이틀입니다.
-// * @param isLiked
+ * @param priceType 칩 타입입니다. (REVIEW, FREE, NEGOTIABLE)
+ * @param treatmentTypes "시술 종류"입니다.
+ * @param signatures "시그니처"입니다.
+ * @param shootingRanges "촬영범위"입니다.
+ * @param shopName "매장명"입니다.
  */
 @Composable
 fun ServiceInfoCard(
