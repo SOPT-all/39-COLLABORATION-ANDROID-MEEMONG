@@ -35,7 +35,7 @@ enum class Sns(
     NAVER_PLACE(
         iconRes = R.drawable.ic_naver_24,
         label = "네이버 플레이스",
-        link = "",
+        link = "", // TODO: link가 빈 문자열일 경우 예외 처리
     ),
     YOUTUBE(
         iconRes = R.drawable.ic_youtube_24,
