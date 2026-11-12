@@ -1,6 +1,5 @@
 package com.sopt.meemong.presentation.matchingdetail.component
 
-import android.R.attr.onClick
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -24,7 +23,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
-import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
@@ -62,7 +60,6 @@ fun ImageCarousel(
                 .height(92.dp)
                 .background(
                     brush = MeemongTheme.colors.gradientHero,
-//                    alpha = 0.5f,
                 )
                 .align(Alignment.TopCenter)
         )
@@ -83,7 +80,7 @@ fun ImageCarousel(
             )
         }
 
-        if ( urlList.size > 1 ) {
+        if (urlList.size > 1) {
             PageIndicator(
                 currentPage = pagerState.currentPage + 1,
                 pageCount = pagerState.pageCount,
