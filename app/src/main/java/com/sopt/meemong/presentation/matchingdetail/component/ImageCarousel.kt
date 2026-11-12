@@ -104,9 +104,7 @@ private fun PageIndicator(
         color = MeemongTheme.colors.white,
         modifier = modifier
             .background(
-                color = MeemongTheme.colors.black.copy(
-                    alpha = 0.5f,
-                ),
+                color = MeemongTheme.colors.black.copy(alpha = 0.5f),
                 shape = CircleShape,
             )
             .padding(vertical = 4.dp, horizontal = 14.dp),
