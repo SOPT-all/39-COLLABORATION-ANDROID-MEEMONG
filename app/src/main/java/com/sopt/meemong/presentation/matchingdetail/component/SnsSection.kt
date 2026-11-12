@@ -54,7 +54,8 @@ fun SnsSection(
             .background(color = MeemongTheme.colors.white)
             .padding(horizontal = 16.dp)
             .padding(bottom = 36.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+
     ) {
         Text(
             text = "SNS",
@@ -63,14 +64,16 @@ fun SnsSection(
             modifier = Modifier.fillMaxWidth(),
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Sns.entries.forEach { sns ->
-            SnsRow(
-                iconRes = sns.iconRes,
-                label = sns.label,
-                link = sns.link,
-            )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ){
+            Sns.entries.forEach { sns ->
+                SnsRow(
+                    iconRes = sns.iconRes,
+                    label = sns.label,
+                    link = sns.link,
+                )
+            }
         }
     }
 }
