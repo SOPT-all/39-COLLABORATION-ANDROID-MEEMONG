@@ -47,14 +47,15 @@ fun SegmentControlRow(
                     color = MeemongTheme.colors.gray100,
                     shape = RoundedCornerShape(8.dp),
                 )
-                .padding(4.dp)
+                .padding(1.dp)
+                .padding(4.dp),
         )
     }
 }
 
 @Preview
 @Composable
-private fun SegmentControlRowPreview(){
+private fun SegmentControlRowPreview() {
     MeemongTheme {
         SegmentControlRow(
             onClick = {},

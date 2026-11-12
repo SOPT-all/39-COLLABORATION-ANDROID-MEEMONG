@@ -49,7 +49,8 @@ fun MatchingSegmentControl(
                 color = MeemongTheme.colors.gray100,
                 shape = CircleShape,
             )
-            .padding(4.dp)
+            .padding(1.dp)
+            .padding(4.dp),
     ) {
         Row(
             modifier = Modifier.width(IntrinsicSize.Max),
