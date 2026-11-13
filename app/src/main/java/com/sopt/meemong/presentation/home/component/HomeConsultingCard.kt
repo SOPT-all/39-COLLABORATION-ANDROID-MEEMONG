@@ -6,7 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -21,9 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.R
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import kotlin.jvm.Throws
 
 @Composable
 fun HomeConsultingCard(
@@ -37,9 +35,8 @@ fun HomeConsultingCard(
     val shape = RoundedCornerShape(6.dp)
 
     Column(
-        modifier = Modifier
-            .width(189.dp)
-            .height(125.dp)
+        modifier = modifier
+            .fillMaxWidth()
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
@@ -48,7 +45,6 @@ fun HomeConsultingCard(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Column(
-            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Text(
@@ -63,45 +59,59 @@ fun HomeConsultingCard(
                 text = description,
                 color = MeemongTheme.colors.gray600,
                 style = MeemongTheme.typography.body2.r14,
+                minLines = 2,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )
         }
 
+        ConsultingCardInfoRow(
+            timeAgo = timeAgo,
+            commentCount = commentCount,
+        )
+    }
+}
+
+@Composable
+private fun ConsultingCardInfoRow(
+    timeAgo: String,
+    commentCount: Int,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        Text(
+            text = timeAgo,
+            color = MeemongTheme.colors.gray600,
+            style = MeemongTheme.typography.caption1.r12,
+        )
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(
-                text = timeAgo,
-                color = MeemongTheme.colors.gray600,
-                style = MeemongTheme.typography.caption1.r12,
+            Icon(
+                painter = painterResource(com.sopt.meemong.R.drawable.ic_comment_16),
+                contentDescription = "댓글",
+                modifier = Modifier.size(16.dp),
+                tint = MeemongTheme.colors.gray600,
             )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Icon(
-                    painter = painterResource(com.sopt.meemong.R.drawable.ic_comment_16),
-                    contentDescription = "댓글",
-                    modifier = Modifier.size(16.dp),
-                    tint = MeemongTheme.colors.gray600,
-                )
-
-                Text(
-                    text = commentCount.toString(),
-                    color = MeemongTheme.colors.gray600,
-                    style = MeemongTheme.typography.body2.sb14,
-                )
-            }
+            Text(
+                text = commentCount.toString(),
+                color = MeemongTheme.colors.gray600,
+                style = MeemongTheme.typography.body2.sb14,
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun HmeconsultuingCardPreview() {
+private fun HomeConsultingCardPreview() {
     MeemongTheme {
         HomeConsultingCard(
             title = "예쁜 브라운/베이지 염색 받고 싶어요",
@@ -109,6 +119,7 @@ private fun HmeconsultuingCardPreview() {
             timeAgo = "2일 전",
             commentCount = 12,
             onClick = {},
+            modifier = Modifier.width(189.dp),
         )
     }
 }
