@@ -3,13 +3,12 @@ package com.sopt.meemong.core.designsystem.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.selection.selectable
@@ -20,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
@@ -58,11 +59,10 @@ enum class MeemongBottomTab(
 /**
  * 홈 화면에서 사용하는 공통 바텀바입니다.
  *
- * 현재 선택 상태 전용 아이콘은 홈 탭에만 적용되어 있습니다.
- * 다른 탭은 선택 여부와 관계없이 동일한 아이콘을 사용합니다.
+ * 하단 36dp는 시스템 바 영역을 포함한 디자인 여백입니다.
+ * 컴포넌트 내부에서 navigationBarsPadding은 추가하지 않습니다.
  *
- * 실제 네비게이션은 연결되어 있지 않으며,
- * 화면 이동이 필요한 경우 호출부에서 [onTabClick]을 통해 연결합니다.
+ * 실제 화면 이동은 호출부의 [onTabClick]에서 연결합니다.
  */
 @Composable
 fun MeemongBottomBar(
@@ -70,20 +70,25 @@ fun MeemongBottomBar(
     onTabClick: (MeemongBottomTab) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(MeemongTheme.colors.white)
-            .navigationBarsPadding(),
+            .heightIn(min = 94.dp)
+            .background(MeemongTheme.colors.white),
     ) {
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = MeemongTheme.colors.gray300,
+        )
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 89.dp)
                 .padding(
-                    start = 31.5.dp,
+                    start = 25.dp,
                     top = 8.dp,
-                    end = 31.5.dp,
+                    end = 25.dp,
+                    bottom = 36.dp,
                 )
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -92,19 +97,14 @@ fun MeemongBottomBar(
                 MeemongBottomBarItem(
                     tab = tab,
                     selected = selectedTab == tab,
-                    onClick = { onTabClick(tab) },
+                    onClick = {
+                        onTabClick(tab)
+                    },
                 )
             }
         }
-
-        HorizontalDivider(
-            modifier = Modifier.align(Alignment.TopCenter),
-            thickness = 1.dp,
-            color = MeemongTheme.colors.gray300,
-        )
     }
 }
-
 
 @Composable
 private fun MeemongBottomBarItem(
@@ -115,8 +115,8 @@ private fun MeemongBottomBarItem(
 ) {
     Column(
         modifier = modifier
-            .width(32.dp)
-            .heightIn(min = 44.dp)
+            .width(49.dp)
+            .heightIn(min = 49.dp)
             .selectable(
                 selected = selected,
                 role = Role.Tab,
@@ -126,28 +126,47 @@ private fun MeemongBottomBarItem(
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Icon(
-            painter = painterResource(
-                if (selected) tab.selectedIconRes else tab.iconRes,
+            imageVector = ImageVector.vectorResource(
+                if (selected) {
+                    tab.selectedIconRes
+                } else {
+                    tab.iconRes
+                },
             ),
             contentDescription = null,
+            modifier = Modifier.size(24.dp),
             tint = MeemongTheme.colors.gray950,
         )
 
         Text(
             text = tab.title,
-            modifier = Modifier.wrapContentWidth(unbounded = true),
+            modifier = Modifier
+                .width(49.dp)
+                .heightIn(min = 21.dp)
+                .wrapContentWidth(unbounded = true),
             color = if (selected) {
                 MeemongTheme.colors.gray950
             } else {
                 MeemongTheme.colors.gray700
             },
             style = MeemongTheme.typography.caption2.m10,
+            textAlign = TextAlign.Center,
             softWrap = false,
         )
     }
 }
 
-@Preview(showBackground = true, widthDp = 375)
+@Preview(
+    name = "기본",
+    showBackground = true,
+    widthDp = 375,
+)
+@Preview(
+    name = "큰 글자",
+    showBackground = true,
+    widthDp = 375,
+    fontScale = 2f,
+)
 @Composable
 private fun MeemongBottomBarPreview() {
     MeemongTheme {
