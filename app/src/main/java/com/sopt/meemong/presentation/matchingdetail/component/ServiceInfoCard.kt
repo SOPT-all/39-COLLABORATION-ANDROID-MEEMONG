@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -18,7 +19,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
@@ -139,7 +143,26 @@ private fun InfoSection(
     shopName: String,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    val textMeasurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+
+    val infoLabelList = listOf(
+        "시술 종류" to treatmentTypes.joinToString(", "),
+        "시그니처" to signatures.joinToString(", "),
+        "촬영범위" to shootingRanges.joinToString(", "),
+        "매장명" to shopName,
+    )
+
+    val labelWidth = with(density) {
+        infoLabelList.maxOf { label ->
+            textMeasurer.measure(
+                text = AnnotatedString(label.first),
+                style = MeemongTheme.typography.body2.sb14,
+            ).size.width
+        }.toDp()
+    }
+
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .background(
@@ -147,50 +170,26 @@ private fun InfoSection(
                 color = MeemongTheme.colors.gray50,
             )
             .padding(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Column(
-            modifier = Modifier,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            val infoLabelList: List<String> = listOf("시술 종류", "시그니처", "촬영범위", "매장명")
-
-            infoLabelList.forEach { label ->
+        infoLabelList.forEach { info ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
                 Text(
-                    text = label,
+                    modifier = Modifier.width(labelWidth),
+                    text = info.first,
                     style = MeemongTheme.typography.body2.sb14,
                     color = MeemongTheme.colors.gray500,
                 )
+
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = info.second,
+                    style = MeemongTheme.typography.body2.r14,
+                    color = MeemongTheme.colors.black,
+                )
             }
-        }
-
-        Column(
-            modifier = Modifier,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Text(
-                text = treatmentTypes.joinToString(", "),
-                style = MeemongTheme.typography.body2.r14,
-                color = MeemongTheme.colors.black,
-            )
-
-            Text(
-                text = signatures.joinToString(", "),
-                style = MeemongTheme.typography.body2.r14,
-                color = MeemongTheme.colors.black,
-            )
-
-            Text(
-                text = shootingRanges.joinToString(", "),
-                style = MeemongTheme.typography.body2.r14,
-                color = MeemongTheme.colors.black,
-            )
-
-            Text(
-                text = shopName,
-                style = MeemongTheme.typography.body2.r14,
-                color = MeemongTheme.colors.black,
-            )
         }
     }
 }
@@ -263,8 +262,8 @@ private fun ServiceInfoCardPreview() {
                 displayPrice = 500_000,
                 treatmentTypes = listOf("펌"),
                 signatures = listOf("컷트", "펌", "염색"),
-                shootingRanges = listOf("얼굴 노출", "영상"),
-                shopName = "아벨라움",
+                shootingRanges = listOf("얼굴 노출", "영상", "얼굴 노출", "영상", "얼굴 노출", "영상", "얼굴 노출", "영상"),
+                shopName = "아벨라움이란다너이거이름은들어봤니?어렵지?아벨라움인지아벨리움인지ㅋㅋ",
                 onLikeClick = { secondLiked = !secondLiked },
                 isLiked = secondLiked,
             )
