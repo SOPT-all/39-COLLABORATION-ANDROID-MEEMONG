@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,18 +47,18 @@ fun HomeProductCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .heightIn(min = 195.dp)
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
             .clickable(onClick = onClick)
             // 테두리 두께(1dp)만큼 안쪽부터 콘텐츠 배치
             .padding(1.dp),
-
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(81.dp),
+                .aspectRatio(160f / 81f),
         ) {
             UrlImage(
                 url = imageUrl,
@@ -133,6 +137,7 @@ private fun Int.toPriceText(): String = "%,d".format(this)
 private fun HomeProductCardPreview() {
     MeemongTheme {
         Row(
+            modifier = Modifier.height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(11.dp),
         ) {
             HomeProductCard(
@@ -143,7 +148,9 @@ private fun HomeProductCardPreview() {
                 discountRate = 68,
                 salePrice = 8960,
                 onClick = {},
-                modifier = Modifier.width(162.dp),
+                modifier = Modifier
+                    .width(162.dp)
+                    .fillMaxHeight(),
             )
             HomeProductCard(
                 imageUrl = "",
@@ -153,7 +160,9 @@ private fun HomeProductCardPreview() {
                 discountRate = 30,
                 salePrice = 23100,
                 onClick = {},
-                modifier = Modifier.width(162.dp),
+                modifier = Modifier
+                    .width(162.dp)
+                    .fillMaxHeight(),
             )
         }
     }
