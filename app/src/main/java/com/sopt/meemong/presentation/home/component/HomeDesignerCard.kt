@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -103,7 +104,7 @@ fun HomeDesignerCard(
                 }
             }
 
-            Row(
+            FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
@@ -111,7 +112,7 @@ fun HomeDesignerCard(
                         shape = RoundedCornerShape(4.dp),
                     )
                     .padding(horizontal = 12.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 when (priceType) {
@@ -138,27 +139,32 @@ fun HomeDesignerCard(
                         }
                     }
                 }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(14.dp)
+                            .background(MeemongTheme.colors.gray500),
+                    )
 
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .height(14.dp)
-                        .background(MeemongTheme.colors.gray500),
-                )
-
-                Text(
-                    text = location,
-                    color = MeemongTheme.colors.gray700,
-                    style = MeemongTheme.typography.caption1.r12,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                    Text(
+                        text = location,
+                        color = MeemongTheme.colors.gray700,
+                        style = MeemongTheme.typography.caption1.r12,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
         }
     }
 }
 
 @Preview(showBackground = true, widthDp = 375)
+@Preview(showBackground = true, widthDp = 375, fontScale = 2f)
 @Composable
 private fun HomeDesignerCardPreview() {
     MeemongTheme {
