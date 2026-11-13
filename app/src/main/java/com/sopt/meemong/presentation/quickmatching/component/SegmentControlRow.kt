@@ -47,13 +47,13 @@ fun SegmentControlRow(
             imageVector = ImageVector.vectorResource(R.drawable.ic_adjustments_24),
             contentDescription = null,
             modifier = Modifier
-                .size(24.dp)
                 .border(
                     width = 1.dp,
                     color = MeemongTheme.colors.gray100,
                     shape = RoundedCornerShape(8.dp),
                 )
-                .padding(5.dp),
+                .padding(5.dp)
+                .size(24.dp),
         )
     }
 }
