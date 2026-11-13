@@ -34,9 +34,9 @@ enum class MatchingCategory(
 
 @Composable
 fun MatchingSegmentControl(
+    currentCategory: MatchingCategory,
     onClick: (MatchingCategory) -> Unit,
     modifier: Modifier = Modifier,
-    currentCategory: MatchingCategory = MatchingCategory.DESIGNER,
 ) {
     Box(
         modifier = modifier

@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -21,6 +25,7 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
 fun SegmentControlRow(
+    currentCategory: MatchingCategory,
     onClick: (MatchingCategory) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -32,6 +37,7 @@ fun SegmentControlRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         MatchingSegmentControl(
+            currentCategory = currentCategory,
             onClick = onClick,
         )
 
@@ -47,8 +53,7 @@ fun SegmentControlRow(
                     color = MeemongTheme.colors.gray100,
                     shape = RoundedCornerShape(8.dp),
                 )
-                .padding(1.dp)
-                .padding(4.dp),
+                .padding(5.dp),
         )
     }
 }
@@ -57,8 +62,11 @@ fun SegmentControlRow(
 @Composable
 private fun SegmentControlRowPreview() {
     MeemongTheme {
+        var selectedCategory by rememberSaveable { mutableStateOf(MatchingCategory.DESIGNER) }
+
         SegmentControlRow(
-            onClick = {},
+            currentCategory = selectedCategory,
+            onClick = { selectedCategory = it },
         )
     }
 }
