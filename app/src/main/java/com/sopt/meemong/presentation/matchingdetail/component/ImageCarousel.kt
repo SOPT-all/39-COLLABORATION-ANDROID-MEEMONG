@@ -67,15 +67,14 @@ fun ImageCarousel(
             onClick = onClick,
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(start = 6.dp, top = 64.dp),
+                .padding(start = 6.dp, top = 64.dp)
+                .size(44.dp),
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.ic_back_24),
                 contentDescription = "뒤로가기",
                 tint = MeemongTheme.colors.white,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .size(24.dp),
+                modifier = Modifier.size(24.dp),
             )
         }
 
