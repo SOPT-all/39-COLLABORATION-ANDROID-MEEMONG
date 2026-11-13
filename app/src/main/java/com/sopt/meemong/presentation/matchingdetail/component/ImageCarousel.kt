@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -57,11 +56,11 @@ fun ImageCarousel(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(375f/92f)
+                .aspectRatio(375f / 92f)
                 .background(
                     brush = MeemongTheme.colors.gradientHero,
                 )
-                .align(Alignment.TopCenter)
+                .align(Alignment.TopCenter),
         )
 
         IconButton(
