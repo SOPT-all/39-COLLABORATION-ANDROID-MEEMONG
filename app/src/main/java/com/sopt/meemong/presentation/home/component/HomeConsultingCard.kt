@@ -5,11 +5,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -109,6 +112,38 @@ private fun ConsultingCardInfoRow(
     }
 }
 
+data class HomeConsultingItem(
+    val title: String,
+    val description: String,
+    val timeAgo: String,
+    val commentCount: Int,
+)
+
+@Composable
+fun HomeConsultingCardList(
+    items: List<HomeConsultingItem>,
+    onItemClick: (HomeConsultingItem) -> Unit,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+) {
+    LazyRow(
+        modifier = modifier.fillMaxWidth(),
+        contentPadding = contentPadding,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        items(items) { item ->
+            HomeConsultingCard(
+                title = item.title,
+                description = item.description,
+                timeAgo = item.timeAgo,
+                commentCount = item.commentCount,
+                onClick = { onItemClick(item) },
+                modifier = Modifier.width(189.dp),
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun HomeConsultingCardPreview() {
@@ -120,6 +155,24 @@ private fun HomeConsultingCardPreview() {
             commentCount = 12,
             onClick = {},
             modifier = Modifier.width(189.dp),
+        )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 375)
+@Composable
+private fun HomeConsultingCardListPreview() {
+    MeemongTheme {
+        HomeConsultingCardList(
+            items = List(5) {
+                HomeConsultingItem(
+                    title = "예쁜 브라운/베이지 염색 받고 싶어요",
+                    description = "18만원대 이내로 쿨톤 브라운 염색하고 싶습니다!",
+                    timeAgo = "2일 전",
+                    commentCount = 12,
+                )
+            },
+            onItemClick = {},
         )
     }
 }
