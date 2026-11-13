@@ -57,7 +57,7 @@ fun ImageCarousel(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(92.dp)
+                .aspectRatio(375f/92f)
                 .background(
                     brush = MeemongTheme.colors.gradientHero,
                 )
