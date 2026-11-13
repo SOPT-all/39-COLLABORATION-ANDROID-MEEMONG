@@ -1,12 +1,12 @@
 package com.sopt.meemong.presentation.home.component
 
-import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,12 +42,14 @@ fun HomeProductCard(
 
     Column(
         modifier = modifier
-            .width(162.dp)
+            .fillMaxWidth()
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
             .clickable(onClick = onClick)
+            // 테두리 두께(1dp)만큼 안쪽부터 콘텐츠 배치
             .padding(1.dp),
+
     ) {
         Box(
             modifier = Modifier
@@ -84,7 +86,6 @@ fun HomeProductCard(
                 text = name,
                 color = MeemongTheme.colors.gray700,
                 style = MeemongTheme.typography.body2.m14,
-                minLines = 2,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -96,8 +97,7 @@ fun HomeProductCard(
                 textDecoration = TextDecoration.LineThrough,
             )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 Text(
@@ -105,16 +105,21 @@ fun HomeProductCard(
                     color = MeemongTheme.colors.red,
                     style = MeemongTheme.typography.body1.sb16,
                 )
-                Text(
-                    text = salePrice.toPriceText(),
-                    color = MeemongTheme.colors.black,
-                    style = MeemongTheme.typography.body1.sb16,
-                )
-                Text(
-                    text = "원",
-                    color = MeemongTheme.colors.gray600,
-                    style = MeemongTheme.typography.body1.r16,
-                )
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
+                    Text(
+                        text = salePrice.toPriceText(),
+                        color = MeemongTheme.colors.black,
+                        style = MeemongTheme.typography.body1.sb16,
+                    )
+                    Text(
+                        text = "원",
+                        color = MeemongTheme.colors.gray600,
+                        style = MeemongTheme.typography.body1.r16,
+                    )
+                }
             }
         }
     }
@@ -123,17 +128,33 @@ fun HomeProductCard(
 private fun Int.toPriceText(): String = "%,d".format(this)
 
 @Preview(showBackground = true)
+@Preview(showBackground = true, fontScale = 2f)
 @Composable
 private fun HomeProductCardPreview() {
     MeemongTheme {
-        HomeProductCard(
-            imageUrl = "",
-            tag = "두피보호",
-            name = "셀프염색 전 필수 두피 보호제",
-            originalPrice = 28000,
-            discountRate = 68,
-            salePrice = 8960,
-            onClick = {},
-        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(11.dp),
+        ) {
+            HomeProductCard(
+                imageUrl = "",
+                tag = "두피보호",
+                name = "셀프염색 전 필수 두피 보호제",
+                originalPrice = 28000,
+                discountRate = 68,
+                salePrice = 8960,
+                onClick = {},
+                modifier = Modifier.width(162.dp),
+            )
+            HomeProductCard(
+                imageUrl = "",
+                tag = "기름제거",
+                name = "떡진 두피 샴푸",
+                originalPrice = 33000,
+                discountRate = 30,
+                salePrice = 23100,
+                onClick = {},
+                modifier = Modifier.width(162.dp),
+            )
+        }
     }
 }
