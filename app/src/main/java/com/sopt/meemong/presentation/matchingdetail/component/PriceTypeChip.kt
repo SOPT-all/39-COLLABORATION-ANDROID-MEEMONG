@@ -28,6 +28,7 @@ fun PriceTypeChip(
     Text(
         text = label,
         color = MeemongTheme.colors.meemongBlue,
+        style = MeemongTheme.typography.body2.r14,
         modifier = modifier
             .background(
                 color = MeemongTheme.colors.background,
