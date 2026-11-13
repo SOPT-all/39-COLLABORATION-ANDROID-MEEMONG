@@ -1,9 +1,12 @@
+package com.sopt.meemong.presentation.home.component
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -26,12 +29,13 @@ fun HomeProductMoreButton(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(38.dp)
+            .heightIn(min = 38.dp)
             .clip(RoundedCornerShape(5.dp))
             .background(MeemongTheme.colors.background)
-            .clickable(onClick = onClick),
-        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
-        verticalAlignment = Alignment.CenterVertically,
+            .clickable(onClick = onClick)
+            .padding(vertical = 10.dp),
+    horizontalArrangement = Arrangement . spacedBy (4.dp, Alignment.CenterHorizontally),
+    verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = "나에게 맞는 헤어템 더 보러 가기",
