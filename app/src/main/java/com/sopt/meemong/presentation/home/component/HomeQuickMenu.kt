@@ -12,14 +12,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
@@ -34,30 +35,31 @@ enum class HomeQuickMenuItem(
     PARTNER(R.drawable.ic_quick_partner_32, "안심매칭"),
     CONSULTATION(R.drawable.ic_quick_consultation_32, "컨설팅"),
     QUICK_MATCHING(R.drawable.ic_quick_matching_32, "빠른매칭"),
-    RANK(R.drawable.ic_quick_rank_32,"상담랭킹"),
+    RANK(R.drawable.ic_quick_rank_32, "상담랭킹"),
 }
 
 @Composable
 fun HomeQuickMenu(
-    onItemClick: (HomeQuickMenuItem) ->Unit,
+    onItemClick: (HomeQuickMenuItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(MeemongTheme.colors.white)
-            .padding(vertical = 8.dp),
+            // 375 기준: 좌우 19.5 + 칸 112 x 3 → 피그마 아이콘 위치와 동일
+            .padding(horizontal = 19.5.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         HomeQuickMenuItem.entries.chunked(3).forEach { rowItems ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(56.dp, Alignment.CenterHorizontally),
             ) {
                 rowItems.forEach { item ->
                     QuickMenuItem(
                         item = item,
                         onClick = { onItemClick(item) },
+                        modifier = Modifier.weight(1f),
                     )
                 }
             }
@@ -69,13 +71,14 @@ fun HomeQuickMenu(
 private fun QuickMenuItem(
     item: HomeQuickMenuItem,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val boxShape = RoundedCornerShape(16.dp)
 
     Column(
-        modifier = Modifier
-            .width(56.dp)
-            .clickable(onClick = onClick),
+        modifier = modifier
+            .clickable(onClick = onClick)
+            .padding(3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -88,7 +91,7 @@ private fun QuickMenuItem(
             contentAlignment = Alignment.Center,
         ) {
             Image(
-                painter = painterResource(item.iconRes),
+                imageVector = ImageVector.vectorResource(item.iconRes),
                 contentDescription = null,
                 modifier = Modifier.size(32.dp)
             )
@@ -98,16 +101,16 @@ private fun QuickMenuItem(
             text = item.label,
             color = MeemongTheme.colors.gray900,
             style = MeemongTheme.typography.body2.r14,
-            maxLines = 1,
-            softWrap = false,
+            textAlign = TextAlign.Center,
         )
     }
 }
 
 @Preview(showBackground = true, widthDp = 375)
+@Preview(showBackground = true, widthDp = 375, fontScale = 2f)
 @Composable
 private fun HomeQuickMenuPreview() {
-    MeemongTheme{
+    MeemongTheme {
         HomeQuickMenu(onItemClick = {})
     }
 }
