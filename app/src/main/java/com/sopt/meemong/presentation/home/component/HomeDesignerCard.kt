@@ -4,19 +4,24 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,10 +33,22 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
-enum class DesignerPriceType {
-    FREE,
-    MATERIAL,
+enum class DesignerPriceType(
+    val label: String,
+) {
+    FREE("무료시술"),
+    MATERIAL("재료비 발생"),
 }
+
+data class HomeDesignerItem(
+    val portfolioImageUrls: List<String>,
+    val profileImageUrl: String,
+    val name: String,
+    val shopName: String,
+    val priceType: DesignerPriceType,
+    val location: String,
+    val materialCost: String = "",
+)
 
 @Composable
 fun HomeDesignerCard(
@@ -49,12 +66,13 @@ fun HomeDesignerCard(
 
     Column(
         modifier = modifier
-            .width(324.dp)
+            .fillMaxWidth()
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
             .clickable(onClick = onClick)
-            .padding(start = 1.dp, top = 1.dp, end = 1.dp, bottom = 13.dp),
+            .padding(1.dp)
+            .padding(bottom = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Row(
@@ -66,7 +84,7 @@ fun HomeDesignerCard(
                     url = portfolioImageUrls.getOrElse(index) { "" },
                     modifier = Modifier
                         .weight(1f)
-                        .height(104.dp),
+                        .aspectRatio(106f / 104f),
                     contentScale = ContentScale.Crop,
                 )
             }
@@ -112,13 +130,12 @@ fun HomeDesignerCard(
                         shape = RoundedCornerShape(4.dp),
                     )
                     .padding(horizontal = 12.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 when (priceType) {
                     DesignerPriceType.FREE -> {
                         Text(
-                            text = "무료시술",
+                            text = priceType.label,
                             color = MeemongTheme.colors.meemongBlue,
                             style = MeemongTheme.typography.caption1.m12,
                         )
@@ -127,7 +144,7 @@ fun HomeDesignerCard(
                     DesignerPriceType.MATERIAL -> {
                         Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
                             Text(
-                                text = "재료비 발생",
+                                text = priceType.label,
                                 color = MeemongTheme.colors.gray950,
                                 style = MeemongTheme.typography.caption1.m12,
                             )
@@ -140,14 +157,14 @@ fun HomeDesignerCard(
                     }
                 }
                 Row(
+                    modifier = Modifier.height(IntrinsicSize.Min),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .width(1.dp)
-                            .height(14.dp)
-                            .background(MeemongTheme.colors.gray500),
+                    VerticalDivider(
+                        thickness = 1.dp,
+                        color = MeemongTheme.colors.gray500,
+                        modifier = Modifier.padding(vertical = 2.dp),
                     )
 
                     Text(
@@ -163,27 +180,70 @@ fun HomeDesignerCard(
     }
 }
 
+@Composable
+fun HomeDesignerCardSection(
+    title: String,
+    items: List<HomeDesignerItem>,
+    onItemClick: (HomeDesignerItem) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            text = title,
+            style = MeemongTheme.typography.body1.sb16,
+            color = MeemongTheme.colors.gray950,
+            modifier = Modifier.padding(horizontal = 20.dp),
+        )
+
+        BoxWithConstraints(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            // 375 기준 324dp가 되도록 화면 너비에서 계산
+            val cardWidth = maxWidth - 51.dp
+
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                items(items) { item ->
+                    HomeDesignerCard(
+                        portfolioImageUrls = item.portfolioImageUrls,
+                        profileImageUrl = item.profileImageUrl,
+                        name = item.name,
+                        shopName = item.shopName,
+                        priceType = item.priceType,
+                        location = item.location,
+                        materialCost = item.materialCost,
+                        onClick = { onItemClick(item) },
+                        modifier = Modifier.width(cardWidth),
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true, widthDp = 375)
 @Preview(showBackground = true, widthDp = 375, fontScale = 2f)
 @Composable
-private fun HomeDesignerCardPreview() {
+private fun HomeDesignerCardSectionPreview() {
     MeemongTheme {
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            item {
-                HomeDesignerCard(
+        HomeDesignerCardSection(
+            title = "내 주변 디자이너",
+            items = listOf(
+                HomeDesignerItem(
                     portfolioImageUrls = listOf("", "", ""),
                     profileImageUrl = "",
                     name = "한울",
                     shopName = "준오헤어 동탄카림에비뉴점",
                     priceType = DesignerPriceType.FREE,
                     location = "경기도 화성시 4.7km",
-                    onClick = {},
-                )
-            }
-            item {
-                HomeDesignerCard(
+                ),
+                HomeDesignerItem(
                     portfolioImageUrls = listOf("", "", ""),
                     profileImageUrl = "",
                     name = "슬아",
@@ -191,9 +251,9 @@ private fun HomeDesignerCardPreview() {
                     priceType = DesignerPriceType.MATERIAL,
                     materialCost = "10만원~",
                     location = "경기 성남시 분당구 13.4km",
-                    onClick = {},
-                )
-            }
-        }
+                ),
+            ),
+            onItemClick = {},
+        )
     }
 }
