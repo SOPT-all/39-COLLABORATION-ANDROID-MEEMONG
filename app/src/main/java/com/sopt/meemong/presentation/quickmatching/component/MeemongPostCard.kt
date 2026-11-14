@@ -109,6 +109,7 @@ fun MeemongPostCard(
                         modifier = Modifier.weight(1f),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalArrangement = Arrangement.spacedBy(4.dp),
+                        itemVerticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text = designerName,
@@ -116,31 +117,21 @@ fun MeemongPostCard(
                             style = MeemongTheme.typography.caption1.r12,
                         )
 
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            PostCardDividerDot()
+                        PostCardDividerDot()
 
-                            Text(
-                                text = formatPostTime(createdAtMillis),
-                                color = MeemongTheme.colors.gray600,
-                                style = MeemongTheme.typography.caption1.r12,
-                            )
-                        }
+                        Text(
+                            text = formatPostTime(createdAtMillis),
+                            color = MeemongTheme.colors.gray600,
+                            style = MeemongTheme.typography.caption1.r12,
+                        )
 
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            PostCardDividerDot()
+                        PostCardDividerDot()
 
-                            Text(
-                                text = region,
-                                color = MeemongTheme.colors.gray600,
-                                style = MeemongTheme.typography.caption1.r12,
-                            )
-                        }
+                        Text(
+                            text = region,
+                            color = MeemongTheme.colors.gray600,
+                            style = MeemongTheme.typography.caption1.r12,
+                        )
                     }
 
 
