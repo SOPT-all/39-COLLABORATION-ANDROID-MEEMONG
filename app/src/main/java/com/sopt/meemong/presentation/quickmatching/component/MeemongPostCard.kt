@@ -230,19 +230,26 @@ fun MeemongPostCard(
             }
 
             if (treatmentTypes.isNotEmpty()) {
-                FlowRow(
+                Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    treatmentTypes.forEach { treatment ->
+                    treatmentTypes.take(VISIBLE_TAG_COUNT).forEach { treatment ->
                         PostTag(text = treatment)
+                    }
+
+                    val remainingCount = treatmentTypes.size - VISIBLE_TAG_COUNT
+                    if (remainingCount > 0) {
+                        PostTag(text = "+$remainingCount")
                     }
                 }
             }
         }
     }
 }
+
+private const val VISIBLE_TAG_COUNT = 3
 
 @Composable
 private fun PostCardDividerDot() {
