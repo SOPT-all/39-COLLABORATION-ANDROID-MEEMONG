@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -120,26 +121,43 @@ data class HomeConsultingItem(
 )
 
 @Composable
-fun HomeConsultingCardList(
+fun HomeConsultingCardSection(
     items: List<HomeConsultingItem>,
     onItemClick: (HomeConsultingItem) -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
-    LazyRow(
+    Column(
         modifier = modifier.fillMaxWidth(),
-        contentPadding = contentPadding,
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(items) { item ->
-            HomeConsultingCard(
-                title = item.title,
-                description = item.description,
-                timeAgo = item.timeAgo,
-                commentCount = item.commentCount,
-                onClick = { onItemClick(item) },
-                modifier = Modifier.width(189.dp),
-            )
+        Text(
+            text = "헤어컨설팅",
+            style = MeemongTheme.typography.body1.sb16,
+            color = MeemongTheme.colors.gray950,
+            modifier = Modifier.padding(horizontal = 20.dp),
+        )
+
+        BoxWithConstraints(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            val cardWidth = maxWidth - 186.dp
+
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                items(items) { item ->
+                    HomeConsultingCard(
+                        title = item.title,
+                        description = item.description,
+                        timeAgo = item.timeAgo,
+                        commentCount = item.commentCount,
+                        onClick = { onItemClick(item) },
+                        modifier = Modifier.width(cardWidth),
+                    )
+                }
+            }
         }
     }
 }
@@ -161,9 +179,9 @@ private fun HomeConsultingCardPreview() {
 
 @Preview(showBackground = true, widthDp = 375)
 @Composable
-private fun HomeConsultingCardListPreview() {
+private fun HomeConsultingCardSectionPreview() {
     MeemongTheme {
-        HomeConsultingCardList(
+        HomeConsultingCardSection(
             items = List(5) {
                 HomeConsultingItem(
                     title = "예쁜 브라운/베이지 염색 받고 싶어요",
