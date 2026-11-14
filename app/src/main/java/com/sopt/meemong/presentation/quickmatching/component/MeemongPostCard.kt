@@ -112,11 +112,8 @@ fun MeemongPostCard(
                     ) {
                         Text(
                             text = designerName,
-                            modifier = Modifier.widthIn(max = 84.dp),
                             color = MeemongTheme.colors.gray600,
                             style = MeemongTheme.typography.caption1.r12,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
                         )
 
                         Row(
