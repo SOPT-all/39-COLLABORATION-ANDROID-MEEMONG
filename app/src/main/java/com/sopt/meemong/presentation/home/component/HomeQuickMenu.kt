@@ -47,19 +47,18 @@ fun HomeQuickMenu(
         modifier = modifier
             .fillMaxWidth()
             .background(MeemongTheme.colors.white)
-            // 375 기준: 좌우 19.5 + 칸 112 x 3 → 피그마 아이콘 위치와 동일
-            .padding(horizontal = 19.5.dp, vertical = 8.dp),
+            .padding(vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         HomeQuickMenuItem.entries.chunked(3).forEach { rowItems ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(56.dp, Alignment.CenterHorizontally),
             ) {
                 rowItems.forEach { item ->
                     QuickMenuItem(
                         item = item,
                         onClick = { onItemClick(item) },
-                        modifier = Modifier.weight(1f),
                     )
                 }
             }
