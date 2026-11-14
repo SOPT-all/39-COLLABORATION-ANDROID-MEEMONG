@@ -33,13 +33,8 @@ fun formatPostTime(
             "어제"
         }
 
-        postedCalendar.get(Calendar.YEAR) ==
-                todayCalendar.get(Calendar.YEAR) -> {
-            formatDate(postedAtMillis, "M월 dd일", timeZone)
-        }
-
         else -> {
-            formatDate(postedAtMillis, "yyyy년 MM월 d일", timeZone)
+            formatDate(postedAtMillis, "MM월 dd일", timeZone)
         }
     }
 }
