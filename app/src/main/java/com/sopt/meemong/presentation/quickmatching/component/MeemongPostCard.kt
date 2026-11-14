@@ -193,6 +193,9 @@ fun MeemongPostCard(
 
                             MeemongPostCostType.MATERIAL_FEE ->
                                 MeemongTheme.colors.gray700
+
+                            MeemongPostCostType.MODEL_FEE ->
+                                MeemongTheme.colors.green
                         },
                         style = MeemongTheme.typography.body2.sb14,
                         maxLines = 1,
@@ -295,6 +298,7 @@ private fun MeemongPostCardPreview() {
                         MeemongPostCostType.FREE -> null
                         MeemongPostCostType.REVIEW_SPECIAL -> 5_000
                         MeemongPostCostType.MATERIAL_FEE -> 40_000
+                        MeemongPostCostType.MODEL_FEE -> 45_000
                     },
                     availableTimes = listOf("평일 오전"),
                     treatmentTypes = listOf("커트", "염색"),
