@@ -97,60 +97,55 @@ fun MeemongPostCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Row(
+                    UrlImage(
+                        url = designerProfileImageUrl,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop,
+                    )
+
+                    FlowRow(
                         modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
-                        UrlImage(
-                            url = designerProfileImageUrl,
-                            modifier = Modifier
-                                .size(20.dp)
-                                .clip(CircleShape),
-                            contentScale = ContentScale.Crop,
+                        Text(
+                            text = designerName,
+                            modifier = Modifier.widthIn(max = 84.dp),
+                            color = MeemongTheme.colors.gray600,
+                            style = MeemongTheme.typography.caption1.r12,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
 
-                        FlowRow(
-                            modifier = Modifier.weight(1f),
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(4.dp),
                         ) {
+                            PostCardDividerDot()
+
                             Text(
-                                text = designerName,
-                                modifier = Modifier.widthIn(max = 84.dp),
+                                text = formatPostTime(createdAtMillis),
                                 color = MeemongTheme.colors.gray600,
                                 style = MeemongTheme.typography.caption1.r12,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
                             )
+                        }
 
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            ) {
-                                PostCardDividerDot()
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            PostCardDividerDot()
 
-                                Text(
-                                    text = formatPostTime(createdAtMillis),
-                                    color = MeemongTheme.colors.gray600,
-                                    style = MeemongTheme.typography.caption1.r12,
-                                )
-                            }
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            ) {
-                                PostCardDividerDot()
-
-                                Text(
-                                    text = region,
-                                    color = MeemongTheme.colors.gray600,
-                                    style = MeemongTheme.typography.caption1.r12,
-                                )
-                            }
+                            Text(
+                                text = region,
+                                color = MeemongTheme.colors.gray600,
+                                style = MeemongTheme.typography.caption1.r12,
+                            )
                         }
                     }
+
 
                     Icon(
                         imageVector = ImageVector.vectorResource(
