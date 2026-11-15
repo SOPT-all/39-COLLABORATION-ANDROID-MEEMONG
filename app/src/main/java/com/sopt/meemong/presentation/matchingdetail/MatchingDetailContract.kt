@@ -2,18 +2,18 @@ package com.sopt.meemong.presentation.matchingdetail
 
 import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.core.model.ShootingRangeType
 import com.sopt.meemong.core.model.TreatmentType
 import com.sopt.meemong.data.matchingdetail.model.DesignerProfileInfo
 import com.sopt.meemong.data.matchingdetail.model.DetailInfo
 import com.sopt.meemong.data.matchingdetail.model.ServiceInfo
-import com.sopt.meemong.presentation.matchingdetail.component.PriceType
 
 data class MatchingDetailUiState(
-    val postId: Long = 0,
+    val postId: Long = 0L,
     val postImageUrls: List<String> = emptyList(),
     val designerProfileInfo: DesignerProfileInfo = DesignerProfileInfo(
-            designerId = 0,
+            designerId = 0L,
             designerName = "",
             designerProfileImageUrl = "",
             region = "",
@@ -26,7 +26,7 @@ data class MatchingDetailUiState(
             discountRate = 0f,
             originalPrice = 0,
             displayPrice = 0,
-            treatmentTypes = listOf(TreatmentType.STRAIGHT),
+            treatmentTypes = emptyList(),
             signatures = emptyList(),
             shootingRanges = emptyList(),
             shopName = "",
