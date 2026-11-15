@@ -29,30 +29,16 @@ import com.sopt.meemong.R
 import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.common.extensions.toPriceFormat
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.PriceType
+import com.sopt.meemong.core.model.ShootingRangeType
+import com.sopt.meemong.core.model.TreatmentType
+import com.sopt.meemong.data.matchingdetail.model.ServiceInfo
 
-/**
- * 게시물 상세 페이지 > 내용 상세 조회에서 보이는 정보 컴포넌트입니다.
- *
- * @param priceType 칩 타입입니다. (REVIEW, FREE, NEGOTIABLE)
- * @param treatmentTypes "시술 종류"입니다.
- * @param signatures "시그니처"입니다.
- * @param shootingRanges "촬영범위"입니다.
- * @param shopName "매장명"입니다.
- */
 @Composable
 fun ServiceInfoCard(
-    title: String,
-    priceType: String,
-    discountRate: Float,
-    originalPrice: Int,
-    displayPrice: Int,
-    treatmentTypes: List<String>,
-    signatures: List<String>,
-    shootingRanges: List<String>,
-    shopName: String,
+    serviceInfo: ServiceInfo,
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isLiked: Boolean = false,
 ) {
     Column(
         modifier = modifier
@@ -62,20 +48,20 @@ fun ServiceInfoCard(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Header(
-            title = title,
-            isLiked = isLiked,
-            priceType = priceType,
-            discountRate = discountRate,
-            originalPrice = originalPrice,
-            displayPrice = displayPrice,
+            title = serviceInfo.title,
+            isLiked = serviceInfo.isLiked,
+            priceType = serviceInfo.priceType.label,
+            discountRate = serviceInfo.discountRate,
+            originalPrice = serviceInfo.originalPrice,
+            displayPrice = serviceInfo.displayPrice,
             onLikeClick = onLikeClick,
         )
 
         InfoSection(
-            treatmentTypes = treatmentTypes,
-            signatures = signatures,
-            shootingRanges = shootingRanges,
-            shopName = shopName,
+            treatmentTypes = serviceInfo.treatmentTypes,
+            signatures = serviceInfo.signatures,
+            shootingRanges = serviceInfo.shootingRanges,
+            shopName = serviceInfo.shopName,
         )
     }
 }
@@ -137,9 +123,9 @@ private fun Header(
 
 @Composable
 private fun InfoSection(
-    treatmentTypes: List<String>,
-    signatures: List<String>,
-    shootingRanges: List<String>,
+    treatmentTypes: List<TreatmentType>,
+    signatures: List<TreatmentType>,
+    shootingRanges: List<ShootingRangeType>,
     shopName: String,
     modifier: Modifier = Modifier,
 ) {
@@ -147,9 +133,9 @@ private fun InfoSection(
     val density = LocalDensity.current
 
     val infoLabelList = listOf(
-        "시술 종류" to treatmentTypes.joinToString(", "),
-        "시그니처" to signatures.joinToString(", "),
-        "촬영범위" to shootingRanges.joinToString(", "),
+        "시술 종류" to treatmentTypes.joinToString(", ") { it.label },
+        "시그니처" to signatures.joinToString(", ") { it.label },
+        "촬영범위" to shootingRanges.joinToString(", ") { it.label },
         "매장명" to shopName,
     )
 
@@ -241,31 +227,51 @@ private fun ServiceInfoCardPreview() {
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             ServiceInfoCard(
-                title = "뭘 해야 될 지 모르겠다면?",
-                priceType = PriceType.REVIEW.label,
-                discountRate = 50f,
-                originalPrice = 35_000,
-                displayPrice = 5_000,
-                treatmentTypes = listOf("컷트"),
-                signatures = listOf("컷트", "펌"),
-                shootingRanges = listOf("얼굴 노출", "영상"),
-                shopName = "아벨라움",
+                serviceInfo = ServiceInfo(
+                    title = "뭘 해야 될 지 모르겠다면?",
+                    isLiked = firstLiked,
+                    priceType = PriceType.REVIEW,
+                    discountRate = 50f,
+                    originalPrice = 35_000,
+                    displayPrice = 5_000,
+                    treatmentTypes = listOf(TreatmentType.CUT),
+                    signatures = listOf(
+                        TreatmentType.CUT,
+                        TreatmentType.PERM,
+                        TreatmentType.COLORED
+                    ),
+                    shootingRanges = listOf(
+                        ShootingRangeType.FACE_EXPOSURE,
+                        ShootingRangeType.VIDEO
+                    ),
+                    shopName = "아벨라움",
+                ),
                 onLikeClick = { firstLiked = !firstLiked },
-                isLiked = firstLiked,
             )
 
             ServiceInfoCard(
-                title = "뭘 해야 될 지 두 번이나 진짜진짜로 모르겠다면??",
-                priceType = PriceType.FREE.label,
-                discountRate = 50f,
-                originalPrice = 1_000_000,
-                displayPrice = 500_000,
-                treatmentTypes = listOf("펌"),
-                signatures = listOf("컷트", "펌", "염색"),
-                shootingRanges = listOf("얼굴 노출", "영상", "얼굴 노출", "영상", "얼굴 노출", "영상", "얼굴 노출", "영상"),
-                shopName = "아벨라움이란다너이거이름은들어봤니?어렵지?아벨라움인지아벨리움인지ㅋㅋ",
+                serviceInfo = ServiceInfo(
+                    title = "뭘 해야 될 지 두 번이나 진짜진짜로 모르겠다면??",
+                    isLiked = secondLiked,
+                    priceType = PriceType.FREE,
+                    discountRate = 50f,
+                    originalPrice = 1_000_000,
+                    displayPrice = 500_000,
+                    treatmentTypes = listOf(TreatmentType.PERM),
+                    signatures = listOf(
+                        TreatmentType.CUT,
+                        TreatmentType.PERM,
+                        TreatmentType.COLORED
+                    ),
+                    shootingRanges = listOf(
+                        ShootingRangeType.FACE_EXPOSURE, ShootingRangeType.VIDEO,
+                        ShootingRangeType.FACE_EXPOSURE, ShootingRangeType.VIDEO,
+                        ShootingRangeType.FACE_EXPOSURE, ShootingRangeType.VIDEO,
+                        ShootingRangeType.FACE_EXPOSURE, ShootingRangeType.VIDEO,
+                    ),
+                    shopName = "아벨라움이란다너이거이름은들어봤니?어렵지?아벨라움인지아벨리움인지ㅋㅋ",
+                ),
                 onLikeClick = { secondLiked = !secondLiked },
-                isLiked = secondLiked,
             )
         }
     }
