@@ -47,6 +47,8 @@ enum class MeemongPostCostType(
     FREE("무료시술"),
     REVIEW_SPECIAL("리뷰특가"),
     MATERIAL_FEE("재료비 발생"),
+
+    MODEL_FEE("모델료 발생"),
 }
 
 /**
@@ -170,13 +172,14 @@ fun MeemongRecommendedPostCard(
                                 text = priceType.label,
                                 color = when (priceType) {
                                     MeemongPostCostType.FREE,
-                                    MeemongPostCostType.REVIEW_SPECIAL -> {
+                                    MeemongPostCostType.REVIEW_SPECIAL ->
                                         MeemongTheme.colors.meemongBlue
-                                    }
 
-                                    MeemongPostCostType.MATERIAL_FEE -> {
+                                    MeemongPostCostType.MATERIAL_FEE ->
                                         MeemongTheme.colors.gray700
-                                    }
+
+                                    MeemongPostCostType.MODEL_FEE ->
+                                        MeemongTheme.colors.green
                                 },
                                 style = MeemongTheme.typography.body2.sb14,
                                 maxLines = 1,
@@ -357,6 +360,7 @@ private fun RecommendedPostCardPreviewItem(
             MeemongPostCostType.FREE -> 0
             MeemongPostCostType.REVIEW_SPECIAL -> 5_000
             MeemongPostCostType.MATERIAL_FEE -> 10_000
+            MeemongPostCostType.MODEL_FEE -> 45_000
         },
         region = "고양시 덕양구",
         availableTimes = listOf("평일 오전", "평일 오후"),

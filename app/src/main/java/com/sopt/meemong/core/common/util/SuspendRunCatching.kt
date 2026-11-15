@@ -23,7 +23,7 @@ suspend fun <R> suspendRunCatching(block: suspend () -> R): Result<R> =
         Result.failure(t)
     } catch (c: CancellationException) {
         throw c
-    } catch (e: Throwable) {
+    } catch (e: Exception) {
         currentCoroutineContext().ensureActive()
         Result.failure(e)
     }
