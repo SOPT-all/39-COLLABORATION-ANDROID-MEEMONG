@@ -24,19 +24,13 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-
-enum class Tab(
-    val label: String,
-) {
-    DESIGNER_INFO("디자이너 정보"),
-    RESERVATION("예약하기"),
-}
+import com.sopt.meemong.data.matchingdetail.model.TabType
 
 @Composable
 fun DetailTab(
-    onTabClick: (Tab) -> Unit,
+    onTabClick: (TabType) -> Unit,
     modifier: Modifier = Modifier,
-    currentTab: Tab = Tab.DESIGNER_INFO,
+    currentTab: TabType = TabType.DESIGNER_INFO,
 ) {
     Box(
         modifier = modifier
@@ -56,7 +50,7 @@ fun DetailTab(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Tab.entries.forEach { tab ->
+            TabType.entries.forEach { tab ->
                 TabItem(
                     modifier = Modifier.weight(1f),
                     tab = tab,
@@ -70,8 +64,8 @@ fun DetailTab(
 
 @Composable
 private fun TabItem(
-    tab: Tab,
-    currentTab: Tab,
+    tab: TabType,
+    currentTab: TabType,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -111,7 +105,7 @@ private fun TabItem(
 @Composable
 private fun DetailTabPreview() {
     MeemongTheme {
-        var currentTab by remember { mutableStateOf(Tab.DESIGNER_INFO) }
+        var currentTab by remember { mutableStateOf(TabType.DESIGNER_INFO) }
 
         Column(
             modifier = Modifier
@@ -128,7 +122,7 @@ private fun DetailTabPreview() {
 
             DetailTab(
                 onTabClick = {},
-                currentTab = Tab.RESERVATION,
+                currentTab = TabType.RESERVATION,
             )
         }
     }

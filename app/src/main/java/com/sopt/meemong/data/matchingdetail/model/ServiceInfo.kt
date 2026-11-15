@@ -1,8 +1,8 @@
 package com.sopt.meemong.data.matchingdetail.model
 
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.core.model.ShootingRangeType
 import com.sopt.meemong.core.model.TreatmentType
-import com.sopt.meemong.presentation.matchingdetail.component.PriceType
 
 data class ServiceInfo(
     val title: String,
