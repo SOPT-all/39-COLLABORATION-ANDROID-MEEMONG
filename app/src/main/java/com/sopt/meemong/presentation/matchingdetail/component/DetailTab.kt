@@ -28,9 +28,9 @@ import com.sopt.meemong.data.matchingdetail.model.TabType
 
 @Composable
 fun DetailTab(
+    currentTab: TabType,
     onTabClick: (TabType) -> Unit,
     modifier: Modifier = Modifier,
-    currentTab: TabType = TabType.DESIGNER_INFO,
 ) {
     Box(
         modifier = modifier
@@ -115,14 +115,12 @@ private fun DetailTabPreview() {
         ) {
             DetailTab(
                 currentTab = currentTab,
-                onTabClick = { tab ->
-                    currentTab = tab
-                },
+                onTabClick = { currentTab = it },
             )
 
             DetailTab(
                 onTabClick = {},
-                currentTab = TabType.RESERVATION,
+                currentTab = TabType.CONTENT_DETAIL,
             )
         }
     }
