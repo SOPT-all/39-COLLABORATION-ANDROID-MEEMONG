@@ -40,9 +40,9 @@ fun DesignerProfile(
     profileImage: String,
     name: String,
     location: String,
-    distance: Float,
     itemCount: Int,
     modifier: Modifier = Modifier,
+    distance: Float = 11.6f,
 ) {
     Column(
         modifier = modifier
@@ -178,7 +178,6 @@ private fun DesignerProfilePreview() {
                 profileImage = "",
                 name = "승환",
                 location = "경기 고양시",
-                distance = 11.6f,
                 itemCount = 43,
             )
 
@@ -188,7 +187,6 @@ private fun DesignerProfilePreview() {
                 profileImage = "",
                 name = "승환",
                 location = "경기 고양시",
-                distance = 11.6f,
                 itemCount = 0,
             )
         }
