@@ -72,8 +72,8 @@ private fun Header(
     isLiked: Boolean,
     priceType: String,
     discountRate: Float,
-    originalPrice: Int,
-    displayPrice: Int,
+    originalPrice: Int?,
+    displayPrice: Int?,
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
