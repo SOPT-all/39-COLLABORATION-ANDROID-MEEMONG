@@ -76,7 +76,6 @@ private fun MatchingDetailScreen(
                     profileImage = designerProfileInfo.designerProfileImageUrl,
                     name = designerProfileInfo.designerName,
                     location = designerProfileInfo.region,
-                    distance = 11.6f,
                     itemCount = designerProfileInfo.completedTreatmentCount,
                 )
 
