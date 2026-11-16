@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,7 +53,7 @@ private fun MatchingDetailScreen(
 ) {
     val listState = rememberLazyListState()
 
-    var currentTab by remember { mutableStateOf(TabType.CONTENT_DETAIL) }
+    var currentTab by rememberSaveable() { mutableStateOf(TabType.CONTENT_DETAIL) }
 
     val designerProfileInfo = state.designerProfileInfo
     val serviceInfo = state.serviceInfo
