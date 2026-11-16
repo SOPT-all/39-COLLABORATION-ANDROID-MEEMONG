@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 interface BaseUiState
 interface BaseUiEffect
 
-abstract class BaseViewModel<S : BaseUiState, E: BaseUiEffect>(
+abstract class BaseViewModel<S : BaseUiState, E : BaseUiEffect>(
     initialState: S,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(initialState)
