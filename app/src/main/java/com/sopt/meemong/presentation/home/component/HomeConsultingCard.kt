@@ -124,16 +124,16 @@ data class HomeConsultingItem(
 fun HomeConsultingCardSection(
     items: List<HomeConsultingItem>,
     onItemClick: (HomeConsultingItem) -> Unit,
+    onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text(
-            text = "헤어컨설팅",
-            style = MeemongTheme.typography.body1.sb16,
-            color = MeemongTheme.colors.gray950,
+        HomeSectionHeader(
+            title = "헤어컨설팅",
+            onMoreClick = onMoreClick,
             modifier = Modifier.padding(horizontal = 20.dp),
         )
 
@@ -191,6 +191,7 @@ private fun HomeConsultingCardSectionPreview() {
                 )
             },
             onItemClick = {},
+            onMoreClick = {},
         )
     }
 }

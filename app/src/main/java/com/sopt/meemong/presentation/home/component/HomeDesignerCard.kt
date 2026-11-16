@@ -185,16 +185,16 @@ fun HomeDesignerCardSection(
     title: String,
     items: List<HomeDesignerItem>,
     onItemClick: (HomeDesignerItem) -> Unit,
+    onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text(
-            text = title,
-            style = MeemongTheme.typography.body1.sb16,
-            color = MeemongTheme.colors.gray950,
+        HomeSectionHeader(
+            title = title,
+            onMoreClick = onMoreClick,
             modifier = Modifier.padding(horizontal = 20.dp),
         )
 
@@ -254,6 +254,7 @@ private fun HomeDesignerCardSectionPreview() {
                 ),
             ),
             onItemClick = {},
+            onMoreClick = {},
         )
     }
 }
