@@ -8,10 +8,12 @@ import com.sopt.meemong.core.model.TreatmentType
 import com.sopt.meemong.data.matchingdetail.model.DesignerProfileInfo
 import com.sopt.meemong.data.matchingdetail.model.DetailInfo
 import com.sopt.meemong.data.matchingdetail.model.ServiceInfo
+import com.sopt.meemong.data.matchingdetail.model.TabType
 
 data class MatchingDetailUiState(
     val postId: Long = 0L,
     val postImageUrls: List<String> = emptyList(),
+    val currentTab: TabType = TabType.CONTENT_DETAIL,
     val designerProfileInfo: DesignerProfileInfo = DesignerProfileInfo(
             designerId = 0L,
             designerName = "",

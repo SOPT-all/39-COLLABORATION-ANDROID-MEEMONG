@@ -10,9 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,6 +38,7 @@ fun MatchingDetailRoute(
         state = uiState,
         onBackClick = navigateToBack,
         onLikeClick = viewModel::onLikeClick,
+        onTabClick = viewModel::onTabClick,
         modifier = modifier,
     )
 }
@@ -50,11 +48,10 @@ private fun MatchingDetailScreen(
     state: MatchingDetailUiState,
     onBackClick: () -> Unit,
     onLikeClick: () -> Unit,
+    onTabClick: (TabType) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
-
-    var currentTab by rememberSaveable() { mutableStateOf(TabType.CONTENT_DETAIL) }
 
     val designerProfileInfo = state.designerProfileInfo
     val serviceInfo = state.serviceInfo
@@ -89,12 +86,12 @@ private fun MatchingDetailScreen(
                 )
 
                 DetailTab(
-                    currentTab = currentTab,
-                    onTabClick = { currentTab = it },
+                    currentTab = state.currentTab,
+                    onTabClick = onTabClick,
                 )
 
                 ContentSection(
-                    currentTab = currentTab,
+                    currentTab = state.currentTab,
                     content = detailInfo.content,
                     portfolioImageUrls = detailInfo.portfolioImageUrls,
                     shopName = serviceInfo.shopName,
@@ -124,6 +121,7 @@ private fun MatchingDetailScreenPreview() {
             state = MatchingDetailUiState.dummy,
             onBackClick = {},
             onLikeClick = {},
+            onTabClick = {},
         )
     }
 }

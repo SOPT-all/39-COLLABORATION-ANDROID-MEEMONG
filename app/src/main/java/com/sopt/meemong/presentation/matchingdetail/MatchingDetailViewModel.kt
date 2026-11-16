@@ -1,6 +1,7 @@
 package com.sopt.meemong.presentation.matchingdetail
 
 import com.sopt.meemong.core.base.BaseViewModel
+import com.sopt.meemong.data.matchingdetail.model.TabType
 import com.sopt.meemong.data.matchingdetail.repository.MatchingDetailRepository
 
 class MatchingDetailViewModel(
@@ -11,9 +12,11 @@ class MatchingDetailViewModel(
     ) {
     fun onLikeClick() {
         updateState {
-            copy(
-                serviceInfo = serviceInfo.copy(isLiked = !serviceInfo.isLiked)
-            )
+            copy(serviceInfo = serviceInfo.copy(isLiked = !serviceInfo.isLiked))
         }
+    }
+
+    fun onTabClick(tab: TabType) {
+        updateState { copy(currentTab = tab) }
     }
 }

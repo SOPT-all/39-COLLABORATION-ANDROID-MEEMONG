@@ -26,7 +26,7 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Home,
+        startDestination = MatchingDetail,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
