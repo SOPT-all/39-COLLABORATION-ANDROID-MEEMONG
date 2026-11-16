@@ -50,7 +50,9 @@ fun AppNavHost(
         }
 
         composable<MatchingDetail> {
-            MatchingDetailRoute()
+            MatchingDetailRoute(
+                navigateToBack = { navController.popBackStack() },
+            )
         }
     }
 }

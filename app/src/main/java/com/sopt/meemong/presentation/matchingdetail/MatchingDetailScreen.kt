@@ -31,6 +31,7 @@ import com.sopt.meemong.presentation.matchingdetail.component.ServiceInfoCard
 
 @Composable
 fun MatchingDetailRoute(
+    navigateToBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MatchingDetailViewModel = viewModel(factory = ViewModelFactory()),
 ) {
@@ -38,8 +39,8 @@ fun MatchingDetailRoute(
 
     MatchingDetailScreen(
         state = uiState,
-        onBackClick = {},
-        onLikeClick = {},
+        onBackClick = navigateToBack,
+        onLikeClick = viewModel::onLikeClick,
         modifier = modifier,
     )
 }
