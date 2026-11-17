@@ -44,7 +44,7 @@ fun QuickMatchingRoute(
         onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
         onPostClick = {},
-        onLikeChange = { _, _ -> },
+        onLikeChange = viewModel::onLikeChange,
         onMoreClick = {},
         modifier = modifier,
     )
