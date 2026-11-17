@@ -93,30 +93,33 @@ private fun Header(
         ) {
             PriceTypeChip(label = priceType)
 
-            PriceStrikethrough(price = originalPrice)
+            originalPrice?.let {
+                PriceStrikethrough(price = it)
+            }
         }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            Text(
-                text = "${discountRate.toInt()}%",
-                style = MeemongTheme.typography.title.sb20,
-                color = MeemongTheme.colors.red,
-            )
+        displayPrice?.let {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Text(
+                    text = "${discountRate.toInt()}%",
+                    style = MeemongTheme.typography.title.sb20,
+                    color = MeemongTheme.colors.red,
+                )
+                Text(
+                    text = it.toPriceFormat(),
+                    style = MeemongTheme.typography.title.sb20,
+                    color = MeemongTheme.colors.black,
+                )
 
-            Text(
-                text = displayPrice.toPriceFormat(),
-                style = MeemongTheme.typography.title.sb20,
-                color = MeemongTheme.colors.black,
-            )
-
-            Text(
-                text = "원",
-                style = MeemongTheme.typography.body2.m14,
-                color = MeemongTheme.colors.gray700,
-            )
+                Text(
+                    text = "원",
+                    style = MeemongTheme.typography.body2.m14,
+                    color = MeemongTheme.colors.gray700,
+                )
+            }
         }
     }
 }
@@ -255,8 +258,8 @@ private fun ServiceInfoCardPreview() {
                     isLiked = secondLiked,
                     priceType = PriceType.FREE,
                     discountRate = 50f,
-                    originalPrice = 1_000_000,
-                    displayPrice = 500_000,
+                    originalPrice = null,
+                    displayPrice = null,
                     treatmentTypes = listOf(TreatmentType.PERM),
                     signatures = listOf(
                         TreatmentType.CUT,
