@@ -6,29 +6,22 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
 fun ImageCarousel(
     urlList: List<String>,
-    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (urlList.isEmpty()) return
@@ -61,21 +54,6 @@ fun ImageCarousel(
                 )
                 .align(Alignment.TopCenter),
         )
-
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(start = 6.dp, top = 64.dp)
-                .size(44.dp),
-        ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.ic_back_24),
-                contentDescription = "뒤로가기",
-                tint = MeemongTheme.colors.white,
-                modifier = Modifier.size(24.dp),
-            )
-        }
 
         if (urlList.size > 1) {
             PageIndicator(
@@ -120,7 +98,6 @@ private fun ImageCarouselPreview() {
                 "https://github.com/user-attachments/assets/7fda5c4e-4f33-4f51-b1cf-46e4da45a3a2",
                 "https://github.com/user-attachments/assets/06607efa-1ce1-4b0b-815c-026e7aaa522b",
             ),
-            onBackClick = {},
         )
     }
 }

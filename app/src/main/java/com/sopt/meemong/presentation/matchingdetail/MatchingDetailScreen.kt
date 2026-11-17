@@ -1,21 +1,28 @@
 package com.sopt.meemong.presentation.matchingdetail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.data.matchingdetail.model.TabType
@@ -60,17 +67,35 @@ private fun MatchingDetailScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color.White),
+            .background(color = MeemongTheme.colors.white),
     ) {
         LazyColumn(
             state = listState,
             modifier = Modifier.weight(1f),
         ) {
             item {
-                ImageCarousel(
-                    urlList = state.postImageUrls,
-                    onBackClick = onBackClick
-                )
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    ImageCarousel(
+                        urlList = state.postImageUrls,
+                    )
+
+                    IconButton(
+                        onClick = onBackClick,
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .padding(start = 6.dp, top = 64.dp)
+                            .size(44.dp),
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.ic_back_24),
+                            contentDescription = "뒤로가기",
+                            tint = if (state.postImageUrls.isEmpty()) MeemongTheme.colors.black else MeemongTheme.colors.white,
+                            modifier = Modifier.size(24.dp),
+                        )
+                    }
+                }
 
                 DesignerProfile(
                     profileImage = designerProfileInfo.designerProfileImageUrl,
@@ -98,6 +123,7 @@ private fun MatchingDetailScreen(
                     shopImageUrls = detailInfo.shopImageUrls,
                 )
             }
+
         }
 
         ReservationButton(
