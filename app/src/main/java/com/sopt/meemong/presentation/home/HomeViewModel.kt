@@ -7,7 +7,7 @@ class HomeViewModel(
     private val homeRepository: HomeRepository,
 ) :
     BaseViewModel<HomeUiState, HomeUiEffect>(
-        initialState = com.sopt.meemong.presentation.home.HomeUiState()
+        initialState = HomeUiState.dummy, // TODO: API 연동 시 HomeUiState()로 변경
     ) {
 
 }

@@ -18,15 +18,25 @@ data class HomeUiState(
     val designerSections: List<HomeDesignerSectionUiModel> = dummyDesignerSections,
     val matchingPosts: List<HomeMatchingPostItem> = dummyMatchingPosts,
     val productTitle: String = "긴 곱슬머리에 딱 맞는 헤어템",
-    val productDescription: String = "모발 특성과 길이에 맞는 헤어템을 모아봤어요 !",
+    val productDescription: String = "모발 특성과 길이에 맞는 헤어템을 모아봤어요!",
     val products: List<HomeProductItem> = dummyProducts,
     val consultings: List<HomeConsultingItem> = dummyConsultings,
 ) : BaseUiState
+{
+    companion object {
+        // 서버 연결 전까지 쓰는 예시 데이터
+        val dummy = HomeUiState(
+            designerSections = dummyDesignerSections,
+            matchingPosts = dummyMatchingPosts,
+            productTitle = "긴 곱슬머리에 딱 맞는 헤어템",
+            productDescription = "모발 특성과 길이에 맞는 헤어템을 모아봤어요!",
+            products = dummyProducts,
+            consultings = dummyConsultings,
+        )
+    }
+}
 
 sealed interface HomeUiEffect : BaseUiEffect
-
-//서버 연결 전까지 예시 데이터
-private const val ONE_DAY_MILLIS = 24 * 60 * 60 * 1000L
 
 private val dummyDesignerSections = listOf(
     HomeDesignerSectionUiModel(
@@ -43,7 +53,7 @@ private val dummyDesignerSections = listOf(
         },
     ),
     HomeDesignerSectionUiModel(
-        title = "00님을 위한 추천 디자이너",
+        title = "세령님을 위한 추천 디자이너",
         items = List(3) {
             HomeDesignerItem(
                 portfolioImageUrls = listOf("", "", ""),
@@ -70,15 +80,15 @@ private val dummyDesignerSections = listOf(
         },
     ),
     HomeDesignerSectionUiModel(
-        title = "뷰티시술 디자이너",
+        title = "무료시술 디자이너",
         items = List(3) {
             HomeDesignerItem(
                 portfolioImageUrls = listOf("", "", ""),
                 profileImageUrl = "",
-                name = "오프유 브로우",
-                shopName = "오프유브로우",
+                name = "하루",
+                shopName = "하루",
                 priceType = DesignerPriceType.FREE,
-                location = "경기도 수원시 권선구 8.3km",
+                location = "경기도 수원시 권선구 7.9km",
             )
         },
     ),
@@ -86,36 +96,47 @@ private val dummyDesignerSections = listOf(
 
 private val dummyMatchingPosts = listOf(
     HomeMatchingPostItem(
-        thumbnailUrl = "",
-        title = "펌ㆍ염색모델 모집중입니다",
+        thumbnailUrl = "https://github.com/user-attachments/assets/e4cf2f44-7d7c-4491-beca-e56b9b47ec08",
+        title = "롱머리 헤어모델 구합니다❤️",
         priceType = MeemongPostCostType.FREE,
         displayPrice = 0,
-        region = "서울시 관악구",
+        region = "서울 강남구",
         availableTimes = listOf("시간 상관없음"),
-        treatmentTypes = listOf("컷트", "클리닉", "펌", "염색", "탈색", "드라이", "매직", "셋팅", "다운펌", "두피케어"),
-        createdAtMillis = System.currentTimeMillis() - ONE_DAY_MILLIS,
+        treatmentTypes = listOf("컷트", "펌", "염색"),
+        createdAtMillis = 1795600800000, // 2026-11-25 19:00
         isLiked = true,
     ),
     HomeMatchingPostItem(
-        thumbnailUrl = "",
-        title = "여자숏컷/애쉬블루옴브레 모델 구합니다",
-        priceType = MeemongPostCostType.MODEL_FEE,
-        displayPrice = 100000,
-        region = "성남시 분당구",
-        availableTimes = listOf("평일 오후", "주말 오후"),
-        treatmentTypes = listOf("컷트", "펌", "탈색"),
-        createdAtMillis = System.currentTimeMillis() - ONE_DAY_MILLIS,
-        isLiked = true,
-    ),
-    HomeMatchingPostItem(
-        thumbnailUrl = "",
-        title = "헤어모델 모집합니다",
+        thumbnailUrl = "https://github.com/user-attachments/assets/5d4faaab-0b0e-44c8-a973-3a12bac77d7d",
+        title = "중단발 펌 모델 구해요:)",
         priceType = MeemongPostCostType.MATERIAL_FEE,
-        displayPrice = 5000,
-        region = "서울시 강남구",
+        displayPrice = 27000,
+        region = "서울 강남구",
+        availableTimes = listOf("평일 오전", "평일 오후"),
+        treatmentTypes = listOf("펌"),
+        createdAtMillis = 1795602600000, // 2026-11-25 19:30
+        isLiked = true,
+    ),
+    HomeMatchingPostItem(
+        thumbnailUrl = "https://github.com/user-attachments/assets/d086ced8-a099-46fe-b8d6-c3cf4cc4639d",
+        title = "긴머리 염색 커트 헤어모델 모집합니다😊",
+        priceType = MeemongPostCostType.MATERIAL_FEE,
+        displayPrice = 10000,
+        region = "서울 관악구",
         availableTimes = listOf("시간 상관없음"),
-        treatmentTypes = listOf("컷트", "클리닉", "펌", "염색", "탈색", "드라이", "매직", "셋팅", "다운펌"),
-        createdAtMillis = System.currentTimeMillis(),
+        treatmentTypes = listOf("컷트", "염색"),
+        createdAtMillis = 1795605000000, // 2026-11-25 20:10
+        isLiked = true,
+    ),
+    HomeMatchingPostItem(
+        thumbnailUrl = "https://github.com/user-attachments/assets/6a3db738-2ff4-4eec-82f2-ec5e77b1d774",
+        title = "C컬, S컬펌 모델 받고 있습니다!💛",
+        priceType = MeemongPostCostType.MATERIAL_FEE,
+        displayPrice = 15000,
+        region = "서울 서초구",
+        availableTimes = listOf("평일 오전", "평일 오후"),
+        treatmentTypes = listOf("컷트", "펌", "매직"),
+        createdAtMillis = 1795695000000, // 2026-11-26 21:10
         isLiked = true,
     ),
 )

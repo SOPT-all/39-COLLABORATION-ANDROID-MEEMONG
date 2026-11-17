@@ -76,8 +76,8 @@ private fun HomeScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
-                    // 피그마 기준: 상단바 아래 68, 마지막 섹션 아래 125
-                    .padding(top = 68.dp, bottom = 125.dp),
+                    // 피그마 기준: 상단바 아래 16, 마지막 섹션 아래 55
+                    .padding(top = 16.dp, bottom = 55.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Image(
@@ -136,7 +136,7 @@ private fun HomeScreen(
                 onItemClick = {},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = 27.dp),
+                    .padding(end = 20.dp, bottom = 22.dp),
             )
         }
 
@@ -152,7 +152,7 @@ private fun HomeScreen(
 private fun HomeScreenPreview() {
     MeemongTheme {
         HomeScreen(
-            uiState = HomeUiState(),
+            uiState = HomeUiState.dummy,
         )
     }
 }
