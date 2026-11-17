@@ -1,7 +1,11 @@
 package com.sopt.meemong.presentation.home
 
 import com.sopt.meemong.core.base.BaseViewModel
+import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuItem
 import com.sopt.meemong.data.home.repository.HomeRepository
+import com.sopt.meemong.presentation.home.component.HomeDesignerItem
+import com.sopt.meemong.presentation.home.component.HomeMatchingPostItem
+import com.sopt.meemong.presentation.home.component.HomeQuickMenuItem
 
 class HomeViewModel(
     private val homeRepository: HomeRepository,
@@ -9,5 +13,35 @@ class HomeViewModel(
     BaseViewModel<HomeUiState, HomeUiEffect>(
         initialState = HomeUiState.dummy, // TODO: API 연동 시 HomeUiState()로 변경
     ) {
+    fun onQuickMenuClick(item: HomeQuickMenuItem) {
+        when (item) {
+            HomeQuickMenuItem.QUICK_MATCHING -> sendEffect(HomeUiEffect.NavigateToQuickMatching)
+            else -> Unit
+        }
+    }
 
+    fun onDesignerClick(item: HomeDesignerItem) {
+        sendEffect(HomeUiEffect.NavigateToMatchingDetail)
+    }
+
+    fun onMatchingPostLikeChange(item: HomeMatchingPostItem, isLiked: Boolean) {
+        updateState {
+            copy(
+                matchingPosts = matchingPosts.map { post ->
+                    if (post == item) post.copy(isLiked = isLiked) else post
+                },
+            )
+        }
+    }
+
+    fun onMatchingPostMoreClick() {
+        sendEffect(HomeUiEffect.NavigateToQuickMatching)
+    }
+
+    fun onFloatingMenuItemClick(item: MeemongFloatingMenuItem) {
+        when (item) {
+            MeemongFloatingMenuItem.QUICK_MATCHING -> sendEffect(HomeUiEffect.NavigateToQuickMatching)
+            else -> Unit
+        }
+    }
 }

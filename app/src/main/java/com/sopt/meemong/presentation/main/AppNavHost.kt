@@ -30,7 +30,10 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         composable<Home> {
-            HomeRoute()
+            HomeRoute(
+                navigateToQuickMatching = { navController.navigate(QuickMatching) },
+                navigateToMatchingDetail = { navController.navigate(MatchingDetail) },
+            )
         }
 
         composable<QuickMatching> {

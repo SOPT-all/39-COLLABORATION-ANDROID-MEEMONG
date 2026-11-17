@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -28,24 +29,45 @@ import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.component.MeemongBottomBar
 import com.sopt.meemong.core.designsystem.component.MeemongBottomTab
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenu
+import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuItem
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuType
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.presentation.home.component.HomeConsultingCardSection
 import com.sopt.meemong.presentation.home.component.HomeDesignerCardSection
+import com.sopt.meemong.presentation.home.component.HomeDesignerItem
+import com.sopt.meemong.presentation.home.component.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeMatchingPostSection
 import com.sopt.meemong.presentation.home.component.HomeProductSection
 import com.sopt.meemong.presentation.home.component.HomeQuickMenu
+import com.sopt.meemong.presentation.home.component.HomeQuickMenuItem
 import com.sopt.meemong.presentation.home.component.HomeTopBar
 
 @Composable
 fun HomeRoute(
+    navigateToQuickMatching: () -> Unit,
+    navigateToMatchingDetail: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEffect.collect { effect ->
+            when (effect) {
+                HomeUiEffect.NavigateToQuickMatching -> navigateToQuickMatching()
+                HomeUiEffect.NavigateToMatchingDetail -> navigateToMatchingDetail()
+            }
+        }
+    }
+
     HomeScreen(
         uiState = uiState,
+        onQuickMenuClick = viewModel::onQuickMenuClick,
+        onDesignerClick = viewModel::onDesignerClick,
+        onMatchingPostLikeChange = viewModel::onMatchingPostLikeChange,
+        onMatchingPostMoreClick = viewModel::onMatchingPostMoreClick,
+        onFloatingMenuItemClick = viewModel::onFloatingMenuItemClick,
         modifier = modifier,
     )
 }
@@ -53,6 +75,11 @@ fun HomeRoute(
 @Composable
 private fun HomeScreen(
     uiState: HomeUiState,
+    onQuickMenuClick: (HomeQuickMenuItem) -> Unit,
+    onDesignerClick: (HomeDesignerItem) -> Unit,
+    onMatchingPostLikeChange: (HomeMatchingPostItem, Boolean) -> Unit,
+    onMatchingPostMoreClick: () -> Unit,
+    onFloatingMenuItemClick: (MeemongFloatingMenuItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var isFloatingMenuExpanded by rememberSaveable { mutableStateOf(false) }
@@ -91,7 +118,7 @@ private fun HomeScreen(
                 )
 
                 HomeQuickMenu(
-                    onItemClick = {},
+                    onItemClick = onQuickMenuClick,
                 )
 
                 Column(
@@ -101,7 +128,7 @@ private fun HomeScreen(
                         HomeDesignerCardSection(
                             title = section.title,
                             items = section.items,
-                            onItemClick = {},
+                            onItemClick = onDesignerClick,
                             onMoreClick = {},
                         )
                     }
@@ -109,8 +136,8 @@ private fun HomeScreen(
                     HomeMatchingPostSection(
                         items = uiState.matchingPosts,
                         onItemClick = {},
-                        onLikeChange = { _, _ -> },
-                        onMoreClick = {},
+                        onLikeChange = onMatchingPostLikeChange,
+                        onMoreClick = onMatchingPostMoreClick,
                     )
 
                     HomeProductSection(
@@ -133,7 +160,7 @@ private fun HomeScreen(
                 type = MeemongFloatingMenuType.HOME,
                 isExpanded = isFloatingMenuExpanded,
                 onExpandedChange = { isFloatingMenuExpanded = it },
-                onItemClick = {},
+                onItemClick = onFloatingMenuItemClick,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(end = 20.dp, bottom = 22.dp),
@@ -153,6 +180,11 @@ private fun HomeScreenPreview() {
     MeemongTheme {
         HomeScreen(
             uiState = HomeUiState.dummy,
+            onQuickMenuClick = {},
+            onDesignerClick = {},
+            onMatchingPostLikeChange = { _, _ -> },
+            onMatchingPostMoreClick = {},
+            onFloatingMenuItemClick = {},
         )
     }
 }

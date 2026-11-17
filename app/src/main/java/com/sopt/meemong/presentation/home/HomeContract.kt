@@ -15,14 +15,13 @@ data class HomeDesignerSectionUiModel(
 )
 
 data class HomeUiState(
-    val designerSections: List<HomeDesignerSectionUiModel> = dummyDesignerSections,
-    val matchingPosts: List<HomeMatchingPostItem> = dummyMatchingPosts,
-    val productTitle: String = "긴 곱슬머리에 딱 맞는 헤어템",
-    val productDescription: String = "모발 특성과 길이에 맞는 헤어템을 모아봤어요!",
-    val products: List<HomeProductItem> = dummyProducts,
-    val consultings: List<HomeConsultingItem> = dummyConsultings,
-) : BaseUiState
-{
+    val designerSections: List<HomeDesignerSectionUiModel> = emptyList(),
+    val matchingPosts: List<HomeMatchingPostItem> = emptyList(),
+    val productTitle: String = "",
+    val productDescription: String = "",
+    val products: List<HomeProductItem> = emptyList(),
+    val consultings: List<HomeConsultingItem> = emptyList(),
+) : BaseUiState {
     companion object {
         // 서버 연결 전까지 쓰는 예시 데이터
         val dummy = HomeUiState(
@@ -36,7 +35,11 @@ data class HomeUiState(
     }
 }
 
-sealed interface HomeUiEffect : BaseUiEffect
+sealed interface HomeUiEffect : BaseUiEffect {
+    data object NavigateToQuickMatching : HomeUiEffect
+
+    data object NavigateToMatchingDetail : HomeUiEffect
+}
 
 private val dummyDesignerSections = listOf(
     HomeDesignerSectionUiModel(
@@ -89,6 +92,19 @@ private val dummyDesignerSections = listOf(
                 shopName = "하루",
                 priceType = DesignerPriceType.FREE,
                 location = "경기도 수원시 권선구 7.9km",
+            )
+        },
+    ),
+    HomeDesignerSectionUiModel(
+        title = "뷰티시술 디자이너",
+        items = List(3) {
+            HomeDesignerItem(
+                portfolioImageUrls = listOf("", "", ""),
+                profileImageUrl = "",
+                name = "오프유 브로우",
+                shopName = "오프유브로우",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 권선구 8.3km",
             )
         },
     ),
