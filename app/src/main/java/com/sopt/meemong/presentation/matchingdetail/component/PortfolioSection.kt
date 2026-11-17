@@ -65,12 +65,12 @@ fun PortfolioSection(
                     }
                 }
             }
-        }
 
-        MeemongLoadMoreButton(
-            text = "포트폴리오 더보기",
-            onClick = {}, // TODO: 더보기 버튼 클릭 (기능 구현X)
-        )
+            MeemongLoadMoreButton(
+                text = "포트폴리오 더보기",
+                onClick = {}, // TODO: 더보기 버튼 클릭 (기능 구현X)
+            )
+        }
     }
 }
 
