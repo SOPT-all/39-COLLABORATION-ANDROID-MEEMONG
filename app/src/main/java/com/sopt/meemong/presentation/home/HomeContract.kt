@@ -1,5 +1,6 @@
 package com.sopt.meemong.presentation.home
 
+import com.sopt.meemong.R
 import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
 import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
@@ -42,8 +43,8 @@ private val dummyDesignerSections = listOf(
         title = "내 주변 디자이너",
         items = List(3) {
             HomeDesignerItem(
-                portfolioImageUrls = listOf("", "", ""),
-                profileImageUrl = "",
+                portfolioImageResIds = listOf(R.drawable.img_designer_hanul_1, R.drawable.img_designer_hanul_2, R.drawable.img_designer_hanul_3),
+                profileImageResId = R.drawable.img_designer_hanul_profile,
                 name = "한울",
                 shopName = "준오헤어 동탄카림에비뉴점",
                 priceType = DesignerPriceType.FREE,
@@ -55,8 +56,8 @@ private val dummyDesignerSections = listOf(
         title = "세령님을 위한 추천 디자이너",
         items = List(3) {
             HomeDesignerItem(
-                portfolioImageUrls = listOf("", "", ""),
-                profileImageUrl = "",
+                portfolioImageResIds = listOf(R.drawable.img_designer_seula_1, R.drawable.img_designer_seula_2, R.drawable.img_designer_seula_3),
+                profileImageResId = R.drawable.img_designer_seula_profile,
                 name = "슬아",
                 shopName = "에이치플레이스 정자역점",
                 priceType = DesignerPriceType.MATERIAL,
@@ -69,8 +70,8 @@ private val dummyDesignerSections = listOf(
         title = "무료시술 디자이너",
         items = List(3) {
             HomeDesignerItem(
-                portfolioImageUrls = listOf("", "", ""),
-                profileImageUrl = "",
+                portfolioImageResIds = listOf(R.drawable.img_designer_haru_1, R.drawable.img_designer_haru_2, R.drawable.img_designer_haru_3),
+                profileImageResId = R.drawable.img_designer_haru_profile,
                 name = "하루",
                 shopName = "하루",
                 priceType = DesignerPriceType.FREE,
@@ -82,8 +83,8 @@ private val dummyDesignerSections = listOf(
         title = "무료시술 디자이너",
         items = List(3) {
             HomeDesignerItem(
-                portfolioImageUrls = listOf("", "", ""),
-                profileImageUrl = "",
+                portfolioImageResIds = listOf(R.drawable.img_designer_haru_1, R.drawable.img_designer_haru_2, R.drawable.img_designer_haru_3),
+                profileImageResId = R.drawable.img_designer_haru_profile,
                 name = "하루",
                 shopName = "하루",
                 priceType = DesignerPriceType.FREE,
@@ -95,8 +96,8 @@ private val dummyDesignerSections = listOf(
         title = "뷰티시술 디자이너",
         items = List(3) {
             HomeDesignerItem(
-                portfolioImageUrls = listOf("", "", ""),
-                profileImageUrl = "",
+                portfolioImageResIds = listOf(R.drawable.img_designer_offu_1, R.drawable.img_designer_offu_2, R.drawable.img_designer_offu_3),
+                profileImageResId = R.drawable.img_designer_offu_profile,
                 name = "오프유 브로우",
                 shopName = "오프유브로우",
                 priceType = DesignerPriceType.FREE,
@@ -159,7 +160,7 @@ private val dummyMatchingPosts = listOf(
 
 private val dummyProducts = listOf(
     HomeProductItem(
-        imageUrl = "",
+        imageResId = R.drawable.img_home_product_scalp,
         tag = "두피보호",
         name = "셀프염색 전 필수 두피 보호제",
         originalPrice = 28000,
@@ -167,7 +168,7 @@ private val dummyProducts = listOf(
         salePrice = 8960,
     ),
     HomeProductItem(
-        imageUrl = "",
+        imageResId = R.drawable.img_home_product_shampoo,
         tag = "기름제거",
         name = "떡지고 냄새나는 두피 해결 샴푸",
         originalPrice = 33000,

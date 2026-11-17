@@ -18,6 +18,7 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.designsystem.theme.PretendardFont
 import androidx.compose.ui.text.TextStyle
 import com.sopt.meemong.presentation.home.model.HomeProductItem
+import com.sopt.meemong.R
 
 @Composable
 fun HomeProductSection(
@@ -60,7 +61,7 @@ fun HomeProductSection(
         ) {
             items.forEach { item ->
                 HomeProductCard(
-                    imageUrl = item.imageUrl,
+                    imageResId = item.imageResId,
                     tag = item.tag,
                     name = item.name,
                     originalPrice = item.originalPrice,
@@ -87,8 +88,8 @@ private fun HomeProductSectionPreview() {
             title = "긴 곱슬머리에 딱 맞는 헤어템",
             description = "모발 특성과 길이에 맞는 헤어템을 모아봤어요!",
             items = listOf(
-                HomeProductItem("", "두피보호", "셀프염색 전 필수 두피 보호제", 28000, 68, 8960),
-                HomeProductItem("", "기름제거", "떡지고 냄새나는 두피 해결 샴푸", 33000, 30, 23100),
+                HomeProductItem(R.drawable.img_home_product_scalp, "두피보호", "셀프염색 전 필수 두피 보호제", 28000, 68, 8960),
+                HomeProductItem(R.drawable.img_home_product_shampoo, "기름제거", "떡지고 냄새나는 두피 해결 샴푸", 33000, 30, 23100),
             ),
             onItemClick = {},
             onMoreClick = {},

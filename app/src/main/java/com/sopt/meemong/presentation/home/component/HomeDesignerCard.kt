@@ -1,5 +1,7 @@
 package com.sopt.meemong.presentation.home.component
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,11 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sopt.meemong.core.designsystem.component.UrlImage
+import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.presentation.home.model.HomeDesignerItem
 
@@ -43,8 +47,8 @@ enum class DesignerPriceType(
 
 @Composable
 fun HomeDesignerCard(
-    portfolioImageUrls: List<String>,
-    profileImageUrl: String,
+    portfolioImageResIds: List<Int>,
+    @DrawableRes profileImageResId: Int,
     name: String,
     shopName: String,
     priceType: DesignerPriceType,
@@ -70,9 +74,10 @@ fun HomeDesignerCard(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            repeat(3) { index ->
-                UrlImage(
-                    url = portfolioImageUrls.getOrElse(index) { "" },
+            portfolioImageResIds.take(3).forEach { resId ->
+                Image(
+                    bitmap = ImageBitmap.imageResource(resId),
+                    contentDescription = null,
                     modifier = Modifier
                         .weight(1f)
                         .aspectRatio(106f / 104f),
@@ -91,8 +96,9 @@ fun HomeDesignerCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                UrlImage(
-                    url = profileImageUrl,
+                Image(
+                    bitmap = ImageBitmap.imageResource(profileImageResId),
+                    contentDescription = null,
                     modifier = Modifier
                         .size(48.dp)
                         .clip(CircleShape),
@@ -202,8 +208,8 @@ fun HomeDesignerCardSection(
             ) {
                 items(items) { item ->
                     HomeDesignerCard(
-                        portfolioImageUrls = item.portfolioImageUrls,
-                        profileImageUrl = item.profileImageUrl,
+                        portfolioImageResIds = item.portfolioImageResIds,
+                        profileImageResId = item.profileImageResId,
                         name = item.name,
                         shopName = item.shopName,
                         priceType = item.priceType,
@@ -227,16 +233,16 @@ private fun HomeDesignerCardSectionPreview() {
             title = "내 주변 디자이너",
             items = listOf(
                 HomeDesignerItem(
-                    portfolioImageUrls = listOf("", "", ""),
-                    profileImageUrl = "",
+                    portfolioImageResIds = listOf(R.drawable.img_designer_hanul_1, R.drawable.img_designer_hanul_2, R.drawable.img_designer_hanul_3),
+                    profileImageResId = R.drawable.img_designer_hanul_profile,
                     name = "한울",
                     shopName = "준오헤어 동탄카림에비뉴점",
                     priceType = DesignerPriceType.FREE,
                     location = "경기도 화성시 4.7km",
                 ),
                 HomeDesignerItem(
-                    portfolioImageUrls = listOf("", "", ""),
-                    profileImageUrl = "",
+                    portfolioImageResIds = listOf(R.drawable.img_designer_seula_1, R.drawable.img_designer_seula_2, R.drawable.img_designer_seula_3),
+                    profileImageResId = R.drawable.img_designer_seula_profile,
                     name = "슬아",
                     shopName = "에이치플레이스 정자역점",
                     priceType = DesignerPriceType.MATERIAL,
