@@ -95,7 +95,7 @@ fun ShopSection(
             contentDescription = "지도",
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(343f / 193f)
+                .aspectRatio(343f / 194f)
                 .clip(shape = RoundedCornerShape(14.dp)),
         )
 
