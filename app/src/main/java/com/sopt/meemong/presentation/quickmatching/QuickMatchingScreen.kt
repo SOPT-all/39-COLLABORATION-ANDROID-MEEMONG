@@ -27,16 +27,22 @@ import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingBanner
 import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingGeneralSection
 import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingRecommendedSection
 import com.sopt.meemong.presentation.quickmatching.component.SegmentControlRow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sopt.meemong.core.di.ViewModelFactory
 
 @Composable
 fun QuickMatchingRoute(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {},
+    viewModel: QuickMatchingViewModel = viewModel(factory = ViewModelFactory()),
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     QuickMatchingScreen(
-        uiState = QuickMatchingUiState(),
+        uiState = uiState,
         onBackClick = onBackClick,
-        onCategoryClick = {},
+        onCategoryClick = viewModel::onCategoryClick,
         onPostClick = {},
         onLikeChange = { _, _ -> },
         onMoreClick = {},
