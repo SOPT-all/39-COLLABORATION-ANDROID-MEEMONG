@@ -12,4 +12,23 @@ class QuickMatchingViewModel(
     fun onCategoryClick(category: MatchingCategory) {
         updateState { copy(selectedCategory = category) }
     }
+
+    fun onLikeChange(postId: Long, isLiked: Boolean) {
+        updateState {
+            copy(
+                designerRecommendedPosts = designerRecommendedPosts.map { post ->
+                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
+                },
+                designerGeneralPosts = designerGeneralPosts.map { post ->
+                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
+                },
+                modelRecommendedPosts = modelRecommendedPosts.map { post ->
+                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
+                },
+                modelGeneralPosts = modelGeneralPosts.map { post ->
+                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
+                },
+            )
+        }
+    }
 }
