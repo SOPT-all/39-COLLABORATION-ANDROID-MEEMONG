@@ -17,15 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.designsystem.theme.PretendardFont
 import androidx.compose.ui.text.TextStyle
-
-data class HomeProductItem(
-    val imageUrl: String,
-    val tag: String,
-    val name: String,
-    val originalPrice: Int,
-    val discountRate: Int,
-    val salePrice: Int,
-)
+import com.sopt.meemong.presentation.home.model.HomeProductItem
 
 @Composable
 fun HomeProductSection(
@@ -59,7 +51,6 @@ fun HomeProductSection(
                 ),
             )
         }
-
 
         Row(
             modifier = Modifier

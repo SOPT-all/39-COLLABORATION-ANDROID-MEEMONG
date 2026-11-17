@@ -19,8 +19,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,8 +36,8 @@ import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.presentation.home.component.HomeConsultingCardSection
 import com.sopt.meemong.presentation.home.component.HomeDesignerCardSection
-import com.sopt.meemong.presentation.home.component.HomeDesignerItem
-import com.sopt.meemong.presentation.home.component.HomeMatchingPostItem
+import com.sopt.meemong.presentation.home.model.HomeDesignerItem
+import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeMatchingPostSection
 import com.sopt.meemong.presentation.home.component.HomeProductSection
 import com.sopt.meemong.presentation.home.component.HomeQuickMenu
@@ -108,7 +109,7 @@ private fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Image(
-                    painter = painterResource(R.drawable.img_home_banner),
+                    bitmap = ImageBitmap.imageResource(R.drawable.img_home_banner),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

@@ -3,8 +3,8 @@ package com.sopt.meemong.presentation.home
 import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuItem
 import com.sopt.meemong.data.home.repository.HomeRepository
-import com.sopt.meemong.presentation.home.component.HomeDesignerItem
-import com.sopt.meemong.presentation.home.component.HomeMatchingPostItem
+import com.sopt.meemong.presentation.home.model.HomeDesignerItem
+import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeQuickMenuItem
 
 class HomeViewModel(
@@ -28,7 +28,7 @@ class HomeViewModel(
         updateState {
             copy(
                 matchingPosts = matchingPosts.map { post ->
-                    if (post == item) post.copy(isLiked = isLiked) else post
+                    if (post.postId == item.postId) post.copy(isLiked = isLiked) else post
                 },
             )
         }

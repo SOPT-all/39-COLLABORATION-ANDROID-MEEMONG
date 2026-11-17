@@ -16,18 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.core.designsystem.component.MeemongRecommendedPostCard
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-
-data class HomeMatchingPostItem(
-    val thumbnailUrl: String,
-    val title: String,
-    val priceType: MeemongPostCostType,
-    val displayPrice: Int,
-    val region: String,
-    val availableTimes: List<String>,
-    val treatmentTypes: List<String>,
-    val createdAtMillis: Long,
-    val isLiked: Boolean,
-)
+import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 
 @Composable
 fun HomeMatchingPostSection(
@@ -50,15 +39,18 @@ fun HomeMatchingPostSection(
         BoxWithConstraints(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            //375-69 = 306
-            val cardWidth = maxWidth - 69.dp
+            // 375 기준: 좌우 여백 20 + 카드 간격 8 + 다음 카드가 보이는 너비 41 = 69 → 카드 306
+            val horizontalPadding = 20.dp
+            val cardSpacing = 8.dp
+            val nextCardPeekWidth = 41.dp
+            val cardWidth = maxWidth - horizontalPadding - cardSpacing - nextCardPeekWidth
 
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(horizontal = 20.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = horizontalPadding),
+                horizontalArrangement = Arrangement.spacedBy(cardSpacing),
             ) {
-                items(items) { item ->
+                items(items, key = { it.postId }) { item ->
                     MeemongRecommendedPostCard(
                         thumbnailUrl = item.thumbnailUrl,
                         title = item.title,
@@ -87,6 +79,7 @@ private fun HomeMatchingPostSectionPreview() {
         HomeMatchingPostSection(
             items = List(3) {
                 HomeMatchingPostItem(
+                    postId = it.toLong(),
                     thumbnailUrl = "",
                     title = "펌ㆍ염색모델 모집중입니다",
                     priceType = MeemongPostCostType.FREE,

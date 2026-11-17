@@ -1,11 +1,11 @@
 package com.sopt.meemong.presentation.home.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,10 +44,11 @@ fun HomeSectionHeader(
                 color = MeemongTheme.colors.gray600,
                 style = MeemongTheme.typography.caption1.m12,
             )
-            Image(
+            Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.ic_arrow_forward_12),
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
+                tint = MeemongTheme.colors.gray600,
             )
         }
     }

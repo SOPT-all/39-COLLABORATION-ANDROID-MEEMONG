@@ -21,11 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.presentation.home.model.HomeConsultingItem
 
 @Composable
 fun HomeConsultingCard(
@@ -98,7 +100,7 @@ private fun ConsultingCardInfoRow(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Icon(
-                painter = painterResource(com.sopt.meemong.R.drawable.ic_comment_16),
+                imageVector = ImageVector.vectorResource(com.sopt.meemong.R.drawable.ic_comment_16),
                 contentDescription = "댓글",
                 modifier = Modifier.size(16.dp),
                 tint = MeemongTheme.colors.gray600,
@@ -112,13 +114,6 @@ private fun ConsultingCardInfoRow(
         }
     }
 }
-
-data class HomeConsultingItem(
-    val title: String,
-    val description: String,
-    val timeAgo: String,
-    val commentCount: Int,
-)
 
 @Composable
 fun HomeConsultingCardSection(

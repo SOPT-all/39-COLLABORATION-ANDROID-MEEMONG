@@ -4,15 +4,11 @@ import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
 import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.presentation.home.component.DesignerPriceType
-import com.sopt.meemong.presentation.home.component.HomeConsultingItem
-import com.sopt.meemong.presentation.home.component.HomeDesignerItem
-import com.sopt.meemong.presentation.home.component.HomeMatchingPostItem
-import com.sopt.meemong.presentation.home.component.HomeProductItem
-
-data class HomeDesignerSectionUiModel(
-    val title: String,
-    val items: List<HomeDesignerItem>,
-)
+import com.sopt.meemong.presentation.home.model.HomeConsultingItem
+import com.sopt.meemong.presentation.home.model.HomeDesignerItem
+import com.sopt.meemong.presentation.home.model.HomeDesignerSectionUiModel
+import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
+import com.sopt.meemong.presentation.home.model.HomeProductItem
 
 data class HomeUiState(
     val designerSections: List<HomeDesignerSectionUiModel> = emptyList(),
@@ -112,6 +108,7 @@ private val dummyDesignerSections = listOf(
 
 private val dummyMatchingPosts = listOf(
     HomeMatchingPostItem(
+        postId = 1L,
         thumbnailUrl = "https://github.com/user-attachments/assets/e4cf2f44-7d7c-4491-beca-e56b9b47ec08",
         title = "롱머리 헤어모델 구합니다❤️",
         priceType = MeemongPostCostType.FREE,
@@ -123,6 +120,7 @@ private val dummyMatchingPosts = listOf(
         isLiked = true,
     ),
     HomeMatchingPostItem(
+        postId = 2L,
         thumbnailUrl = "https://github.com/user-attachments/assets/5d4faaab-0b0e-44c8-a973-3a12bac77d7d",
         title = "중단발 펌 모델 구해요:)",
         priceType = MeemongPostCostType.MATERIAL_FEE,
@@ -134,6 +132,7 @@ private val dummyMatchingPosts = listOf(
         isLiked = true,
     ),
     HomeMatchingPostItem(
+        postId = 3L,
         thumbnailUrl = "https://github.com/user-attachments/assets/d086ced8-a099-46fe-b8d6-c3cf4cc4639d",
         title = "긴머리 염색 커트 헤어모델 모집합니다😊",
         priceType = MeemongPostCostType.MATERIAL_FEE,
@@ -145,6 +144,7 @@ private val dummyMatchingPosts = listOf(
         isLiked = true,
     ),
     HomeMatchingPostItem(
+        postId = 4L,
         thumbnailUrl = "https://github.com/user-attachments/assets/6a3db738-2ff4-4eec-82f2-ec5e77b1d774",
         title = "C컬, S컬펌 모델 받고 있습니다!💛",
         priceType = MeemongPostCostType.MATERIAL_FEE,

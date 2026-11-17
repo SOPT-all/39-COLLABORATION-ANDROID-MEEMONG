@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.presentation.home.model.HomeDesignerItem
 
 enum class DesignerPriceType(
     val label: String,
@@ -39,16 +40,6 @@ enum class DesignerPriceType(
     FREE("무료시술"),
     MATERIAL("재료비 발생"),
 }
-
-data class HomeDesignerItem(
-    val portfolioImageUrls: List<String>,
-    val profileImageUrl: String,
-    val name: String,
-    val shopName: String,
-    val priceType: DesignerPriceType,
-    val location: String,
-    val materialCost: String = "",
-)
 
 @Composable
 fun HomeDesignerCard(

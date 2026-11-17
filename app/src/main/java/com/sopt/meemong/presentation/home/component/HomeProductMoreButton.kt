@@ -15,7 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
@@ -34,8 +36,8 @@ fun HomeProductMoreButton(
             .background(MeemongTheme.colors.background)
             .clickable(onClick = onClick)
             .padding(vertical = 10.dp),
-    horizontalArrangement = Arrangement . spacedBy (4.dp, Alignment.CenterHorizontally),
-    verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = "나에게 맞는 헤어템 더 보러 가기",
@@ -44,7 +46,7 @@ fun HomeProductMoreButton(
         )
 
         Icon(
-            painter = painterResource(R.drawable.ic_arrow_right_16),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_arrow_right_16),
             contentDescription = null,
             modifier = Modifier.size(16.dp),
             tint = MeemongTheme.colors.meemongBlue,

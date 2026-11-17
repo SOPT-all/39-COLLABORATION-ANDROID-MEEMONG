@@ -3,8 +3,7 @@ package com.sopt.meemong.presentation.home.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,15 +11,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,34 +31,47 @@ fun HomeTopBar(
     onNotificationClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .height(44.dp)
-            .background(MeemongTheme.colors.white)
-            .padding(horizontal = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
+            .background(MeemongTheme.colors.white),
     ) {
-        Image(
-            painter = painterResource(com.sopt.meemong.R.drawable.img_meemong_logo),
-            contentDescription = "미몽 로고",
+        Row(
             modifier = Modifier
-                .width(108.dp)
-                .height(28.dp),
-        )
+                .fillMaxWidth()
+                .height(44.dp)
+                .padding(horizontal = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                bitmap = ImageBitmap.imageResource(com.sopt.meemong.R.drawable.img_meemong_logo),
+                contentDescription = "미몽 로고",
+                modifier = Modifier
+                    .width(108.dp)
+                    .height(28.dp),
+            )
 
-        Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
 
-        TopBarIcon(
-            iconRes = com.sopt.meemong.R.drawable.ic_search_24,
-            contentDescription = "검색",
-            onClick = onSearchClick,
-        )
+            TopBarIcon(
+                iconRes = com.sopt.meemong.R.drawable.ic_search_24,
+                contentDescription = "검색",
+                onClick = onSearchClick,
+            )
 
-        TopBarIcon(
-            iconRes = com.sopt.meemong.R.drawable.ic_notification_24,
-            contentDescription = "알림",
-            onClick = onNotificationClick,
+            TopBarIcon(
+                iconRes = com.sopt.meemong.R.drawable.ic_notification_24,
+                contentDescription = "알림",
+                onClick = onNotificationClick,
+            )
+        }
+
+        // 피그마 header: 아래 2dp 띄우고 1dp 구분선
+        Spacer(modifier = Modifier.height(2.dp))
+
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = MeemongTheme.colors.gray100,
         )
     }
 }
