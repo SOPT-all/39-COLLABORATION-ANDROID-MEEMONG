@@ -11,13 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import com.sopt.meemong.core.di.ViewModelFactory
 
 @Composable
 fun QuickMatchingRoute(
-    modifier: Modifier = Modifier
+    viewModel: QuickMatchingViewModel,
+    modifier: Modifier = Modifier,
 ) {
     QuickMatchingScreen(
         modifier = modifier
@@ -27,7 +26,6 @@ fun QuickMatchingRoute(
 @Composable
 private fun QuickMatchingScreen(
     modifier: Modifier = Modifier,
-    viewModel: QuickMatchingViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     Column(
         modifier = modifier

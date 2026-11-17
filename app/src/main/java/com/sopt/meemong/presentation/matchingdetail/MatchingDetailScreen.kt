@@ -21,10 +21,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.data.matchingdetail.model.TabType
 import com.sopt.meemong.presentation.matchingdetail.component.ContentSection
 import com.sopt.meemong.presentation.matchingdetail.component.DesignerProfile
@@ -35,9 +33,9 @@ import com.sopt.meemong.presentation.matchingdetail.component.ServiceInfoCard
 
 @Composable
 fun MatchingDetailRoute(
+    viewModel: MatchingDetailViewModel,
     navigateToBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: MatchingDetailViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
