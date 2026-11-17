@@ -11,14 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-
-enum class PriceType(
-    val label: String,
-) {
-    REVIEW("리뷰특가"),
-    FREE("무료시술"),
-    NEGOTIABLE("재료비발생")
-}
+import com.sopt.meemong.core.model.PriceType
 
 @Composable
 fun PriceTypeChip(

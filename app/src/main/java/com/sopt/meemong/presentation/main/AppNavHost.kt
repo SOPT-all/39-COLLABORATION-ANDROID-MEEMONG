@@ -2,6 +2,9 @@ package com.sopt.meemong.presentation.main
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -17,6 +20,7 @@ import com.sopt.meemong.presentation.quickmatching.QuickMatchingRoute
 
 @Composable
 fun AppNavHost(
+    paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
@@ -30,15 +34,25 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         composable<Home> {
-            HomeRoute()
+            HomeRoute(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .consumeWindowInsets(paddingValues),
+            )
         }
 
         composable<QuickMatching> {
-            QuickMatchingRoute()
+            QuickMatchingRoute(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .consumeWindowInsets(paddingValues),
+            )
         }
 
         composable<MatchingDetail> {
-            MatchingDetailRoute()
+            MatchingDetailRoute(
+                navigateToBack = { navController.popBackStack() },
+            )
         }
     }
 }
