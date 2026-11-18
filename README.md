@@ -13,6 +13,7 @@
 | **Android Lead** | **Android** | **Android** |
 | <b>[김예림](https://github.com/doorimng)</b> | <b>[신한서](https://github.com/shinhanseo)</b> | <b>[정소연](https://github.com/cowkite12)</b> |
 | `초기 세팅`<br>`디자인 시스템 구축 · 아이콘 추가`<br>`상세 페이지 UI 및 공통 컴포넌트 구현`<br>`내용 상세 조회 · 디자이너 정보 조회 API 연결` | `빠른 매칭 UI 및 공통 컴포넌트 구현`<br>`디자이너 카드 목록 조회 API 연결`<br>`찜 등록 · 찜 취소 API 연결` | `홈 UI 및 공통 컴포넌트 구현`<br>`일반 공고 목록 조회 API 연결`<br>`README 작성` |
+
 <br>
 
 ## 📱 구현 범위
@@ -45,6 +46,7 @@
 | Image | Coil `3.3.0` |
 | Build | AGP `9.4.1`, Version Catalog (`libs.versions.toml`) |
 | SDK | minSdk `24` / targetSdk `37` |
+
 <br>
 
 ## 🤝 Git Convention
