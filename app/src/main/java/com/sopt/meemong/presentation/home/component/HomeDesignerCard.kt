@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -53,7 +52,6 @@ fun HomeDesignerCard(
     shopName: String,
     priceType: DesignerPriceType,
     location: String,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     materialCost: String = "",
 ) {
@@ -65,7 +63,6 @@ fun HomeDesignerCard(
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
-            .clickable(onClick = onClick)
             .padding(1.dp)
             .padding(bottom = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -181,7 +178,6 @@ fun HomeDesignerCard(
 fun HomeDesignerCardSection(
     title: String,
     items: List<HomeDesignerItem>,
-    onItemClick: (HomeDesignerItem) -> Unit,
     onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -215,7 +211,6 @@ fun HomeDesignerCardSection(
                         priceType = item.priceType,
                         location = item.location,
                         materialCost = item.materialCost,
-                        onClick = { onItemClick(item) },
                         modifier = Modifier.width(cardWidth),
                     )
                 }
@@ -250,7 +245,6 @@ private fun HomeDesignerCardSectionPreview() {
                     location = "경기 성남시 분당구 13.4km",
                 ),
             ),
-            onItemClick = {},
             onMoreClick = {},
         )
     }

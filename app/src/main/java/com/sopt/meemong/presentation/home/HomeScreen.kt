@@ -30,13 +30,11 @@ import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.component.MeemongBottomBar
 import com.sopt.meemong.core.designsystem.component.MeemongBottomTab
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenu
-import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuItem
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuType
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.presentation.home.component.HomeConsultingCardSection
 import com.sopt.meemong.presentation.home.component.HomeDesignerCardSection
-import com.sopt.meemong.presentation.home.model.HomeDesignerItem
 import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeMatchingPostSection
 import com.sopt.meemong.presentation.home.component.HomeProductSection
@@ -65,10 +63,9 @@ fun HomeRoute(
     HomeScreen(
         uiState = uiState,
         onQuickMenuClick = viewModel::onQuickMenuClick,
-        onDesignerClick = viewModel::onDesignerClick,
+        onMatchingPostClick = viewModel::onMatchingPostClick,
         onMatchingPostLikeChange = viewModel::onMatchingPostLikeChange,
         onMatchingPostMoreClick = viewModel::onMatchingPostMoreClick,
-        onFloatingMenuItemClick = viewModel::onFloatingMenuItemClick,
         modifier = modifier,
     )
 }
@@ -77,10 +74,9 @@ fun HomeRoute(
 private fun HomeScreen(
     uiState: HomeUiState,
     onQuickMenuClick: (HomeQuickMenuItem) -> Unit,
-    onDesignerClick: (HomeDesignerItem) -> Unit,
+    onMatchingPostClick: (HomeMatchingPostItem) -> Unit,
     onMatchingPostLikeChange: (HomeMatchingPostItem, Boolean) -> Unit,
     onMatchingPostMoreClick: () -> Unit,
-    onFloatingMenuItemClick: (MeemongFloatingMenuItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var isFloatingMenuExpanded by rememberSaveable { mutableStateOf(false) }
@@ -129,14 +125,13 @@ private fun HomeScreen(
                         HomeDesignerCardSection(
                             title = section.title,
                             items = section.items,
-                            onItemClick = onDesignerClick,
                             onMoreClick = {},
                         )
                     }
 
                     HomeMatchingPostSection(
                         items = uiState.matchingPosts,
-                        onItemClick = {},
+                        onItemClick = onMatchingPostClick,
                         onLikeChange = onMatchingPostLikeChange,
                         onMoreClick = onMatchingPostMoreClick,
                     )
@@ -161,7 +156,7 @@ private fun HomeScreen(
                 type = MeemongFloatingMenuType.HOME,
                 isExpanded = isFloatingMenuExpanded,
                 onExpandedChange = { isFloatingMenuExpanded = it },
-                onItemClick = onFloatingMenuItemClick,
+                onItemClick = {},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(end = 20.dp, bottom = 22.dp),
@@ -182,10 +177,9 @@ private fun HomeScreenPreview() {
         HomeScreen(
             uiState = HomeUiState.dummy,
             onQuickMenuClick = {},
-            onDesignerClick = {},
+            onMatchingPostClick = {},
             onMatchingPostLikeChange = { _, _ -> },
             onMatchingPostMoreClick = {},
-            onFloatingMenuItemClick = {},
         )
     }
 }

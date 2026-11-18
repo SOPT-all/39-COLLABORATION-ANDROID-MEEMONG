@@ -1,9 +1,7 @@
 package com.sopt.meemong.presentation.home
 
 import com.sopt.meemong.core.base.BaseViewModel
-import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuItem
 import com.sopt.meemong.data.home.repository.HomeRepository
-import com.sopt.meemong.presentation.home.model.HomeDesignerItem
 import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeQuickMenuItem
 
@@ -20,7 +18,7 @@ class HomeViewModel(
         }
     }
 
-    fun onDesignerClick(item: HomeDesignerItem) {
+    fun onMatchingPostClick(item: HomeMatchingPostItem) {
         sendEffect(HomeUiEffect.NavigateToMatchingDetail)
     }
 
@@ -36,12 +34,5 @@ class HomeViewModel(
 
     fun onMatchingPostMoreClick() {
         sendEffect(HomeUiEffect.NavigateToQuickMatching)
-    }
-
-    fun onFloatingMenuItemClick(item: MeemongFloatingMenuItem) {
-        when (item) {
-            MeemongFloatingMenuItem.QUICK_MATCHING -> sendEffect(HomeUiEffect.NavigateToQuickMatching)
-            else -> Unit
-        }
     }
 }
