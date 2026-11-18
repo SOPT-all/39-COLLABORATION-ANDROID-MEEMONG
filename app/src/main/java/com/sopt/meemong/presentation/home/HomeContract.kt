@@ -41,7 +41,7 @@ sealed interface HomeUiEffect : BaseUiEffect {
 private val dummyDesignerSections = listOf(
     HomeDesignerSectionUiModel(
         title = "내 주변 디자이너",
-        items = List(3) {
+        items = listOf(
             HomeDesignerItem(
                 portfolioImageResIds = listOf(R.drawable.img_designer_hanul_1, R.drawable.img_designer_hanul_2, R.drawable.img_designer_hanul_3),
                 profileImageResId = R.drawable.img_designer_hanul_profile,
@@ -49,12 +49,29 @@ private val dummyDesignerSections = listOf(
                 shopName = "준오헤어 동탄카림에비뉴점",
                 priceType = DesignerPriceType.FREE,
                 location = "경기 화성시 4.7km",
-            )
-        },
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_jihyun_1, R.drawable.img_designer_jihyun_2, R.drawable.img_designer_jihyun_3),
+                profileImageResId = R.drawable.img_designer_jihyun_profile,
+                name = "지현 디자이너",
+                shopName = "이가자헤어비스 분당이마트점",
+                priceType = DesignerPriceType.MATERIAL,
+                location = "경기 성남시 분당구 13.0km",
+                materialCost = "2만원~",
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_haewon_1, R.drawable.img_designer_haewon_2, R.drawable.img_designer_haewon_3),
+                profileImageResId = R.drawable.img_designer_haewon_profile,
+                name = "해원",
+                shopName = "이철헤어커커 서현점",
+                priceType = DesignerPriceType.FREE,
+                location = "경기 성남시 분당구 15.8km",
+            ),
+        ),
     ),
     HomeDesignerSectionUiModel(
         title = "세령님을 위한 추천 디자이너",
-        items = List(3) {
+        items = listOf(
             HomeDesignerItem(
                 portfolioImageResIds = listOf(R.drawable.img_designer_seula_1, R.drawable.img_designer_seula_2, R.drawable.img_designer_seula_3),
                 profileImageResId = R.drawable.img_designer_seula_profile,
@@ -63,12 +80,28 @@ private val dummyDesignerSections = listOf(
                 priceType = DesignerPriceType.MATERIAL,
                 location = "경기 성남시 분당구 13.4km",
                 materialCost = "10만원~",
-            )
-        },
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_iyu_1, R.drawable.img_designer_iyu_2, R.drawable.img_designer_iyu_3),
+                profileImageResId = R.drawable.img_designer_iyu_profile,
+                name = "이유수석실장",
+                shopName = "헤어다이아 수원역 타임점",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 팔달구 10.8km",
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_minseo_1, R.drawable.img_designer_minseo_2, R.drawable.img_designer_minseo_3),
+                profileImageResId = R.drawable.img_designer_minseo_profile,
+                name = "민서 수석디자이너",
+                shopName = "헤어다이아 수원역점",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 팔달구 10.9km",
+            ),
+        ),
     ),
     HomeDesignerSectionUiModel(
         title = "무료시술 디자이너",
-        items = List(3) {
+        items = listOf(
             HomeDesignerItem(
                 portfolioImageResIds = listOf(R.drawable.img_designer_haru_1, R.drawable.img_designer_haru_2, R.drawable.img_designer_haru_3),
                 profileImageResId = R.drawable.img_designer_haru_profile,
@@ -76,12 +109,28 @@ private val dummyDesignerSections = listOf(
                 shopName = "하루",
                 priceType = DesignerPriceType.FREE,
                 location = "경기도 수원시 권선구 7.9km",
-            )
-        },
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_seungyeon_1, R.drawable.img_designer_seungyeon_2, R.drawable.img_designer_seungyeon_3),
+                profileImageResId = R.drawable.img_designer_seungyeon_profile,
+                name = "hd승연",
+                shopName = "차홍룸광교점",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 영통구 7.9km",
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_seonga_1, R.drawable.img_designer_seonga_2, R.drawable.img_designer_seonga_3),
+                profileImageResId = R.drawable.img_designer_seonga_profile,
+                name = "성아",
+                shopName = "아이디헤어 동탄 솔빛나루점",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 화성시 동탄구 6.6km",
+            ),
+        ),
     ),
     HomeDesignerSectionUiModel(
         title = "뷰티시술 디자이너",
-        items = List(3) {
+        items = listOf(
             HomeDesignerItem(
                 portfolioImageResIds = listOf(R.drawable.img_designer_offu_1, R.drawable.img_designer_offu_2, R.drawable.img_designer_offu_3),
                 profileImageResId = R.drawable.img_designer_offu_profile,
@@ -89,8 +138,24 @@ private val dummyDesignerSections = listOf(
                 shopName = "오프유브로우",
                 priceType = DesignerPriceType.FREE,
                 location = "경기도 수원시 권선구 8.3km",
-            )
-        },
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_haneul_1, R.drawable.img_designer_haneul_2, R.drawable.img_designer_haneul_3),
+                profileImageResId = R.drawable.img_designer_haneul_profile,
+                name = "하늘",
+                shopName = "모도아티스트리 수우너",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 영통구 7.0km",
+            ),
+            HomeDesignerItem(
+                portfolioImageResIds = listOf(R.drawable.img_designer_rosy_1, R.drawable.img_designer_rosy_2, R.drawable.img_designer_rosy_3),
+                profileImageResId = R.drawable.img_designer_rosy_profile,
+                name = "Rosy",
+                shopName = "프리랜서",
+                priceType = DesignerPriceType.FREE,
+                location = "경기도 수원시 권선구 8.2km",
+            ),
+        ),
     ),
 )
 
@@ -164,11 +229,35 @@ private val dummyProducts = listOf(
     ),
 )
 
-private val dummyConsultings = List(5) {
+private val dummyConsultings = listOf(
     HomeConsultingItem(
         title = "예쁜 브라운/베이지 염색 받고 싶어요",
         description = "10만원대 이내로 쿨톤 브라운 염색하고 싶습니다!!",
         timeAgo = "2일 전",
         commentCount = 12,
-    )
-}
+    ),
+    HomeConsultingItem(
+        title = "손상모 커트&블랙염색 시술 흠흠",
+        description = "3개월 전에 탈색 후 염색을 했는데 색이 잘 안빠져서 3~4번은 했더니 관리를 흠흠",
+        timeAgo = "3일 전",
+        commentCount = 9,
+    ),
+    HomeConsultingItem(
+        title = "단발하고 싶어요",
+        description = "단발하고 싶어요!(태슬컷, c컬펌, 완전 뽀글 머리도 좋아요 다 상관 없습니다)",
+        timeAgo = "2일 전",
+        commentCount = 12,
+    ),
+    HomeConsultingItem(
+        title = "제발도와주세요저를",
+        description = "매일 고데기를 할 자신이 없어서 최대한 손질이 편한 스타일을 원해요!",
+        timeAgo = "2일 전",
+        commentCount = 10,
+    ),
+    HomeConsultingItem(
+        title = "단발을 하고 싶은데 잘 어울릴지 모르겠어요",
+        description = "제가 어릴때 단발을 했었는데 그냥 무작정 싹뚝 자르기만 해서 최양락이 되어버렸거든요",
+        timeAgo = "2일 전",
+        commentCount = 10,
+    ),
+)
