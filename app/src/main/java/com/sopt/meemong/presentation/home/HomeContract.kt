@@ -80,19 +80,6 @@ private val dummyDesignerSections = listOf(
         },
     ),
     HomeDesignerSectionUiModel(
-        title = "무료시술 디자이너",
-        items = List(3) {
-            HomeDesignerItem(
-                portfolioImageResIds = listOf(R.drawable.img_designer_haru_1, R.drawable.img_designer_haru_2, R.drawable.img_designer_haru_3),
-                profileImageResId = R.drawable.img_designer_haru_profile,
-                name = "하루",
-                shopName = "하루",
-                priceType = DesignerPriceType.FREE,
-                location = "경기도 수원시 권선구 7.9km",
-            )
-        },
-    ),
-    HomeDesignerSectionUiModel(
         title = "뷰티시술 디자이너",
         items = List(3) {
             HomeDesignerItem(
