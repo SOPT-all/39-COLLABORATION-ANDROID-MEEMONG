@@ -127,7 +127,7 @@ private fun QuickMatchingScreen(
                 onItemClick = {},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = 20.dp),
+                    .padding(end = 20.dp, bottom = 116.dp),
             )
         }
     }
