@@ -28,12 +28,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sopt.meemong.core.designsystem.component.UrlImage
+import com.sopt.meemong.R
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
 fun HomeProductCard(
-    imageUrl: String,
+    @DrawableRes imageResId: Int,
     tag: String,
     name: String,
     originalPrice: Int,
@@ -60,8 +64,9 @@ fun HomeProductCard(
                 .fillMaxWidth()
                 .aspectRatio(160f / 81f),
         ) {
-            UrlImage(
-                url = imageUrl,
+            Image(
+                bitmap = ImageBitmap.imageResource(imageResId),
+                contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
             )
@@ -141,7 +146,7 @@ private fun HomeProductCardPreview() {
             horizontalArrangement = Arrangement.spacedBy(11.dp),
         ) {
             HomeProductCard(
-                imageUrl = "",
+                imageResId = R.drawable.img_home_product_scalp,
                 tag = "두피보호",
                 name = "셀프염색 전 필수 두피 보호제",
                 originalPrice = 28000,
@@ -153,7 +158,7 @@ private fun HomeProductCardPreview() {
                     .fillMaxHeight(),
             )
             HomeProductCard(
-                imageUrl = "",
+                imageResId = R.drawable.img_home_product_shampoo,
                 tag = "기름제거",
                 name = "떡진 두피 샴푸",
                 originalPrice = 33000,

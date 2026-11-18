@@ -35,6 +35,8 @@ fun AppNavHost(
     ) {
         composable<Home> {
             HomeRoute(
+                navigateToQuickMatching = { navController.navigate(QuickMatching) },
+                navigateToMatchingDetail = { navController.navigate(MatchingDetail) },
                 modifier = Modifier
                     .padding(paddingValues)
                     .consumeWindowInsets(paddingValues),
