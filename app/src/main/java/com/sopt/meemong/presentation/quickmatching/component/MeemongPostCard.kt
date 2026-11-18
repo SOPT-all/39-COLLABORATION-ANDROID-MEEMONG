@@ -32,10 +32,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
 import com.sopt.meemong.core.common.util.formatPostTime
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.core.designsystem.component.PostTag
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -43,7 +44,7 @@ import java.util.Locale
  * 일반 공고 목록에서 사용하는 카드입니다.
  *
  * @param displayPrice 표시 가격입니다. null이면 금액을 표시하지 않습니다.
- * @param availableTimes 매퍼에서 한글로 변환한 시술 가능 시간 목록입니다.
+ * @param availableTimes 시술 가능 시간 목록입니다.
  * @param treatmentTypes 매퍼에서 한글로 변환한 시술 유형 목록입니다.
  * @param createdAtMillis createdAt을 변환한 밀리초 단위 Unix timestamp입니다.
  * @param isLikeLoading 해당 공고의 좋아요 요청 진행 여부입니다.
@@ -57,9 +58,9 @@ fun MeemongPostCard(
     createdAtMillis: Long,
     region: String,
     title: String,
-    priceType: MeemongPostCostType,
+    priceType: PriceType,
     displayPrice: Int?,
-    availableTimes: List<String>,
+    availableTimes: List<AvailableTime>,
     treatmentTypes: List<String>,
     isLiked: Boolean,
     isLikeLoading: Boolean,
@@ -177,14 +178,14 @@ fun MeemongPostCard(
                         text = priceType.label,
                         modifier = Modifier.widthIn(max = 88.dp),
                         color = when (priceType) {
-                            MeemongPostCostType.FREE,
-                            MeemongPostCostType.REVIEW_SPECIAL ->
+                            PriceType.FREE,
+                            PriceType.REVIEW ->
                                 MeemongTheme.colors.meemongBlue
 
-                            MeemongPostCostType.MATERIAL_FEE ->
+                            PriceType.NEGOTIABLE ->
                                 MeemongTheme.colors.gray700
 
-                            MeemongPostCostType.MODEL_FEE ->
+                            PriceType.MODEL_FEE ->
                                 MeemongTheme.colors.green
                         },
                         style = MeemongTheme.typography.body2.sb14,
@@ -217,7 +218,7 @@ fun MeemongPostCard(
                             PostCardDividerDot()
 
                             Text(
-                                text = availableTimes.joinToString(", "),
+                                text = availableTimes.joinToString(", ") { it.label },
                                 modifier = Modifier.widthIn(max = 88.dp),
                                 color = MeemongTheme.colors.gray600,
                                 style = MeemongTheme.typography.body2.m14,
@@ -283,7 +284,7 @@ private fun MeemongPostCardPreview() {
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            MeemongPostCostType.entries.forEach { priceType ->
+            PriceType.entries.forEach { priceType ->
                 MeemongPostCard(
                     designerProfileImageUrl = "",
                     designerName = "수아디자이너",
@@ -292,14 +293,14 @@ private fun MeemongPostCardPreview() {
                     title = "월, 화 롱헤어모델 모집합니다",
                     priceType = priceType,
                     displayPrice = when (priceType) {
-                        MeemongPostCostType.FREE -> null
-                        MeemongPostCostType.REVIEW_SPECIAL -> 5_000
-                        MeemongPostCostType.MATERIAL_FEE -> 40_000
-                        MeemongPostCostType.MODEL_FEE -> 45_000
+                        PriceType.FREE -> null
+                        PriceType.REVIEW -> 5_000
+                        PriceType.NEGOTIABLE -> 40_000
+                        PriceType.MODEL_FEE -> 45_000
                     },
-                    availableTimes = listOf("평일 오전"),
+                    availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
                     treatmentTypes = listOf("커트", "염색"),
-                    isLiked = priceType == MeemongPostCostType.REVIEW_SPECIAL,
+                    isLiked = priceType == PriceType.REVIEW,
                     isLikeLoading = false,
                     onLikeChange = {},
                     onClick = {},

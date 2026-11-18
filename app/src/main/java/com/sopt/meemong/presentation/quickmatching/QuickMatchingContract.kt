@@ -2,7 +2,8 @@ package com.sopt.meemong.presentation.quickmatching
 
 import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.quickmatching.component.MatchingCategory
 import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
@@ -29,10 +30,10 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
         postId = 1L,
         thumbnailUrl = "",
         title = "롱헤어 펌 모델 모집합니다",
-        priceType = MeemongPostCostType.REVIEW_SPECIAL,
+        priceType = PriceType.REVIEW,
         displayPrice = 5_000,
         region = "서울시 성동구",
-        availableTimes = listOf("평일 오전"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
         treatmentTypes = listOf("펌"),
         createdAtMillis = now,
         isLiked = true,
@@ -45,9 +46,9 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
         createdAtMillis = now,
         region = "서울시 서초구",
         title = "단발 커트 모델 모집합니다",
-        priceType = MeemongPostCostType.FREE,
+        priceType = PriceType.FREE,
         displayPrice = null,
-        availableTimes = listOf("평일 오후"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_AFTERNOON),
         treatmentTypes = listOf("커트"),
         isLiked = false,
     )
@@ -68,7 +69,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             recommendedPost.copy(
                 postId = 21L,
                 title = "단발펌 받고 싶어요",
-                priceType = MeemongPostCostType.MODEL_FEE,
+                priceType = PriceType.MODEL_FEE,
                 displayPrice = 45_000,
             ),
             recommendedPost.copy(postId = 22L, title = "긴 머리 염색 받고 싶어요"),

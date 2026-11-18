@@ -5,5 +5,6 @@ enum class PriceType(
 ) {
     REVIEW("리뷰특가"),
     FREE("무료시술"),
-    NEGOTIABLE("재료비발생")
+    NEGOTIABLE("재료비 발생"),
+    MODEL_FEE("모델료 발생"),
 }

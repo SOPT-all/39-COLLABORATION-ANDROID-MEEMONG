@@ -11,8 +11,9 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 
 @Composable
@@ -66,9 +67,9 @@ private fun QuickMatchingGeneralSectionPreview() {
         createdAtMillis = System.currentTimeMillis(),
         region = "서울시 서초구",
         title = "월, 화 롱헤어모델 모집합니다",
-        priceType = MeemongPostCostType.MATERIAL_FEE,
+        priceType = PriceType.NEGOTIABLE,
         displayPrice = 40_000,
-        availableTimes = listOf("평일 오전"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
         treatmentTypes = listOf("커트", "펌"),
         isLiked = false,
     )
@@ -80,7 +81,7 @@ private fun QuickMatchingGeneralSectionPreview() {
                 previewPost.copy(
                     postId = 2L,
                     title = "염색 모델 구해요",
-                    priceType = MeemongPostCostType.REVIEW_SPECIAL,
+                    priceType = PriceType.REVIEW,
                     displayPrice = 5_000,
                     treatmentTypes = listOf("염색"),
                     isLiked = true,
@@ -88,7 +89,7 @@ private fun QuickMatchingGeneralSectionPreview() {
                 previewPost.copy(
                     postId = 3L,
                     title = "단발 커트 모델 모집합니다",
-                    priceType = MeemongPostCostType.FREE,
+                    priceType = PriceType.FREE,
                     displayPrice = null,
                     treatmentTypes = listOf("커트"),
                 ),
@@ -96,7 +97,7 @@ private fun QuickMatchingGeneralSectionPreview() {
                     postId = 4L,
                     title = "빈티지 펌 모델 구해요",
                     displayPrice = 45_000,
-                    availableTimes = listOf("시간 상관없음"),
+                    availableTimes = listOf(AvailableTime.ANYTIME),
                     treatmentTypes = listOf("펌"),
                 ),
             ),

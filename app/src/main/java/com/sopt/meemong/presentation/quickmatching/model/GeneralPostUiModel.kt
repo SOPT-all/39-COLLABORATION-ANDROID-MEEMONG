@@ -1,6 +1,7 @@
 package com.sopt.meemong.presentation.quickmatching.model
 
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 
 data class GeneralPostUiModel(
     val postId: Long,
@@ -9,9 +10,9 @@ data class GeneralPostUiModel(
     val createdAtMillis: Long,
     val region: String,
     val title: String,
-    val priceType: MeemongPostCostType,
+    val priceType: PriceType,
     val displayPrice: Int?,
-    val availableTimes: List<String>,
+    val availableTimes: List<AvailableTime>,
     val treatmentTypes: List<String>,
     val isLiked: Boolean,
 )

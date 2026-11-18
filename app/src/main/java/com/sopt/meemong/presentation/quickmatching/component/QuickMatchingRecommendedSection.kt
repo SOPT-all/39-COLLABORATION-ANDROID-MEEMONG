@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.MeemongLoadMoreButton
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.core.designsystem.component.MeemongRecommendedPostCard
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
 
 @Composable
@@ -66,10 +67,10 @@ private fun QuickMatchingRecommendedSectionPreview() {
         postId = 1L,
         thumbnailUrl = "",
         title = "뭘 해야 할지 모르겠다면?",
-        priceType = MeemongPostCostType.REVIEW_SPECIAL,
+        priceType = PriceType.REVIEW,
         displayPrice = 5_000,
         region = "서울시 성동구",
-        availableTimes = listOf("평일 오전"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
         treatmentTypes = listOf("커트", "펌"),
         createdAtMillis = System.currentTimeMillis(),
         isLiked = true,
@@ -87,7 +88,7 @@ private fun QuickMatchingRecommendedSectionPreview() {
                 previewPost.copy(
                     postId = 3L,
                     title = "단발 커트 모델 구해요",
-                    priceType = MeemongPostCostType.MATERIAL_FEE,
+                    priceType = PriceType.NEGOTIABLE,
                     displayPrice = 10_000,
                 ),
             ),
