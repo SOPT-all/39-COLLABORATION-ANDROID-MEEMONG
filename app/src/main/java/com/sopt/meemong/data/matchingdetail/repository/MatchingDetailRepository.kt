@@ -1,5 +1,9 @@
 package com.sopt.meemong.data.matchingdetail.repository
 
-class MatchingDetailRepository {
+import com.sopt.meemong.data.matchingdetail.remote.service.MatchingDetailService
+
+class MatchingDetailRepository(
+    private val service: MatchingDetailService,
+) {
 
 }
