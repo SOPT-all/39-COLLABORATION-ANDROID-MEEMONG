@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,21 +37,23 @@ fun QuickMatchingRecommendedSection(
         )
 
         posts.forEach { post ->
-            MeemongRecommendedPostCard(
-                thumbnailUrl = post.thumbnailUrl,
-                title = post.title,
-                priceType = post.priceType,
-                displayPrice = post.displayPrice,
-                region = post.region,
-                availableTimes = post.availableTimes,
-                treatmentTypes = post.treatmentTypes,
-                createdAtMillis = post.createdAtMillis,
-                isLiked = post.isLiked,
-                isLikeLoading = false,
-                onLikeChange = { isLiked -> onLikeChange(post.postId, isLiked) },
-                onClick = { onPostClick(post.postId) },
-                modifier = Modifier.fillMaxWidth(),
-            )
+            key(post.postId) {
+                MeemongRecommendedPostCard(
+                    thumbnailUrl = post.thumbnailUrl,
+                    title = post.title,
+                    priceType = post.priceType,
+                    displayPrice = post.displayPrice,
+                    region = post.region,
+                    availableTimes = post.availableTimes,
+                    treatmentTypes = post.treatmentTypes,
+                    createdAtMillis = post.createdAtMillis,
+                    isLiked = post.isLiked,
+                    isLikeLoading = false,
+                    onLikeChange = { isLiked -> onLikeChange(post.postId, isLiked) },
+                    onClick = { onPostClick(post.postId) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
 
         MeemongLoadMoreButton(
