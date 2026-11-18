@@ -93,7 +93,7 @@ private fun QuickMatchingScreen(
         ) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(top = 12.dp, bottom = 96.dp),
+                contentPadding = PaddingValues(top = 20.dp, bottom = 128.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 item {
