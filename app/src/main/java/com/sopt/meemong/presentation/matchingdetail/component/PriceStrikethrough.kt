@@ -15,10 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.common.extensions.toPriceFormat
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
-
 @Composable
 fun PriceStrikethrough(
-    price: Int,
+    price: Int?,
     modifier: Modifier = Modifier,
 ) {
     val textColor = MeemongTheme.colors.gray500

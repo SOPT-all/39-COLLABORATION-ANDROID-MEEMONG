@@ -5,9 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -56,7 +54,7 @@ fun SnsSection(
             .padding(bottom = 36.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
 
-    ) {
+        ) {
         Text(
             text = "SNS",
             style = MeemongTheme.typography.body1.sb16,
@@ -66,7 +64,7 @@ fun SnsSection(
 
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-        ){
+        ) {
             Sns.entries.forEach { sns ->
                 SnsRow(
                     iconRes = sns.iconRes,
