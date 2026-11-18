@@ -9,24 +9,12 @@ import com.sopt.meemong.data.quickmatching.remote.service.QuickMatchingService
 import com.sopt.meemong.data.quickmatching.repository.QuickMatchingRepository
 
 class AppContainer {
-    private val homeService by lazy {
-        NetworkModule.retrofit.create(HomeService::class.java)
-    }
-    val homeRepository: HomeRepository by lazy {
-        HomeRepository(homeService)
-    }
+    private val homeService by lazy { NetworkModule.createService<HomeService>() }
+    val homeRepository: HomeRepository by lazy { HomeRepository(homeService) }
 
-    private val quickMatchingService by lazy {
-        NetworkModule.retrofit.create(QuickMatchingService::class.java)
-    }
-    val quickMatchingRepository: QuickMatchingRepository by lazy {
-        QuickMatchingRepository(quickMatchingService)
-    }
+    private val quickMatchingService by lazy { NetworkModule.createService<QuickMatchingService>() }
+    val quickMatchingRepository: QuickMatchingRepository by lazy { QuickMatchingRepository(quickMatchingService) }
 
-    private val matchingDetailService by lazy {
-        NetworkModule.retrofit.create(MatchingDetailService::class.java)
-    }
-    val matchingDetailRepository: MatchingDetailRepository by lazy {
-        MatchingDetailRepository(matchingDetailService)
-    }
+    private val matchingDetailService by lazy { NetworkModule.createService<MatchingDetailService>() }
+    val matchingDetailRepository: MatchingDetailRepository by lazy { MatchingDetailRepository(matchingDetailService) }
 }
