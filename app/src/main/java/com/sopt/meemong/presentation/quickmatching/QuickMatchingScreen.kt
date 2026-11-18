@@ -94,7 +94,7 @@ private fun QuickMatchingScreen(
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(top = 20.dp, bottom = 128.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 item {
                     QuickMatchingRecommendedSection(
