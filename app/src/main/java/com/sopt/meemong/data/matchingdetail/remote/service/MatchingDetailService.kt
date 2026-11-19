@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface MatchingDetailService {
-    @GET("/api/v1/posts/{postId}")
+    @GET("api/v1/posts/{postId}")
 
     suspend fun getPostDetail(
         @Path("postId") postId: Long,
