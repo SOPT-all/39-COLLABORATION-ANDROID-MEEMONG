@@ -43,6 +43,12 @@ fun AppNavHost(
 
         composable<QuickMatching> {
             QuickMatchingRoute(
+                onBackClick = { navController.popBackStack() },
+                onPostClick = {
+                    navController.navigate(MatchingDetail) {
+                        launchSingleTop = true
+                    }
+                },
                 modifier = Modifier
                     .padding(paddingValues)
                     .consumeWindowInsets(paddingValues),

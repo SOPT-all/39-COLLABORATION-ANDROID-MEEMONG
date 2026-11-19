@@ -33,8 +33,9 @@ import com.sopt.meemong.core.di.ViewModelFactory
 
 @Composable
 fun QuickMatchingRoute(
+    onBackClick: () -> Unit,
+    onPostClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit = {},
     viewModel: QuickMatchingViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -43,7 +44,7 @@ fun QuickMatchingRoute(
         uiState = uiState,
         onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
-        onPostClick = {},
+        onPostClick = onPostClick,
         onLikeChange = viewModel::onLikeChange,
         onMoreClick = {},
         modifier = modifier,
