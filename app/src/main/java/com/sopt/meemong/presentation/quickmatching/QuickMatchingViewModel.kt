@@ -14,6 +14,8 @@ class QuickMatchingViewModel(
         designerRecommendedPosts = emptyList(),
     ),
 ) {
+    private val pendingLikePostIds = mutableSetOf<Long>()
+
     init {
         loadRecommendedPosts()
     }
@@ -23,6 +25,49 @@ class QuickMatchingViewModel(
     }
 
     fun onLikeChange(postId: Long, isLiked: Boolean) {
+        val state = currentState
+        val recommendedPost = state.designerRecommendedPosts
+            .firstOrNull { it.postId == postId }
+            .takeIf { state.selectedCategory == MatchingCategory.DESIGNER }
+
+        if (recommendedPost == null) {
+            updateLocalLikeState(postId, isLiked)
+            return
+        }
+
+        if (!pendingLikePostIds.add(postId)) return
+
+        val previousIsLiked = recommendedPost.isLiked
+        updateRecommendedLikeState(postId, isLiked)
+
+        viewModelScope.launch {
+            try {
+                quickMatchingRepository.updatePostLike(
+                    postId = postId,
+                    isLiked = isLiked,
+                ).onSuccess { serverIsLiked ->
+                    updateRecommendedLikeState(postId, serverIsLiked)
+                }.onFailure { exception ->
+                    updateRecommendedLikeState(postId, previousIsLiked)
+                    Log.e("QuickMatchingViewModel", "공고 찜 변경 실패", exception)
+                }
+            } finally {
+                pendingLikePostIds.remove(postId)
+            }
+        }
+    }
+
+    private fun updateRecommendedLikeState(postId: Long, isLiked: Boolean) {
+        updateState {
+            copy(
+                designerRecommendedPosts = designerRecommendedPosts.map { post ->
+                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
+                },
+            )
+        }
+    }
+
+    private fun updateLocalLikeState(postId: Long, isLiked: Boolean) {
         updateState {
             copy(
                 designerRecommendedPosts = designerRecommendedPosts.map { post ->
