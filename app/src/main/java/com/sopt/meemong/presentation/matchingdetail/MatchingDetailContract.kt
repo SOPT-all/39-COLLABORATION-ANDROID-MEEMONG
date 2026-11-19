@@ -12,6 +12,7 @@ import com.sopt.meemong.data.matchingdetail.model.TabType
 
 data class MatchingDetailUiState(
     val postId: Long = 0L,
+    val isLoading: Boolean = false,
     val postImageUrls: List<String> = emptyList(),
     val currentTab: TabType = TabType.CONTENT_DETAIL,
     val designerProfileInfo: DesignerProfileInfo = DesignerProfileInfo(

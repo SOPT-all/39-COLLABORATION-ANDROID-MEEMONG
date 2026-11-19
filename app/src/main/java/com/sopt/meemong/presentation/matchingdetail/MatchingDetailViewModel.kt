@@ -1,5 +1,6 @@
 package com.sopt.meemong.presentation.matchingdetail
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.data.matchingdetail.model.TabType
@@ -11,7 +12,10 @@ class MatchingDetailViewModel(
     private val matchingDetailRepository: MatchingDetailRepository,
 ) :
     BaseViewModel<MatchingDetailUiState, MatchingDetailUiEffect>(
-        initialState = MatchingDetailUiState(),
+        initialState = MatchingDetailUiState(
+            postId = postId,
+            isLoading = true,
+        ),
     ) {
 
     init {
@@ -20,21 +24,22 @@ class MatchingDetailViewModel(
 
     private fun loadPost() {
         viewModelScope.launch {
+            updateState { copy(isLoading = true) }
+
             matchingDetailRepository.getPostDetail(postId)
-                .onSuccess { post ->
+                .onSuccess {
                     updateState {
                         copy(
-                            postId = post.postId,
-                            postImageUrls = post.postImageUrls,
-                            designerProfileInfo = post.designerProfileInfo,
-                            serviceInfo = post.serviceInfo,
-                            detailInfo = post.detailInfo,
+                            postId = it.postId,
+                            isLoading = false,
+                            postImageUrls = it.postImageUrls,
+                            designerProfileInfo = it.designerProfileInfo,
+                            serviceInfo = it.serviceInfo,
+                            detailInfo = it.detailInfo,
                         )
                     }
                 }
-                .onFailure {
-                    throw Error("임시 에러")
-                }
+                .onFailure { updateState { copy(isLoading = false) } }
         }
     }
 
