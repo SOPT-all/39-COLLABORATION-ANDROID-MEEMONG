@@ -1,5 +1,6 @@
 package com.sopt.meemong.presentation.quickmatching
 
+import com.sopt.meemong.R
 import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
 import com.sopt.meemong.core.model.AvailableTime
@@ -27,6 +28,7 @@ data class QuickMatchingUiState(
 sealed interface QuickMatchingUiEffect : BaseUiEffect
 
 private fun quickMatchingDummyState(): QuickMatchingUiState {
+    val modelImageUrl = "android.resource://com.sopt.meemong/${R.drawable.img_quick_matching_model}"
 
     return QuickMatchingUiState(
         designerRecommendedPosts = listOf(
@@ -139,7 +141,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
         modelRecommendedPosts = listOf(
             RecommendedPostUiModel(
                 postId = 21L,
-                thumbnailUrl = "",
+                thumbnailUrl = modelImageUrl,
                 title = "펌ㆍ염색모델 모집중입니다",
                 priceType = PriceType.FREE,
                 displayPrice = 0,
@@ -151,7 +153,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             RecommendedPostUiModel(
                 postId = 22L,
-                thumbnailUrl = "",
+                thumbnailUrl = modelImageUrl,
                 title = "염색 해 주실 디자이너분 찾습니다!!",
                 priceType = PriceType.FREE,
                 displayPrice = 0,
@@ -163,7 +165,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             RecommendedPostUiModel(
                 postId = 23L,
-                thumbnailUrl = "",
+                thumbnailUrl = modelImageUrl,
                 title = "샤기하고 중성적인 단발 컷트 원해요",
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 10_000,
@@ -175,7 +177,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             RecommendedPostUiModel(
                 postId = 24L,
-                thumbnailUrl = "",
+                thumbnailUrl = modelImageUrl,
                 title = "긴 기장 붙임머리 희망해요",
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 200_000,
@@ -192,7 +194,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
         modelGeneralPosts = listOf(
             GeneralPostUiModel(
                 postId = 31L,
-                designerProfileImageUrl = "",
+                designerProfileImageUrl = modelImageUrl,
                 designerName = "민간인",
                 createdAtMillis = dummyPostTime(19, 49),
                 region = "서울시 서초구",
@@ -205,7 +207,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             GeneralPostUiModel(
                 postId = 32L,
-                designerProfileImageUrl = "",
+                designerProfileImageUrl = modelImageUrl,
                 designerName = "몽몽",
                 createdAtMillis = dummyPostTime(17, 48),
                 region = "서울시 중랑구",
@@ -221,7 +223,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             GeneralPostUiModel(
                 postId = 33L,
-                designerProfileImageUrl = "",
+                designerProfileImageUrl = modelImageUrl,
                 designerName = "먕무헤비",
                 createdAtMillis = dummyPostTime(17, 44),
                 region = "서울시 강서구",
@@ -234,7 +236,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
             ),
             GeneralPostUiModel(
                 postId = 34L,
-                designerProfileImageUrl = "",
+                designerProfileImageUrl = modelImageUrl,
                 designerName = "민",
                 createdAtMillis = dummyPostTime(14, 52),
                 region = "서울시 도봉구",

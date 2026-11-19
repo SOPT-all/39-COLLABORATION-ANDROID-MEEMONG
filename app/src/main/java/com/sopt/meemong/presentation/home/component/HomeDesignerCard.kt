@@ -32,20 +32,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.UrlImage
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-
-enum class DesignerPriceType(
-    val label: String,
-) {
-    FREE("무료시술"),
-    MATERIAL("재료비 발생"),
-}
+import com.sopt.meemong.core.model.PriceType
 
 data class HomeDesignerItem(
     val portfolioImageUrls: List<String>,
     val profileImageUrl: String,
     val name: String,
     val shopName: String,
-    val priceType: DesignerPriceType,
+    val priceType: PriceType,
     val location: String,
     val materialCost: String = "",
 )
@@ -56,7 +50,7 @@ fun HomeDesignerCard(
     profileImageUrl: String,
     name: String,
     shopName: String,
-    priceType: DesignerPriceType,
+    priceType: PriceType,
     location: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -133,7 +127,7 @@ fun HomeDesignerCard(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 when (priceType) {
-                    DesignerPriceType.FREE -> {
+                    PriceType.FREE, PriceType.REVIEW -> {
                         Text(
                             text = priceType.label,
                             color = MeemongTheme.colors.meemongBlue,
@@ -141,7 +135,7 @@ fun HomeDesignerCard(
                         )
                     }
 
-                    DesignerPriceType.MATERIAL -> {
+                    PriceType.NEGOTIABLE, PriceType.MODEL_FEE -> {
                         Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
                             Text(
                                 text = priceType.label,
@@ -240,7 +234,7 @@ private fun HomeDesignerCardSectionPreview() {
                     profileImageUrl = "",
                     name = "한울",
                     shopName = "준오헤어 동탄카림에비뉴점",
-                    priceType = DesignerPriceType.FREE,
+                    priceType = PriceType.FREE,
                     location = "경기도 화성시 4.7km",
                 ),
                 HomeDesignerItem(
@@ -248,7 +242,7 @@ private fun HomeDesignerCardSectionPreview() {
                     profileImageUrl = "",
                     name = "슬아",
                     shopName = "에이치플레이스 정자역점",
-                    priceType = DesignerPriceType.MATERIAL,
+                    priceType = PriceType.NEGOTIABLE,
                     materialCost = "10만원~",
                     location = "경기 성남시 분당구 13.4km",
                 ),
