@@ -28,7 +28,7 @@ enum class Sns(
     INSTAGRAM(
         iconRes = R.drawable.ic_instagram_24,
         label = "인스타그램",
-        link = "https://www.instagram.com/gaman._.and/" // TODO: 미몽 인스타그램으로 수정
+        link = "https://www.instagram.com/mimong_designer?evlk=MW1jbHE0aTIxNWs4eg%3D%3D&utm_source=qr"
     ),
     NAVER_PLACE(
         iconRes = R.drawable.ic_naver_24,
