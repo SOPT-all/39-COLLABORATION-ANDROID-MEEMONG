@@ -8,6 +8,7 @@ import com.sopt.meemong.presentation.quickmatching.QuickMatchingViewModel
 
 class ViewModelFactory(
     private val container: AppContainer,
+    private val postId: Long = 0L,
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -20,7 +21,7 @@ class ViewModelFactory(
                 QuickMatchingViewModel(container.quickMatchingRepository) as T
 
             modelClass.isAssignableFrom(MatchingDetailViewModel::class.java) ->
-                MatchingDetailViewModel(container.matchingDetailRepository) as T
+                MatchingDetailViewModel(postId, container.matchingDetailRepository) as T
 
             else -> throw IllegalArgumentException(
                 "Unknown ViewModel class: ${modelClass.name}",

@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.sopt.meemong.MeemongApplication
 import com.sopt.meemong.core.common.navigation.Home
 import com.sopt.meemong.core.common.navigation.MatchingDetail
@@ -52,7 +53,9 @@ fun AppNavHost(
             HomeRoute(
                 viewModel = viewModel,
                 navigateToQuickMatching = { navController.navigate(QuickMatching) },
-                navigateToMatchingDetail = { navController.navigate(MatchingDetail) },
+                navigateToMatchingDetail = { postId ->
+                    navController.navigate(MatchingDetail(postId))
+                },
                 modifier = Modifier
                     .padding(paddingValues)
                     .consumeWindowInsets(paddingValues),
@@ -65,8 +68,8 @@ fun AppNavHost(
             QuickMatchingRoute(
                 viewModel = viewModel,
                 onBackClick = { navController.popBackStack() },
-                onPostClick = {
-                    navController.navigate(MatchingDetail) {
+                onPostClick = { postId ->
+                    navController.navigate(MatchingDetail(postId)) {
                         launchSingleTop = true
                     }
                 },
@@ -76,8 +79,27 @@ fun AppNavHost(
             )
         }
 
-        composable<MatchingDetail> {
-            val viewModel: MatchingDetailViewModel = viewModel(factory = factory)
+//        composable<MatchingDetail> {
+//            val viewModel: MatchingDetailViewModel = viewModel(factory = factory)
+//
+//            MatchingDetailRoute(
+//                viewModel = viewModel,
+//                navigateToBack = { navController.popBackStack() },
+//            )
+//        }
+
+        composable<MatchingDetail> { backStackEntry ->
+            val detailRoute = backStackEntry.toRoute<MatchingDetail>()
+
+            val matchingDetailFactory = remember(application, detailRoute.postId) {
+                ViewModelFactory(
+                    postId = detailRoute.postId,
+                    container = application.container,
+                )
+            }
+
+            val viewModel: MatchingDetailViewModel =
+                viewModel(factory = matchingDetailFactory)
 
             MatchingDetailRoute(
                 viewModel = viewModel,
