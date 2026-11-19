@@ -14,8 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.component.MeemongLoadMoreButton
 import com.sopt.meemong.core.designsystem.component.MeemongRecommendedPostCard
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import com.sopt.meemong.core.model.AvailableTime
-import com.sopt.meemong.core.model.PriceType
+import com.sopt.meemong.presentation.quickmatching.QuickMatchingUiState
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
 
 @Composable
@@ -66,35 +65,9 @@ fun QuickMatchingRecommendedSection(
 @Preview(showBackground = true, widthDp = 375)
 @Composable
 private fun QuickMatchingRecommendedSectionPreview() {
-    val previewPost = RecommendedPostUiModel(
-        postId = 1L,
-        thumbnailUrl = "",
-        title = "뭘 해야 할지 모르겠다면?",
-        priceType = PriceType.REVIEW,
-        displayPrice = 5_000,
-        region = "서울시 성동구",
-        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-        treatmentTypes = listOf("커트", "펌"),
-        createdAtMillis = System.currentTimeMillis(),
-        isLiked = true,
-    )
-
     MeemongTheme {
         QuickMatchingRecommendedSection(
-            posts = listOf(
-                previewPost,
-                previewPost.copy(
-                    postId = 2L,
-                    title = "펌·염색 모델 모집합니다",
-                    isLiked = false,
-                ),
-                previewPost.copy(
-                    postId = 3L,
-                    title = "단발 커트 모델 구해요",
-                    priceType = PriceType.NEGOTIABLE,
-                    displayPrice = 10_000,
-                ),
-            ),
+            posts = QuickMatchingUiState.dummy.designerRecommendedPosts,
             onPostClick = {},
             onLikeChange = { _, _ -> },
             onMoreClick = {},
