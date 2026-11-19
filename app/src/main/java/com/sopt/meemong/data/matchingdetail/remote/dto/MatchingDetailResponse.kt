@@ -60,3 +60,14 @@ data class MatchingDetailResponse(
     val content: String,
 )
 
+@Serializable
+data class DesignerDetailResponse(
+    @SerializedName("portfolioImageUrls")
+    val portfolioImageUrls: List<String>,
+
+    @SerializedName("shopAddress")
+    val shopAddress: String,
+
+    @SerializedName("shopImageUrls")
+    val shopImageUrls: List<String>,
+)
