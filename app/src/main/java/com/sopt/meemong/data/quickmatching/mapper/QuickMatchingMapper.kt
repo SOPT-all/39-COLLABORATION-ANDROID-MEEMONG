@@ -4,11 +4,11 @@ import com.sopt.meemong.core.common.extensions.toAvailableTimeOrNull
 import com.sopt.meemong.core.common.extensions.toEpochMillis
 import com.sopt.meemong.core.common.extensions.toPriceType
 import com.sopt.meemong.core.common.extensions.toTreatmentTypeOrNull
+import com.sopt.meemong.data.quickmatching.model.GeneralPost
 import com.sopt.meemong.data.quickmatching.remote.dto.GeneralPostResponse
-import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 
-fun GeneralPostResponse.toGeneralPostUiModel(): GeneralPostUiModel =
-    GeneralPostUiModel(
+fun GeneralPostResponse.toGeneralPost(): GeneralPost =
+    GeneralPost(
         postId = postId,
         designerProfileImageUrl = designerProfileImageUrl,
         designerName = designerName,
