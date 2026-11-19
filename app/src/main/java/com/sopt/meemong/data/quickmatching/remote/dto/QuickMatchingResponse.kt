@@ -15,7 +15,7 @@ data class GeneralPostResponse(
     @SerializedName("designerName")
     val designerName: String,
     @SerializedName("designerProfileImageUrl")
-    val designerProfileImageUrl: String?,
+    val designerProfileImageUrl: String,
     @SerializedName("priceType")
     val priceType: String,
     @SerializedName("displayPrice")

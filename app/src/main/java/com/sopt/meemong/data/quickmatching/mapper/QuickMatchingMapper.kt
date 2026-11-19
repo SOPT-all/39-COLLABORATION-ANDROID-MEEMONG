@@ -10,7 +10,7 @@ import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 fun GeneralPostResponse.toGeneralPostUiModel(): GeneralPostUiModel =
     GeneralPostUiModel(
         postId = postId,
-        designerProfileImageUrl = designerProfileImageUrl.orEmpty(),
+        designerProfileImageUrl = designerProfileImageUrl,
         designerName = designerName,
         createdAtMillis = createdAt.toEpochMillis(),
         region = region,
