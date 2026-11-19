@@ -27,7 +27,7 @@ data class GeneralPostResponse(
     @SerializedName("availableTimes")
     val availableTimes: List<String>,
     @SerializedName("treatmentTypes")
-    val treatmentType: List<String>,
+    val treatmentTypes: List<String>,
     @SerializedName("isLinked")
     val isLiked: Boolean,
     @SerializedName("createdAt")
