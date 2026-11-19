@@ -19,7 +19,6 @@ data class GeneralPostUiModel(
     val isLiked: Boolean,
 )
 
-
 fun GeneralPost.toUiModel(): GeneralPostUiModel =
     GeneralPostUiModel(
         postId = postId,
