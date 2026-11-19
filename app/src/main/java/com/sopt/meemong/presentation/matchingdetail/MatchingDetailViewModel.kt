@@ -39,7 +39,10 @@ class MatchingDetailViewModel(
                         )
                     }
                 }
-                .onFailure { updateState { copy(isLoading = false) } }
+                .onFailure {
+                    Log.e("MatchingDetailViewModel", "상세 조회 실패 postId=$postId", it)
+                    updateState { copy(isLoading = false) }
+                }
         }
     }
 
