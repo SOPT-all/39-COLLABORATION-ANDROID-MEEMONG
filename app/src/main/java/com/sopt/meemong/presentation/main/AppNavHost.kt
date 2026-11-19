@@ -64,6 +64,12 @@ fun AppNavHost(
 
             QuickMatchingRoute(
                 viewModel = viewModel,
+                onBackClick = { navController.popBackStack() },
+                onPostClick = {
+                    navController.navigate(MatchingDetail) {
+                        launchSingleTop = true
+                    }
+                },
                 modifier = Modifier
                     .padding(paddingValues)
                     .consumeWindowInsets(paddingValues),
