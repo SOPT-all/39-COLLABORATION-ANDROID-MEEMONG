@@ -58,10 +58,7 @@ enum class MeemongBottomTab(
 
 /**
  * 홈 화면에서 사용하는 공통 바텀바입니다.
- *
- * 하단 36dp는 시스템 바 영역을 포함한 디자인 여백입니다.
- * 컴포넌트 내부에서 navigationBarsPadding은 추가하지 않습니다.
- *
+ * 하단 여백 없이 시스템 내비게이션 바 바로 위에 붙여 배치합니다.
  * 실제 화면 이동은 호출부의 [onTabClick]에서 연결합니다.
  */
 @Composable
@@ -73,7 +70,6 @@ fun MeemongBottomBar(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 94.dp)
             .background(MeemongTheme.colors.white),
     ) {
         HorizontalDivider(
@@ -88,7 +84,6 @@ fun MeemongBottomBar(
                     start = 25.dp,
                     top = 8.dp,
                     end = 25.dp,
-                    bottom = 36.dp,
                 )
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
