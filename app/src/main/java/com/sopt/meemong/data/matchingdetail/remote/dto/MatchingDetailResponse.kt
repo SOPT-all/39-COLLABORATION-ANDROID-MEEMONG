@@ -21,7 +21,7 @@ data class MatchingDetailResponse(
     val priceType: String,
 
     @SerializedName("discountRate")
-    val discountRate: Double,
+    val discountRate: Double?,
 
     @SerializedName("originalPrice")
     val originalPrice: Int?,

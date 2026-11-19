@@ -71,7 +71,7 @@ private fun Header(
     title: String,
     isLiked: Boolean,
     priceType: String,
-    discountRate: Double,
+    discountRate: Double?,
     originalPrice: Int?,
     displayPrice: Int?,
     onLikeClick: () -> Unit,
@@ -104,7 +104,7 @@ private fun Header(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 Text(
-                    text = "${discountRate.toInt()}%",
+                    text = "${discountRate?.toInt()}%",
                     style = MeemongTheme.typography.title.sb20,
                     color = MeemongTheme.colors.red,
                 )

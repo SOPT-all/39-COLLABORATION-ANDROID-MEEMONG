@@ -8,7 +8,7 @@ data class ServiceInfo(
     val title: String,
     val isLiked: Boolean,
     val priceType: PriceType,
-    val discountRate: Double,
+    val discountRate: Double?,
     val originalPrice: Int?,
     val displayPrice: Int?,
     val treatmentTypes: List<TreatmentType>,
