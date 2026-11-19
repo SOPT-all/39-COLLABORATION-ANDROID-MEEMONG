@@ -7,6 +7,7 @@ import com.sopt.meemong.data.matchingdetail.model.DesignerProfileInfo
 import com.sopt.meemong.data.matchingdetail.model.DetailInfo
 import com.sopt.meemong.data.matchingdetail.model.MatchingDetail
 import com.sopt.meemong.data.matchingdetail.model.ServiceInfo
+import com.sopt.meemong.data.matchingdetail.remote.dto.DesignerDetailResponse
 import com.sopt.meemong.data.matchingdetail.remote.dto.MatchingDetailResponse
 
 fun MatchingDetailResponse.toModel(): MatchingDetail =
@@ -33,10 +34,16 @@ fun MatchingDetailResponse.toModel(): MatchingDetail =
             shopName = shopName,
         ),
         detailInfo = DetailInfo(
-            // TODO: 디자이너 정보 API 연결
             content = content,
             portfolioImageUrls = emptyList(),
             shopAddress = "",
             shopImageUrls = emptyList(),
         ),
+    )
+
+fun DesignerDetailResponse.toModel(detail: DetailInfo): DetailInfo =
+    detail.copy(
+        portfolioImageUrls = portfolioImageUrls,
+        shopAddress = shopAddress,
+        shopImageUrls = shopImageUrls,
     )
