@@ -28,4 +28,30 @@ class QuickMatchingRepository(
         } catch (exception: Exception) {
             Result.failure(exception)
         }
+
+    suspend fun updatePostLike(
+        postId: Long,
+        isLiked: Boolean,
+    ): Result<Boolean> =
+        try {
+            val response = if (isLiked) {
+                service.likePost(postId)
+            } else {
+                service.unlikePost(postId)
+            }
+
+            check(response.code == "SUCCESS") {
+                "공고 찜 변경 실패: ${response.code}"
+            }
+
+            val data = checkNotNull(response.data) {
+                "공고 찜 응답에 data가 없습니다."
+            }
+
+            Result.success(data.isLiked)
+        } catch (exception: CancellationException) {
+            throw exception
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
 }
