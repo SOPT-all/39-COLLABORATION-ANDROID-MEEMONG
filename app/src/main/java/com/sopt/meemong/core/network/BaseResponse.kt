@@ -1,12 +1,10 @@
 package com.sopt.meemong.core.network
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class BaseResponse<T>(
-    @SerialName("code")
+    @SerializedName("code")
     val code: String,
-    @SerialName("data")
+    @SerializedName("data")
     val data: T?,
 )
