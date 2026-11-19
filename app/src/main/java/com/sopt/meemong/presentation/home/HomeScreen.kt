@@ -25,29 +25,27 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.component.MeemongBottomBar
 import com.sopt.meemong.core.designsystem.component.MeemongBottomTab
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenu
 import com.sopt.meemong.core.designsystem.component.MeemongFloatingMenuType
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
-import com.sopt.meemong.core.di.ViewModelFactory
 import com.sopt.meemong.presentation.home.component.HomeConsultingCardSection
 import com.sopt.meemong.presentation.home.component.HomeDesignerCardSection
-import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 import com.sopt.meemong.presentation.home.component.HomeMatchingPostSection
 import com.sopt.meemong.presentation.home.component.HomeProductSection
 import com.sopt.meemong.presentation.home.component.HomeQuickMenu
 import com.sopt.meemong.presentation.home.component.HomeQuickMenuItem
 import com.sopt.meemong.presentation.home.component.HomeTopBar
+import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 
 @Composable
 fun HomeRoute(
+    viewModel: HomeViewModel,
     navigateToQuickMatching: () -> Unit,
     navigateToMatchingDetail: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(factory = ViewModelFactory()),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
