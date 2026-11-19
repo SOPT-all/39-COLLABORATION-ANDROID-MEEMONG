@@ -44,7 +44,7 @@ fun QuickMatchingRecommendedSection(
                     displayPrice = post.displayPrice,
                     region = post.region,
                     availableTimes = post.availableTimes,
-                    treatmentTypes = post.treatmentTypes,
+                    treatmentTypes = post.treatmentTypes.map { it.label },
                     createdAtMillis = post.createdAtMillis,
                     isLiked = post.isLiked,
                     isLikeLoading = false,

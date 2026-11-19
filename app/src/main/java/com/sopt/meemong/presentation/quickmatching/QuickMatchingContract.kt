@@ -4,6 +4,7 @@ import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
 import com.sopt.meemong.core.model.AvailableTime
 import com.sopt.meemong.core.model.PriceType
+import com.sopt.meemong.core.model.TreatmentType
 import com.sopt.meemong.presentation.quickmatching.component.MatchingCategory
 import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
@@ -37,7 +38,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 5_000,
                 region = "서울시 성동구",
                 availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-                treatmentTypes = listOf("컷트", "펌"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM),
                 createdAtMillis = dummyPostTime(14, 52),
                 isLiked = true,
             ),
@@ -49,7 +50,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 0,
                 region = "서울시 관악구",
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("펌"),
+                treatmentTypes = listOf(TreatmentType.PERM),
                 createdAtMillis = dummyPostTime(14, 52),
                 isLiked = true,
             ),
@@ -61,7 +62,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 0,
                 region = "서울시 성동구",
                 availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-                treatmentTypes = listOf("컷트", "펌", "염색", "클리닉"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM, TreatmentType.COLORED, TreatmentType.CLINIC),
                 createdAtMillis = dummyPostTime(14, 52),
                 isLiked = true,
             ),
@@ -76,7 +77,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                     AvailableTime.WEEKDAY_MORNING,
                     AvailableTime.WEEKDAY_AFTERNOON,
                 ),
-                treatmentTypes = listOf("컷트", "클리닉", "염색"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.CLINIC, TreatmentType.COLORED),
                 createdAtMillis = dummyPostTime(12, 0, daysAgo = 1),
                 isLiked = true,
             ),
@@ -92,7 +93,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 40_000,
                 availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-                treatmentTypes = listOf("컷트", "펌"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -105,7 +106,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 10_000,
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("컷트", "펌", "매직", "염색"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM, TreatmentType.STRAIGHT, TreatmentType.COLORED),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -118,7 +119,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 45_000,
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("염색"),
+                treatmentTypes = listOf(TreatmentType.COLORED),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -131,7 +132,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.FREE,
                 displayPrice = null,
                 availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-                treatmentTypes = listOf("컷트", "염색"),
+                treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.COLORED),
                 isLiked = false,
             ),
         ),
@@ -144,7 +145,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 0,
                 region = "김포시",
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("펌"),
+                treatmentTypes = listOf(TreatmentType.PERM),
                 createdAtMillis = dummyPostTime(12, 5),
                 isLiked = true,
             ),
@@ -156,7 +157,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 0,
                 region = "광주시",
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("염색"),
+                treatmentTypes = listOf(TreatmentType.COLORED),
                 createdAtMillis = dummyPostTime(12, 0),
                 isLiked = true,
             ),
@@ -168,7 +169,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 displayPrice = 10_000,
                 region = "서울시 마포구",
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("컷트"),
+                treatmentTypes = listOf(TreatmentType.CUT),
                 createdAtMillis = dummyPostTime(12, 0, daysAgo = 1),
                 isLiked = true,
             ),
@@ -183,7 +184,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                     AvailableTime.WEEKDAY_MORNING,
                     AvailableTime.WEEKDAY_AFTERNOON,
                 ),
-                treatmentTypes = listOf("붙임머리"),
+                treatmentTypes = listOf(TreatmentType.EXTENSION),
                 createdAtMillis = dummyPostTime(12, 0, daysAgo = 1),
                 isLiked = true,
             ),
@@ -199,7 +200,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.FREE,
                 displayPrice = null,
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("컷트"),
+                treatmentTypes = listOf(TreatmentType.CUT),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -215,7 +216,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                     AvailableTime.WEEKDAY_AFTERNOON,
                     AvailableTime.WEEKEND_MORNING,
                 ),
-                treatmentTypes = listOf("펌"),
+                treatmentTypes = listOf(TreatmentType.PERM),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -228,7 +229,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.MODEL_FEE,
                 displayPrice = 45_000,
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("펌"),
+                treatmentTypes = listOf(TreatmentType.PERM),
                 isLiked = false,
             ),
             GeneralPostUiModel(
@@ -241,7 +242,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 priceType = PriceType.NEGOTIABLE,
                 displayPrice = 50_000,
                 availableTimes = listOf(AvailableTime.ANYTIME),
-                treatmentTypes = listOf("펌"),
+                treatmentTypes = listOf(TreatmentType.PERM),
                 isLiked = false,
             ),
         ),

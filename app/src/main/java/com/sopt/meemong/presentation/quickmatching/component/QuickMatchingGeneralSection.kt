@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.core.model.AvailableTime
 import com.sopt.meemong.core.model.PriceType
+import com.sopt.meemong.core.model.TreatmentType
 import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 
 @Composable
@@ -44,7 +45,7 @@ fun QuickMatchingGeneralSection(
                     priceType = post.priceType,
                     displayPrice = post.displayPrice,
                     availableTimes = post.availableTimes,
-                    treatmentTypes = post.treatmentTypes,
+                    treatmentTypes = post.treatmentTypes.map { it.label },
                     isLiked = post.isLiked,
                     isLikeLoading = false,
                     onLikeChange = { isLiked ->
@@ -70,7 +71,7 @@ private fun QuickMatchingGeneralSectionPreview() {
         priceType = PriceType.NEGOTIABLE,
         displayPrice = 40_000,
         availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
-        treatmentTypes = listOf("커트", "펌"),
+        treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM),
         isLiked = false,
     )
 
@@ -83,7 +84,7 @@ private fun QuickMatchingGeneralSectionPreview() {
                     title = "염색 모델 구해요",
                     priceType = PriceType.REVIEW,
                     displayPrice = 5_000,
-                    treatmentTypes = listOf("염색"),
+                    treatmentTypes = listOf(TreatmentType.COLORED),
                     isLiked = true,
                 ),
                 previewPost.copy(
@@ -91,14 +92,14 @@ private fun QuickMatchingGeneralSectionPreview() {
                     title = "단발 커트 모델 모집합니다",
                     priceType = PriceType.FREE,
                     displayPrice = null,
-                    treatmentTypes = listOf("커트"),
+                    treatmentTypes = listOf(TreatmentType.CUT),
                 ),
                 previewPost.copy(
                     postId = 4L,
                     title = "빈티지 펌 모델 구해요",
                     displayPrice = 45_000,
                     availableTimes = listOf(AvailableTime.ANYTIME),
-                    treatmentTypes = listOf("펌"),
+                    treatmentTypes = listOf(TreatmentType.PERM),
                 ),
             ),
             onPostClick = {},
