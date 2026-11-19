@@ -1,12 +1,10 @@
 package com.sopt.meemong.data.quickmatching.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import com.sopt.meemong.core.model.TreatmentType
-import java.io.Serial
 
 data class GeneralPostListResponse(
     @SerializedName("posts")
-    val posts: List<GeneralPostListResponse>,
+    val posts: List<GeneralPostResponse>,
 )
 
 data class GeneralPostResponse(
@@ -17,7 +15,7 @@ data class GeneralPostResponse(
     @SerializedName("designerName")
     val designerName: String,
     @SerializedName("designerProfileImageUrl")
-    val designerProfileImageUrl: String,
+    val designerProfileImageUrl: String?,
     @SerializedName("priceType")
     val priceType: String,
     @SerializedName("displayPrice")
@@ -28,7 +26,7 @@ data class GeneralPostResponse(
     val availableTimes: List<String>,
     @SerializedName("treatmentTypes")
     val treatmentTypes: List<String>,
-    @SerializedName("isLinked")
+    @SerializedName("isLiked")
     val isLiked: Boolean,
     @SerializedName("createdAt")
     val createdAt: String,
