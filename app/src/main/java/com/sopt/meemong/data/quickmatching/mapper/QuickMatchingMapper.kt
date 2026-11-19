@@ -1,9 +1,9 @@
 package com.sopt.meemong.data.quickmatching.mapper
 
-import com.sopt.meemong.core.common.util.toAvailableTimeOrNull
-import com.sopt.meemong.core.common.util.toEpochMillis
-import com.sopt.meemong.core.common.util.toPriceType
-import com.sopt.meemong.core.common.util.toTreatmentTypeOrNull
+import com.sopt.meemong.core.common.extensions.toAvailableTimeOrNull
+import com.sopt.meemong.core.common.extensions.toEpochMillis
+import com.sopt.meemong.core.common.extensions.toPriceType
+import com.sopt.meemong.core.common.extensions.toTreatmentTypeOrNull
 import com.sopt.meemong.data.quickmatching.remote.dto.GeneralPostResponse
 import com.sopt.meemong.presentation.quickmatching.model.GeneralPostUiModel
 
