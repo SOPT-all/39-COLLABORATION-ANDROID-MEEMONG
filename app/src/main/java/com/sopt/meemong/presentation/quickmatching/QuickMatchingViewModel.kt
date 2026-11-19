@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class QuickMatchingViewModel(
     private val quickMatchingRepository: QuickMatchingRepository,
 ) : BaseViewModel<QuickMatchingUiState, QuickMatchingUiEffect>(
-    initialState = QuickMatchingUiState.dummy.copy(designerGeneralPosts = emptyList())
+    initialState = QuickMatchingUiState.dummy.copy(designerGeneralPosts = emptyList()),
 ) {
     init {
         loadGeneralPosts()
