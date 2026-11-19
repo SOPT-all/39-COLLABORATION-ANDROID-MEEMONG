@@ -17,7 +17,7 @@ data class RecommendedPostResponse(
     @SerializedName("priceType")
     val priceType: String,
     @SerializedName("displayPrice")
-    val displayPrice: Int,
+    val displayPrice: Int?,
     @SerializedName("region")
     val region: String,
     @SerializedName("availableTimes")

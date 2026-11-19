@@ -9,7 +9,7 @@ data class RecommendedPostUiModel(
     val thumbnailUrl: String,
     val title: String,
     val priceType: PriceType,
-    val displayPrice: Int,
+    val displayPrice: Int?,
     val region: String,
     val availableTimes: List<AvailableTime>,
     val treatmentTypes: List<TreatmentType>,
