@@ -18,6 +18,7 @@ data class QuickMatchingUiState(
     val designerGeneralPosts: List<GeneralPostUiModel> = emptyList(),
     val modelRecommendedPosts: List<RecommendedPostUiModel> = emptyList(),
     val modelGeneralPosts: List<GeneralPostUiModel> = emptyList(),
+    val pendingLikePostIds: Set<Long> = emptySet(),
 ) : BaseUiState {
     companion object {
         val dummy: QuickMatchingUiState

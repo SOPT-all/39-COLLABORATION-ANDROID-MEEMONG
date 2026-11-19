@@ -98,6 +98,11 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingRecommendedSection(
                         posts = recommendedPosts,
+                        pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
+                            uiState.pendingLikePostIds
+                        } else {
+                            emptySet()
+                        },
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         onMoreClick = onMoreClick,

@@ -14,8 +14,6 @@ class QuickMatchingViewModel(
         designerRecommendedPosts = emptyList(),
     ),
 ) {
-    private val pendingLikePostIds = mutableSetOf<Long>()
-
     init {
         loadRecommendedPosts()
     }
@@ -35,7 +33,11 @@ class QuickMatchingViewModel(
             return
         }
 
-        if (!pendingLikePostIds.add(postId)) return
+        if (postId in state.pendingLikePostIds) return
+
+        updateState {
+            copy(pendingLikePostIds = pendingLikePostIds + postId)
+        }
 
         val previousIsLiked = recommendedPost.isLiked
         updateRecommendedLikeState(postId, isLiked)
@@ -52,7 +54,9 @@ class QuickMatchingViewModel(
                     Log.e("QuickMatchingViewModel", "공고 찜 변경 실패", exception)
                 }
             } finally {
-                pendingLikePostIds.remove(postId)
+                updateState {
+                    copy(pendingLikePostIds = pendingLikePostIds - postId)
+                }
             }
         }
     }

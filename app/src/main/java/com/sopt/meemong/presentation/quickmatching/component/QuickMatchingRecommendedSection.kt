@@ -24,6 +24,7 @@ fun QuickMatchingRecommendedSection(
     onLikeChange: (Long, Boolean) -> Unit,
     onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
+    pendingLikePostIds: Set<Long> = emptySet(),
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -47,7 +48,7 @@ fun QuickMatchingRecommendedSection(
                     treatmentTypes = post.treatmentTypes.map { it.label },
                     createdAtMillis = post.createdAtMillis,
                     isLiked = post.isLiked,
-                    isLikeLoading = false,
+                    isLikeLoading = post.postId in pendingLikePostIds,
                     onLikeChange = { isLiked -> onLikeChange(post.postId, isLiked) },
                     onClick = { onPostClick(post.postId) },
                     modifier = Modifier.fillMaxWidth(),
