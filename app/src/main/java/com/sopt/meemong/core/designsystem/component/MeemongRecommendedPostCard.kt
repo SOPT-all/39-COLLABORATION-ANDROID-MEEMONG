@@ -38,23 +38,15 @@ import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
 import com.sopt.meemong.core.common.util.formatPostTime
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import java.text.NumberFormat
 import java.util.Locale
-
-enum class MeemongPostCostType(
-    val label: String,
-) {
-    FREE("무료시술"),
-    REVIEW_SPECIAL("리뷰특가"),
-    MATERIAL_FEE("재료비 발생"),
-
-    MODEL_FEE("모델료 발생"),
-}
 
 /**
  * 미몽 추천 공고 카드입니다.
  *
- * @param availableTimes 한글로 변환된 시술 가능 시간 목록입니다.
+ * @param availableTimes 시술 가능 시간 목록입니다.
  * @param treatmentTypes 한글로 변환된 전체 시술 태그 목록입니다.
  * @param createdAtMillis 공고 등록 시각. 밀리초 단위 Unix timestamp입니다.
  * @param isLikeLoading 해당 공고의 좋아요 API 요청 진행 여부입니다.
@@ -66,10 +58,10 @@ enum class MeemongPostCostType(
 fun MeemongRecommendedPostCard(
     thumbnailUrl: String,
     title: String,
-    priceType: MeemongPostCostType,
+    priceType: PriceType,
     displayPrice: Int,
     region: String,
-    availableTimes: List<String>,
+    availableTimes: List<AvailableTime>,
     treatmentTypes: List<String>,
     createdAtMillis: Long,
     isLiked: Boolean,
@@ -171,14 +163,14 @@ fun MeemongRecommendedPostCard(
                             Text(
                                 text = priceType.label,
                                 color = when (priceType) {
-                                    MeemongPostCostType.FREE,
-                                    MeemongPostCostType.REVIEW_SPECIAL ->
+                                    PriceType.FREE,
+                                    PriceType.REVIEW ->
                                         MeemongTheme.colors.meemongBlue
 
-                                    MeemongPostCostType.MATERIAL_FEE ->
+                                    PriceType.NEGOTIABLE ->
                                         MeemongTheme.colors.gray700
 
-                                    MeemongPostCostType.MODEL_FEE ->
+                                    PriceType.MODEL_FEE ->
                                         MeemongTheme.colors.green
                                 },
                                 style = MeemongTheme.typography.body2.sb14,
@@ -186,7 +178,7 @@ fun MeemongRecommendedPostCard(
                                 softWrap = false,
                             )
 
-                            if (priceType != MeemongPostCostType.FREE) {
+                            if (priceType != PriceType.FREE) {
                                 Box(
                                     modifier = Modifier
                                         .size(4.dp)
@@ -228,7 +220,7 @@ fun MeemongRecommendedPostCard(
                             modifier = Modifier.heightIn(min = 18.dp),
                         ) {
                             Text(
-                                text = availableTimes.joinToString(", "),
+                                text = availableTimes.joinToString(", ") { it.label },
                                 modifier = Modifier.weight(1f),
                                 color = MeemongTheme.colors.gray900,
                                 style = MeemongTheme.typography.caption1.r12,
@@ -319,7 +311,7 @@ private fun MeemongRecommendedPostCardPreview() {
                 .padding(horizontal = 20.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            MeemongPostCostType.entries.forEach { priceType ->
+            PriceType.entries.forEach { priceType ->
                 RecommendedPostCardPreviewItem(
                     priceType = priceType,
                 )
@@ -340,7 +332,7 @@ private fun MeemongRecommendedPostCardCompactPreview() {
             modifier = Modifier.padding(20.dp),
         ) {
             RecommendedPostCardPreviewItem(
-                priceType = MeemongPostCostType.REVIEW_SPECIAL,
+                priceType = PriceType.REVIEW,
                 modifier = Modifier.width(306.dp),
             )
         }
@@ -349,7 +341,7 @@ private fun MeemongRecommendedPostCardCompactPreview() {
 
 @Composable
 private fun RecommendedPostCardPreviewItem(
-    priceType: MeemongPostCostType,
+    priceType: PriceType,
     modifier: Modifier = Modifier,
 ) {
     MeemongRecommendedPostCard(
@@ -357,13 +349,13 @@ private fun RecommendedPostCardPreviewItem(
         title = "긴 기장 붙임머리 희망해요",
         priceType = priceType,
         displayPrice = when (priceType) {
-            MeemongPostCostType.FREE -> 0
-            MeemongPostCostType.REVIEW_SPECIAL -> 5_000
-            MeemongPostCostType.MATERIAL_FEE -> 10_000
-            MeemongPostCostType.MODEL_FEE -> 45_000
+            PriceType.FREE -> 0
+            PriceType.REVIEW -> 5_000
+            PriceType.NEGOTIABLE -> 10_000
+            PriceType.MODEL_FEE -> 45_000
         },
         region = "고양시 덕양구",
-        availableTimes = listOf("평일 오전", "평일 오후"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING, AvailableTime.WEEKDAY_AFTERNOON),
         treatmentTypes = listOf(
             "염색",
             "탈색",
@@ -374,7 +366,7 @@ private fun RecommendedPostCardPreviewItem(
             "붙임머리",
         ),
         createdAtMillis = System.currentTimeMillis(),
-        isLiked = priceType == MeemongPostCostType.REVIEW_SPECIAL,
+        isLiked = priceType == PriceType.REVIEW,
         isLikeLoading = false,
         onLikeChange = {},
         onClick = {},

@@ -3,8 +3,8 @@ package com.sopt.meemong.presentation.home
 import com.sopt.meemong.R
 import com.sopt.meemong.core.base.BaseUiEffect
 import com.sopt.meemong.core.base.BaseUiState
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
-import com.sopt.meemong.presentation.home.component.DesignerPriceType
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.home.model.HomeConsultingItem
 import com.sopt.meemong.presentation.home.model.HomeDesignerItem
 import com.sopt.meemong.presentation.home.model.HomeDesignerSectionUiModel
@@ -47,7 +47,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_hanul_profile,
                 name = "한울",
                 shopName = "준오헤어 동탄카림에비뉴점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기 화성시 4.7km",
             ),
             HomeDesignerItem(
@@ -55,7 +55,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_jihyun_profile,
                 name = "지현 디자이너",
                 shopName = "이가자헤어비스 분당이마트점",
-                priceType = DesignerPriceType.MATERIAL,
+                priceType = PriceType.NEGOTIABLE,
                 location = "경기 성남시 분당구 13.0km",
                 materialCost = "2만원~",
             ),
@@ -64,7 +64,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_haewon_profile,
                 name = "해원",
                 shopName = "이철헤어커커 서현점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기 성남시 분당구 15.8km",
             ),
         ),
@@ -77,7 +77,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_seula_profile,
                 name = "슬아",
                 shopName = "에이치플레이스 정자역점",
-                priceType = DesignerPriceType.MATERIAL,
+                priceType = PriceType.NEGOTIABLE,
                 location = "경기 성남시 분당구 13.4km",
                 materialCost = "10만원~",
             ),
@@ -86,7 +86,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_iyu_profile,
                 name = "이유수석실장",
                 shopName = "헤어다이아 수원역 타임점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 팔달구 10.8km",
             ),
             HomeDesignerItem(
@@ -94,7 +94,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_minseo_profile,
                 name = "민서 수석디자이너",
                 shopName = "헤어다이아 수원역점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 팔달구 10.9km",
             ),
         ),
@@ -107,7 +107,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_haru_profile,
                 name = "하루",
                 shopName = "하루",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 권선구 7.9km",
             ),
             HomeDesignerItem(
@@ -115,7 +115,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_seungyeon_profile,
                 name = "hd승연",
                 shopName = "차홍룸광교점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 영통구 7.9km",
             ),
             HomeDesignerItem(
@@ -123,7 +123,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_seonga_profile,
                 name = "성아",
                 shopName = "아이디헤어 동탄 솔빛나루점",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 화성시 동탄구 6.6km",
             ),
         ),
@@ -136,7 +136,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_offu_profile,
                 name = "오프유 브로우",
                 shopName = "오프유브로우",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 권선구 8.3km",
             ),
             HomeDesignerItem(
@@ -144,7 +144,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_haneul_profile,
                 name = "하늘",
                 shopName = "모도아티스트리 수우너",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 영통구 7.0km",
             ),
             HomeDesignerItem(
@@ -152,7 +152,7 @@ private val dummyDesignerSections = listOf(
                 profileImageResId = R.drawable.img_designer_rosy_profile,
                 name = "Rosy",
                 shopName = "프리랜서",
-                priceType = DesignerPriceType.FREE,
+                priceType = PriceType.FREE,
                 location = "경기도 수원시 권선구 8.2km",
             ),
         ),
@@ -164,10 +164,10 @@ private val dummyMatchingPosts = listOf(
         postId = 1L,
         thumbnailUrl = "https://github.com/user-attachments/assets/e4cf2f44-7d7c-4491-beca-e56b9b47ec08",
         title = "롱머리 헤어모델 구합니다❤️",
-        priceType = MeemongPostCostType.FREE,
+        priceType = PriceType.FREE,
         displayPrice = 0,
         region = "서울 강남구",
-        availableTimes = listOf("시간 상관없음"),
+        availableTimes = listOf(AvailableTime.ANYTIME),
         treatmentTypes = listOf("컷트", "펌", "염색"),
         createdAtMillis = 1795600800000, // 2026-11-25 19:00
         isLiked = true,
@@ -176,10 +176,10 @@ private val dummyMatchingPosts = listOf(
         postId = 2L,
         thumbnailUrl = "https://github.com/user-attachments/assets/5d4faaab-0b0e-44c8-a973-3a12bac77d7d",
         title = "중단발 펌 모델 구해요:)",
-        priceType = MeemongPostCostType.MATERIAL_FEE,
+        priceType = PriceType.NEGOTIABLE,
         displayPrice = 27000,
         region = "서울 강남구",
-        availableTimes = listOf("평일 오전", "평일 오후"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING, AvailableTime.WEEKDAY_AFTERNOON),
         treatmentTypes = listOf("펌"),
         createdAtMillis = 1795602600000, // 2026-11-25 19:30
         isLiked = true,
@@ -188,10 +188,10 @@ private val dummyMatchingPosts = listOf(
         postId = 3L,
         thumbnailUrl = "https://github.com/user-attachments/assets/d086ced8-a099-46fe-b8d6-c3cf4cc4639d",
         title = "긴머리 염색 커트 헤어모델 모집합니다😊",
-        priceType = MeemongPostCostType.MATERIAL_FEE,
+        priceType = PriceType.NEGOTIABLE,
         displayPrice = 10000,
         region = "서울 관악구",
-        availableTimes = listOf("시간 상관없음"),
+        availableTimes = listOf(AvailableTime.ANYTIME),
         treatmentTypes = listOf("컷트", "염색"),
         createdAtMillis = 1795605000000, // 2026-11-25 20:10
         isLiked = true,
@@ -200,10 +200,10 @@ private val dummyMatchingPosts = listOf(
         postId = 4L,
         thumbnailUrl = "https://github.com/user-attachments/assets/6a3db738-2ff4-4eec-82f2-ec5e77b1d774",
         title = "C컬, S컬펌 모델 받고 있습니다!💛",
-        priceType = MeemongPostCostType.MATERIAL_FEE,
+        priceType = PriceType.NEGOTIABLE,
         displayPrice = 15000,
         region = "서울 서초구",
-        availableTimes = listOf("평일 오전", "평일 오후"),
+        availableTimes = listOf(AvailableTime.WEEKDAY_MORNING, AvailableTime.WEEKDAY_AFTERNOON),
         treatmentTypes = listOf("컷트", "펌", "매직"),
         createdAtMillis = 1795695000000, // 2026-11-26 21:10
         isLiked = true,

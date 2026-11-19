@@ -35,14 +35,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.home.model.HomeDesignerItem
-
-enum class DesignerPriceType(
-    val label: String,
-) {
-    FREE("무료시술"),
-    MATERIAL("재료비 발생"),
-}
 
 @Composable
 fun HomeDesignerCard(
@@ -50,7 +44,7 @@ fun HomeDesignerCard(
     @DrawableRes profileImageResId: Int,
     name: String,
     shopName: String,
-    priceType: DesignerPriceType,
+    priceType: PriceType,
     location: String,
     modifier: Modifier = Modifier,
     materialCost: String = "",
@@ -127,7 +121,7 @@ fun HomeDesignerCard(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 when (priceType) {
-                    DesignerPriceType.FREE -> {
+                    PriceType.FREE, PriceType.REVIEW -> {
                         Text(
                             text = priceType.label,
                             color = MeemongTheme.colors.meemongBlue,
@@ -135,7 +129,7 @@ fun HomeDesignerCard(
                         )
                     }
 
-                    DesignerPriceType.MATERIAL -> {
+                    PriceType.NEGOTIABLE, PriceType.MODEL_FEE -> {
                         Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
                             Text(
                                 text = priceType.label,
@@ -232,7 +226,7 @@ private fun HomeDesignerCardSectionPreview() {
                     profileImageResId = R.drawable.img_designer_hanul_profile,
                     name = "한울",
                     shopName = "준오헤어 동탄카림에비뉴점",
-                    priceType = DesignerPriceType.FREE,
+                    priceType = PriceType.FREE,
                     location = "경기도 화성시 4.7km",
                 ),
                 HomeDesignerItem(
@@ -240,7 +234,7 @@ private fun HomeDesignerCardSectionPreview() {
                     profileImageResId = R.drawable.img_designer_seula_profile,
                     name = "슬아",
                     shopName = "에이치플레이스 정자역점",
-                    priceType = DesignerPriceType.MATERIAL,
+                    priceType = PriceType.NEGOTIABLE,
                     materialCost = "10만원~",
                     location = "경기 성남시 분당구 13.4km",
                 ),

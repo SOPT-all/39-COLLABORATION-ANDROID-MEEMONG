@@ -13,9 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sopt.meemong.core.designsystem.component.MeemongPostCostType
 import com.sopt.meemong.core.designsystem.component.MeemongRecommendedPostCard
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
+import com.sopt.meemong.core.model.AvailableTime
+import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 
 @Composable
@@ -82,10 +83,10 @@ private fun HomeMatchingPostSectionPreview() {
                     postId = it.toLong(),
                     thumbnailUrl = "",
                     title = "펌ㆍ염색모델 모집중입니다",
-                    priceType = MeemongPostCostType.FREE,
+                    priceType = PriceType.FREE,
                     displayPrice = 0,
                     region = "서울시 관악구",
-                    availableTimes = listOf("시간 상관 없음"),
+                    availableTimes = listOf(AvailableTime.ANYTIME),
                     treatmentTypes = listOf("컷트", "클리닉", "펌", "염색"),
                     createdAtMillis = System.currentTimeMillis(),
                     isLiked = true,
