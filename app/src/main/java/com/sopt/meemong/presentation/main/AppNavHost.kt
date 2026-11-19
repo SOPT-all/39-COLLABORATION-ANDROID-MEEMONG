@@ -79,15 +79,6 @@ fun AppNavHost(
             )
         }
 
-//        composable<MatchingDetail> {
-//            val viewModel: MatchingDetailViewModel = viewModel(factory = factory)
-//
-//            MatchingDetailRoute(
-//                viewModel = viewModel,
-//                navigateToBack = { navController.popBackStack() },
-//            )
-//        }
-
         composable<MatchingDetail> { backStackEntry ->
             val detailRoute = backStackEntry.toRoute<MatchingDetail>()
 
