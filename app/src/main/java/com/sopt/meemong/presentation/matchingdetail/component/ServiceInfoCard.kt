@@ -39,6 +39,7 @@ fun ServiceInfoCard(
     serviceInfo: ServiceInfo,
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isLikeEnabled: Boolean = true,
 ) {
     Column(
         modifier = modifier
@@ -55,6 +56,7 @@ fun ServiceInfoCard(
             originalPrice = serviceInfo.originalPrice,
             displayPrice = serviceInfo.displayPrice,
             onLikeClick = onLikeClick,
+            isLikeEnabled = isLikeEnabled,
         )
 
         InfoSection(
@@ -76,6 +78,7 @@ private fun Header(
     displayPrice: Int?,
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isLikeEnabled: Boolean = true,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -85,6 +88,7 @@ private fun Header(
             title = title,
             isLiked = isLiked,
             onLikeClick = onLikeClick,
+            isLikeEnabled = isLikeEnabled,
         )
 
         Row(
@@ -191,6 +195,7 @@ private fun TitleRow(
     isLiked: Boolean,
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isLikeEnabled: Boolean = true,
 ) {
     Row(
         modifier = modifier
@@ -212,7 +217,7 @@ private fun TitleRow(
             ),
             modifier = Modifier
                 .size(24.dp)
-                .noRippleClickable(onLikeClick),
+                .noRippleClickable(onClick = onLikeClick, enabled = isLikeEnabled),
             contentDescription = if (isLiked) "좋아요 취소" else "좋아요",
             tint = if (isLiked) MeemongTheme.colors.red else MeemongTheme.colors.black,
         )

@@ -21,7 +21,11 @@ class ViewModelFactory(
                 QuickMatchingViewModel(container.quickMatchingRepository) as T
 
             modelClass.isAssignableFrom(MatchingDetailViewModel::class.java) ->
-                MatchingDetailViewModel(postId, container.matchingDetailRepository) as T
+                MatchingDetailViewModel(
+                    postId,
+                    container.matchingDetailRepository,
+                    container.quickMatchingRepository,
+                ) as T
 
             else -> throw IllegalArgumentException(
                 "Unknown ViewModel class: ${modelClass.name}",

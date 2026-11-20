@@ -6,6 +6,7 @@ import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.data.quickmatching.repository.QuickMatchingRepository
 import com.sopt.meemong.presentation.quickmatching.component.MatchingCategory
 import com.sopt.meemong.presentation.quickmatching.model.toUiModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class QuickMatchingViewModel(
@@ -16,9 +17,20 @@ class QuickMatchingViewModel(
         designerGeneralPosts = emptyList(),
     ),
 ) {
-    init {
-        loadRecommendedPosts()
-        loadGeneralPosts()
+    private var refreshJob: Job? = null
+    private var refreshAfterLike = false
+
+    fun refreshPosts() {
+        if (currentState.pendingLikePostIds.isNotEmpty()) {
+            refreshAfterLike = true
+            return
+        }
+        refreshAfterLike = false
+        refreshJob?.cancel()
+        refreshJob = viewModelScope.launch {
+            launch { loadRecommendedPosts() }
+            launch { loadGeneralPosts() }
+        }
     }
 
     fun onCategoryClick(category: MatchingCategory) {
@@ -42,6 +54,11 @@ class QuickMatchingViewModel(
             copy(pendingLikePostIds = pendingLikePostIds + postId)
         }
 
+        if (refreshJob?.isActive == true) {
+            refreshJob?.cancel()
+            refreshAfterLike = true
+        }
+
         val previousIsLiked = recommendedPost.isLiked
         updateRecommendedLikeState(postId, isLiked)
 
@@ -59,6 +76,9 @@ class QuickMatchingViewModel(
             } finally {
                 updateState {
                     copy(pendingLikePostIds = pendingLikePostIds - postId)
+                }
+                if (refreshAfterLike && currentState.pendingLikePostIds.isEmpty()) {
+                    refreshPosts()
                 }
             }
         }
@@ -93,29 +113,23 @@ class QuickMatchingViewModel(
         }
     }
 
-    private fun loadRecommendedPosts() {
-        viewModelScope.launch {
-            quickMatchingRepository.getRecommendedPosts()
-                .onSuccess { posts ->
-                    updateState {
-                        copy(designerRecommendedPosts = posts)
-                    }
-                }
-                .onFailure { exception ->
-                    Log.e(
-                        "QuickMatchingViewModel",
-                        "추천 공고 조회 실패",
-                        exception,
-                    )
-                }
-        }
+    private suspend fun loadRecommendedPosts() {
+        quickMatchingRepository.getRecommendedPosts()
+            .onSuccess { posts ->
+                updateState { copy(designerRecommendedPosts = posts) }
+            }
+            .onFailure { exception ->
+                Log.e("QuickMatchingViewModel", "추천 공고 조회 실패", exception)
+            }
     }
 
-    private fun loadGeneralPosts() {
-        viewModelScope.launch {
-            quickMatchingRepository.getGeneralPosts()
-                .onSuccess { posts -> updateState { copy(designerGeneralPosts = posts.map { it.toUiModel() }) } }
-                .onFailure { Log.e("QuickMatchingViewModel", "일반 공고 조회 실패", it) }
-        }
+    private suspend fun loadGeneralPosts() {
+        quickMatchingRepository.getGeneralPosts()
+            .onSuccess { posts ->
+                updateState { copy(designerGeneralPosts = posts.map { it.toUiModel() }) }
+            }
+            .onFailure { exception ->
+                Log.e("QuickMatchingViewModel", "일반 공고 조회 실패", exception)
+            }
     }
 }
