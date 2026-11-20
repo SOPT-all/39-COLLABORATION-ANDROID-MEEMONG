@@ -1,15 +1,15 @@
 package com.sopt.meemong.data.quickmatching.repository
 
+import com.sopt.meemong.core.common.util.suspendRunCatching
 import com.sopt.meemong.data.quickmatching.mapper.toRecommendedPostUiModel
 import com.sopt.meemong.data.quickmatching.remote.service.QuickMatchingService
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
-import kotlin.coroutines.cancellation.CancellationException
 
 class QuickMatchingRepository(
     private val service: QuickMatchingService,
 ) {
     suspend fun getRecommendedPosts(): Result<List<RecommendedPostUiModel>> =
-        try {
+        suspendRunCatching {
             val response = service.getRecommendedPosts()
 
             check(response.code == "SUCCESS") {
@@ -20,20 +20,14 @@ class QuickMatchingRepository(
                 "추천 공고 응답에 data가 없습니다."
             }
 
-            Result.success(
-                data.posts.map { it.toRecommendedPostUiModel() },
-            )
-        } catch (exception: CancellationException) {
-            throw exception
-        } catch (exception: Exception) {
-            Result.failure(exception)
+            data.posts.map { it.toRecommendedPostUiModel() }
         }
 
     suspend fun updatePostLike(
         postId: Long,
         isLiked: Boolean,
     ): Result<Boolean> =
-        try {
+        suspendRunCatching {
             val response = if (isLiked) {
                 service.likePost(postId)
             } else {
@@ -48,10 +42,6 @@ class QuickMatchingRepository(
                 "공고 찜 응답에 data가 없습니다."
             }
 
-            Result.success(data.isLiked)
-        } catch (exception: CancellationException) {
-            throw exception
-        } catch (exception: Exception) {
-            Result.failure(exception)
+            data.isLiked
         }
 }
