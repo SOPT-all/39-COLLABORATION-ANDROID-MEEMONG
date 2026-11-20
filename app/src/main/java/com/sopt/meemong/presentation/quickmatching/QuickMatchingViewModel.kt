@@ -1,14 +1,30 @@
 package com.sopt.meemong.presentation.quickmatching
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.data.quickmatching.repository.QuickMatchingRepository
 import com.sopt.meemong.presentation.quickmatching.component.MatchingCategory
+import com.sopt.meemong.presentation.quickmatching.model.toUiModel
+import kotlinx.coroutines.launch
 
 class QuickMatchingViewModel(
     private val quickMatchingRepository: QuickMatchingRepository,
 ) : BaseViewModel<QuickMatchingUiState, QuickMatchingUiEffect>(
-    initialState = QuickMatchingUiState.dummy,
+    initialState = QuickMatchingUiState.dummy.copy(designerGeneralPosts = emptyList()),
 ) {
+    init {
+        loadGeneralPosts()
+    }
+
+    private fun loadGeneralPosts() {
+        viewModelScope.launch {
+            quickMatchingRepository.getGeneralPosts()
+                .onSuccess { posts -> updateState { copy(designerGeneralPosts = posts.map { it.toUiModel() }) } }
+                .onFailure { Log.e("QuickMatchingViewModel", "일반 공고 조회 실패", it) }
+        }
+    }
+
     fun onCategoryClick(category: MatchingCategory) {
         updateState { copy(selectedCategory = category) }
     }
