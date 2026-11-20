@@ -1,8 +1,14 @@
 package com.sopt.meemong.data.quickmatching.mapper
 
+import com.sopt.meemong.core.common.extensions.toAvailableTimeOrNull
+import com.sopt.meemong.core.common.extensions.toEpochMillis
+import com.sopt.meemong.core.common.extensions.toPriceType
+import com.sopt.meemong.core.common.extensions.toTreatmentTypeOrNull
 import com.sopt.meemong.core.model.AvailableTime
 import com.sopt.meemong.core.model.PriceType
 import com.sopt.meemong.core.model.TreatmentType
+import com.sopt.meemong.data.quickmatching.model.GeneralPost
+import com.sopt.meemong.data.quickmatching.remote.dto.GeneralPostResponse
 import com.sopt.meemong.data.quickmatching.remote.dto.RecommendedPostResponse
 import com.sopt.meemong.presentation.quickmatching.model.RecommendedPostUiModel
 import java.text.SimpleDateFormat
@@ -33,3 +39,18 @@ private fun String.toPostEpochMillis(): Long {
         "공고 작성 시간을 변환할 수 없습니다: $this"
     }.time
 }
+
+fun GeneralPostResponse.toGeneralPost(): GeneralPost =
+    GeneralPost(
+        postId = postId,
+        designerProfileImageUrl = designerProfileImageUrl,
+        designerName = designerName,
+        createdAtMillis = createdAt.toEpochMillis(),
+        region = region,
+        title = title,
+        priceType = priceType.toPriceType(),
+        displayPrice = displayPrice,
+        availableTimes = availableTimes.mapNotNull { it.toAvailableTimeOrNull() },
+        treatmentTypes = treatmentTypes.mapNotNull { it.toTreatmentTypeOrNull() },
+        isLiked = isLiked,
+    )

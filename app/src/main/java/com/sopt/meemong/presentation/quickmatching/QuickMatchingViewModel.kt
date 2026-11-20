@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.data.quickmatching.repository.QuickMatchingRepository
 import com.sopt.meemong.presentation.quickmatching.component.MatchingCategory
+import com.sopt.meemong.presentation.quickmatching.model.toUiModel
 import kotlinx.coroutines.launch
 
 class QuickMatchingViewModel(
@@ -12,10 +13,12 @@ class QuickMatchingViewModel(
 ) : BaseViewModel<QuickMatchingUiState, QuickMatchingUiEffect>(
     initialState = QuickMatchingUiState.dummy.copy(
         designerRecommendedPosts = emptyList(),
+        designerGeneralPosts = emptyList(),
     ),
 ) {
     init {
         loadRecommendedPosts()
+        loadGeneralPosts()
     }
 
     fun onCategoryClick(category: MatchingCategory) {
@@ -105,6 +108,14 @@ class QuickMatchingViewModel(
                         exception,
                     )
                 }
+        }
+    }
+
+    private fun loadGeneralPosts() {
+        viewModelScope.launch {
+            quickMatchingRepository.getGeneralPosts()
+                .onSuccess { posts -> updateState { copy(designerGeneralPosts = posts.map { it.toUiModel() }) } }
+                .onFailure { Log.e("QuickMatchingViewModel", "일반 공고 조회 실패", it) }
         }
     }
 }
