@@ -30,6 +30,20 @@
 
 <br>
 
+## 🎬 시연 영상
+
+Uploading KakaoTalk_20261121_000019650.mp4…
+
+https://github.com/user-attachments/assets/0033f3e4-60a3-43f4-80f2-24aec9a44f75
+
+https://github.com/user-attachments/assets/b27a4765-a6c5-4576-8fd9-68fa81a9fbb6
+
+https://github.com/user-attachments/assets/ed2e9651-97e9-4ca7-9ec6-6a01523db0cf
+
+https://github.com/user-attachments/assets/89eefcf0-3fc7-40fc-8201-557fbcc61695
+
+<br>
+
 ## 🛠 기술 스택 및 라이브러리
 
 | 구분 | 사용 기술 |
@@ -149,12 +163,6 @@ init/#1-add-font
 - 팀원 모두의 Approve를 받은 후 본인이 직접 머지합니다.
 - 머지한 이후에는 단톡방에 꼭!! 남겨주세요. → 나머지 인원은 그 즉시 pull 받아오기
 
-### 🍀 안드 그라운드 룰
-
-| 김예림 | 신한서 | 정소연 |
-| :---: | :---: | :---: |
-| 둥글게 말하기 (진짜 중요함)<br>코리 3개 이상 달기<br>합세하는 동안 싸우지 말기<br>잠도 잘 자기 (이것도 진짜 중요함) | 간단한 질문이라도 서슴치 않고 질문하기 | 커밋푸쉬 해주었거나 / 코리 달았거나 / 코리 반영했을 때 카톡으로 알려주기!! |
-
 <br>
 
 ## ⌨️ 코드 컨벤션
@@ -198,7 +206,6 @@ init/#1-add-font
 │       ├── 📂 mapper
 │       ├── 📂 model
 │       ├── 📂 remote
-│       │   ├── 📂 datasource
 │       │   ├── 📂 dto
 │       │   └── 📂 service
 │       └── 📂 repository
@@ -206,11 +213,5 @@ init/#1-add-font
 └── 📂 presentation
     ├── 📂 main
     ├── 📂 home
-    │   ├── 📂 component
-    │   └── 📂 model
     ├── 📂 matchingdetail
-    │   └── 📂 component
     └── 📂 quickmatching
-        ├── 📂 component
-        └── 📂 model
-```
