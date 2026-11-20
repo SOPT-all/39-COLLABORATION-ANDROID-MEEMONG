@@ -8,14 +8,12 @@ import retrofit2.http.Path
 
 interface MatchingDetailService {
     @GET("api/v1/posts/{postId}")
-
     suspend fun getPostDetail(
         @Path("postId") postId: Long,
     ): BaseResponse<MatchingDetailResponse>
 
     @GET("api/v1/posts/{postId}/designer")
-
     suspend fun getDesignerDetail(
-        @Path("postId") postID: Long,
+        @Path("postId") postId: Long,
     ): BaseResponse<DesignerDetailResponse>
 }
