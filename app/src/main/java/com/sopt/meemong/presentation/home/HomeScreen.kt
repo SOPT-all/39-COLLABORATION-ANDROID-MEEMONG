@@ -44,7 +44,7 @@ import com.sopt.meemong.presentation.home.model.HomeMatchingPostItem
 fun HomeRoute(
     viewModel: HomeViewModel,
     navigateToQuickMatching: () -> Unit,
-    navigateToMatchingDetail: () -> Unit,
+    navigateToMatchingDetail: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -53,7 +53,7 @@ fun HomeRoute(
         viewModel.uiEffect.collect { effect ->
             when (effect) {
                 HomeUiEffect.NavigateToQuickMatching -> navigateToQuickMatching()
-                HomeUiEffect.NavigateToMatchingDetail -> navigateToMatchingDetail()
+                is HomeUiEffect.NavigateToMatchingDetail -> navigateToMatchingDetail(effect.postId)
             }
         }
     }
