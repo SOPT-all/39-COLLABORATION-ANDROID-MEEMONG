@@ -10,7 +10,11 @@ class QuickMatchingRepository(
 ) {
     suspend fun getGeneralPosts(): Result<List<GeneralPost>> =
         suspendRunCatching {
-            service.getGeneralPosts().data?.posts.orEmpty()
-                .map { it.toGeneralPost() }
+            val response = service.getGeneralPosts()
+
+            check(response.code == "SUCCESS") { "일반 공고 조회 실패: ${response.code}" }
+            val data = checkNotNull(response.data) { "일반 공고 응답에 data가 없습니다." }
+
+            data.posts.map { it.toGeneralPost() }
         }
 }
