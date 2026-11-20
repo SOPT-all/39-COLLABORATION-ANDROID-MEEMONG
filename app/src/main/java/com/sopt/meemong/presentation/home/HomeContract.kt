@@ -14,6 +14,7 @@ import com.sopt.meemong.presentation.home.model.HomeProductItem
 data class HomeUiState(
     val designerSections: List<HomeDesignerSectionUiModel> = emptyList(),
     val matchingPosts: List<HomeMatchingPostItem> = emptyList(),
+    val pendingLikePostIds: Set<Long> = emptySet(),
     val productTitle: String = "",
     val productDescription: String = "",
     val products: List<HomeProductItem> = emptyList(),

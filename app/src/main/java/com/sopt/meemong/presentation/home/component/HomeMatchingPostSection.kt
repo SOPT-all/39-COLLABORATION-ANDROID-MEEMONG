@@ -26,6 +26,7 @@ fun HomeMatchingPostSection(
     onLikeChange: (HomeMatchingPostItem, Boolean) -> Unit,
     onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
+    pendingLikePostIds: Set<Long> = emptySet(),
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -62,7 +63,7 @@ fun HomeMatchingPostSection(
                         treatmentTypes = item.treatmentTypes,
                         createdAtMillis = item.createdAtMillis,
                         isLiked = item.isLiked,
-                        isLikeLoading = false,
+                        isLikeLoading = item.postId in pendingLikePostIds,
                         onLikeChange = { isLiked -> onLikeChange(item, isLiked) },
                         onClick = { onItemClick(item) },
                         modifier = Modifier.width(cardWidth),
@@ -84,7 +85,7 @@ private fun HomeMatchingPostSectionPreview() {
                     thumbnailUrl = "",
                     title = "펌ㆍ염색모델 모집중입니다",
                     priceType = PriceType.FREE,
-                    displayPrice = 0,
+                    displayPrice = null,
                     region = "서울시 관악구",
                     availableTimes = listOf(AvailableTime.ANYTIME),
                     treatmentTypes = listOf("컷트", "클리닉", "펌", "염색"),

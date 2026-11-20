@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sopt.meemong.R
 import com.sopt.meemong.core.designsystem.component.MeemongBottomBar
@@ -48,6 +49,11 @@ fun HomeRoute(
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LifecycleResumeEffect(viewModel) {
+        viewModel.refreshMatchingPosts()
+        onPauseOrDispose {}
+    }
 
     LaunchedEffect(Unit) {
         viewModel.uiEffect.collect { effect ->
@@ -129,6 +135,7 @@ private fun HomeScreen(
 
                     HomeMatchingPostSection(
                         items = uiState.matchingPosts,
+                        pendingLikePostIds = uiState.pendingLikePostIds,
                         onItemClick = onMatchingPostClick,
                         onLikeChange = onMatchingPostLikeChange,
                         onMoreClick = onMatchingPostMoreClick,

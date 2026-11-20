@@ -15,7 +15,7 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) ->
-                HomeViewModel(container.homeRepository) as T
+                HomeViewModel(container.homeRepository, container.quickMatchingRepository) as T
 
             modelClass.isAssignableFrom(QuickMatchingViewModel::class.java) ->
                 QuickMatchingViewModel(container.quickMatchingRepository) as T
