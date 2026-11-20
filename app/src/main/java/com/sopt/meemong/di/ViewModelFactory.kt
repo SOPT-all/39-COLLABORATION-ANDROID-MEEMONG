@@ -15,13 +15,17 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) ->
-                HomeViewModel(container.homeRepository) as T
+                HomeViewModel(container.homeRepository, container.quickMatchingRepository) as T
 
             modelClass.isAssignableFrom(QuickMatchingViewModel::class.java) ->
                 QuickMatchingViewModel(container.quickMatchingRepository) as T
 
             modelClass.isAssignableFrom(MatchingDetailViewModel::class.java) ->
-                MatchingDetailViewModel(postId, container.matchingDetailRepository) as T
+                MatchingDetailViewModel(
+                    postId,
+                    container.matchingDetailRepository,
+                    container.quickMatchingRepository,
+                ) as T
 
             else -> throw IllegalArgumentException(
                 "Unknown ViewModel class: ${modelClass.name}",

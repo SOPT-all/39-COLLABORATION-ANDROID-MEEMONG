@@ -27,6 +27,7 @@ import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingBanner
 import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingGeneralSection
 import com.sopt.meemong.presentation.quickmatching.component.QuickMatchingRecommendedSection
 import com.sopt.meemong.presentation.quickmatching.component.SegmentControlRow
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
@@ -38,11 +39,18 @@ fun QuickMatchingRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    LifecycleResumeEffect(viewModel) {
+        viewModel.refreshPosts()
+        onPauseOrDispose {}
+    }
+
     QuickMatchingScreen(
         uiState = uiState,
         onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
-        onPostClick = onPostClick,
+        onPostClick = { postId ->
+            if (postId !in uiState.pendingLikePostIds) onPostClick(postId)
+        },
         onLikeChange = viewModel::onLikeChange,
         onMoreClick = {},
         modifier = modifier,
@@ -98,6 +106,11 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingRecommendedSection(
                         posts = recommendedPosts,
+                        pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
+                            uiState.pendingLikePostIds
+                        } else {
+                            emptySet()
+                        },
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         onMoreClick = onMoreClick,

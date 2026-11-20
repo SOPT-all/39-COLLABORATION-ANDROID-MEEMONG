@@ -1,5 +1,6 @@
 package com.sopt.meemong.presentation.matchingdetail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,9 +40,11 @@ fun MatchingDetailRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    BackHandler(enabled = uiState.isLikeLoading) {}
+
     MatchingDetailScreen(
         state = uiState,
-        onBackClick = navigateToBack,
+        onBackClick = { if (!uiState.isLikeLoading) navigateToBack() },
         onLikeClick = viewModel::onLikeClick,
         onTabClick = viewModel::onTabClick,
         modifier = modifier,
@@ -105,6 +108,7 @@ private fun MatchingDetailScreen(
                 ServiceInfoCard(
                     serviceInfo = serviceInfo,
                     onLikeClick = onLikeClick,
+                    isLikeEnabled = state.isPostLoaded && !state.isLikeLoading,
                 )
 
                 DetailTab(

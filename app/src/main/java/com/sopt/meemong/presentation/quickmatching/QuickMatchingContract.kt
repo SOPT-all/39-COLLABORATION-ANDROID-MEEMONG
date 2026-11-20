@@ -18,6 +18,7 @@ data class QuickMatchingUiState(
     val designerGeneralPosts: List<GeneralPostUiModel> = emptyList(),
     val modelRecommendedPosts: List<RecommendedPostUiModel> = emptyList(),
     val modelGeneralPosts: List<GeneralPostUiModel> = emptyList(),
+    val pendingLikePostIds: Set<Long> = emptySet(),
 ) : BaseUiState {
     companion object {
         val dummy: QuickMatchingUiState
@@ -49,7 +50,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 thumbnailUrl = "",
                 title = "펌ㆍ염색모델 모집중입니다",
                 priceType = PriceType.FREE,
-                displayPrice = 0,
+                displayPrice = null,
                 region = "서울시 관악구",
                 availableTimes = listOf(AvailableTime.ANYTIME),
                 treatmentTypes = listOf(TreatmentType.PERM),
@@ -61,7 +62,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 thumbnailUrl = "",
                 title = "이미지 체인지 해보고싶은신분 어떤",
                 priceType = PriceType.FREE,
-                displayPrice = 0,
+                displayPrice = null,
                 region = "서울시 성동구",
                 availableTimes = listOf(AvailableTime.WEEKDAY_MORNING),
                 treatmentTypes = listOf(TreatmentType.CUT, TreatmentType.PERM, TreatmentType.COLORED, TreatmentType.CLINIC),
@@ -73,7 +74,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 thumbnailUrl = "",
                 title = "C컬 레이어드컷 헤어모델 구해요!",
                 priceType = PriceType.FREE,
-                displayPrice = 0,
+                displayPrice = null,
                 region = "서울시 마포구",
                 availableTimes = listOf(
                     AvailableTime.WEEKDAY_MORNING,
@@ -144,7 +145,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 thumbnailUrl = modelImageUrl,
                 title = "펌ㆍ염색모델 모집중입니다",
                 priceType = PriceType.FREE,
-                displayPrice = 0,
+                displayPrice = null,
                 region = "김포시",
                 availableTimes = listOf(AvailableTime.ANYTIME),
                 treatmentTypes = listOf(TreatmentType.PERM),
@@ -156,7 +157,7 @@ private fun quickMatchingDummyState(): QuickMatchingUiState {
                 thumbnailUrl = modelImageUrl,
                 title = "염색 해 주실 디자이너분 찾습니다!!",
                 priceType = PriceType.FREE,
-                displayPrice = 0,
+                displayPrice = null,
                 region = "광주시",
                 availableTimes = listOf(AvailableTime.ANYTIME),
                 treatmentTypes = listOf(TreatmentType.COLORED),

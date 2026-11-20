@@ -13,6 +13,8 @@ import com.sopt.meemong.data.matchingdetail.model.TabType
 data class MatchingDetailUiState(
     val postId: Long = 0L,
     val isLoading: Boolean = false,
+    val isLikeLoading: Boolean = false,
+    val isPostLoaded: Boolean = false,
     val postImageUrls: List<String> = emptyList(),
     val currentTab: TabType = TabType.CONTENT_DETAIL,
     val designerProfileInfo: DesignerProfileInfo = DesignerProfileInfo(
@@ -43,6 +45,7 @@ data class MatchingDetailUiState(
 ) : BaseUiState {
     companion object {
         val dummy = MatchingDetailUiState(
+            isPostLoaded = true,
             postId = 1L,
             postImageUrls = listOf(
                 "https://github.com/user-attachments/assets/e4cf2f44-7d7c-4491-beca-e56b9b47ec08",

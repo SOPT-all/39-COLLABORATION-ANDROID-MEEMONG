@@ -59,7 +59,7 @@ fun MeemongRecommendedPostCard(
     thumbnailUrl: String,
     title: String,
     priceType: PriceType,
-    displayPrice: Int,
+    displayPrice: Int?,
     region: String,
     availableTimes: List<AvailableTime>,
     treatmentTypes: List<String>,
@@ -178,7 +178,7 @@ fun MeemongRecommendedPostCard(
                                 softWrap = false,
                             )
 
-                            if (priceType != PriceType.FREE) {
+                            if (priceType != PriceType.FREE && displayPrice != null) {
                                 Box(
                                     modifier = Modifier
                                         .size(4.dp)
@@ -349,7 +349,7 @@ private fun RecommendedPostCardPreviewItem(
         title = "긴 기장 붙임머리 희망해요",
         priceType = priceType,
         displayPrice = when (priceType) {
-            PriceType.FREE -> 0
+            PriceType.FREE -> null
             PriceType.REVIEW -> 5_000
             PriceType.NEGOTIABLE -> 10_000
             PriceType.MODEL_FEE -> 45_000

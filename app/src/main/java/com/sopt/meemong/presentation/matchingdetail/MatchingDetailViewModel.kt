@@ -6,11 +6,13 @@ import com.sopt.meemong.core.base.BaseViewModel
 import com.sopt.meemong.data.matchingdetail.model.DetailInfo
 import com.sopt.meemong.data.matchingdetail.model.TabType
 import com.sopt.meemong.data.matchingdetail.repository.MatchingDetailRepository
+import com.sopt.meemong.data.quickmatching.repository.QuickMatchingRepository
 import kotlinx.coroutines.launch
 
 class MatchingDetailViewModel(
     private val postId: Long,
     private val matchingDetailRepository: MatchingDetailRepository,
+    private val quickMatchingRepository: QuickMatchingRepository,
 ) :
     BaseViewModel<MatchingDetailUiState, MatchingDetailUiEffect>(
         initialState = MatchingDetailUiState(
@@ -32,6 +34,7 @@ class MatchingDetailViewModel(
                     updateState {
                         copy(
                             postId = it.postId,
+                            isPostLoaded = true,
                             isLoading = false,
                             postImageUrls = it.postImageUrls,
                             designerProfileInfo = it.designerProfileInfo,
@@ -57,8 +60,30 @@ class MatchingDetailViewModel(
     }
 
     fun onLikeClick() {
+        val state = currentState
+        if (!state.isPostLoaded || state.isLikeLoading) return
+
+        val previousIsLiked = state.serviceInfo.isLiked
         updateState {
-            copy(serviceInfo = serviceInfo.copy(isLiked = !serviceInfo.isLiked))
+            copy(
+                isLikeLoading = true,
+                serviceInfo = serviceInfo.copy(isLiked = !previousIsLiked),
+            )
+        }
+
+        viewModelScope.launch {
+            try {
+                quickMatchingRepository.updatePostLike(postId, !previousIsLiked)
+                    .onSuccess { serverIsLiked ->
+                        updateState { copy(serviceInfo = serviceInfo.copy(isLiked = serverIsLiked)) }
+                    }
+                    .onFailure { exception ->
+                        updateState { copy(serviceInfo = serviceInfo.copy(isLiked = previousIsLiked)) }
+                        Log.e("MatchingDetailViewModel", "공고 찜 변경 실패 postId=$postId", exception)
+                    }
+            } finally {
+                updateState { copy(isLikeLoading = false) }
+            }
         }
     }
 
