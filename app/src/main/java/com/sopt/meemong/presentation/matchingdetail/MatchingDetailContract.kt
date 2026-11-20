@@ -12,6 +12,7 @@ import com.sopt.meemong.data.matchingdetail.model.TabType
 
 data class MatchingDetailUiState(
     val postId: Long = 0L,
+    val isLoading: Boolean = false,
     val postImageUrls: List<String> = emptyList(),
     val currentTab: TabType = TabType.CONTENT_DETAIL,
     val designerProfileInfo: DesignerProfileInfo = DesignerProfileInfo(
@@ -25,7 +26,7 @@ data class MatchingDetailUiState(
         title = "",
         isLiked = false,
         priceType = PriceType.REVIEW,
-        discountRate = 0f,
+        discountRate = 0.0,
         originalPrice = null,
         displayPrice = null,
         treatmentTypes = emptyList(),
@@ -61,7 +62,7 @@ data class MatchingDetailUiState(
                 title = "롱머리 헤어모델 구합니다❤\uFE0F",
                 isLiked = false,
                 priceType = PriceType.FREE,
-                discountRate = 50f,
+                discountRate = 50.0,
                 originalPrice = 35_000,
                 displayPrice = 17_500,
                 treatmentTypes = listOf(

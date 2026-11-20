@@ -37,7 +37,9 @@ fun LinkButton(
             .clip(shape = RoundedCornerShape(6.dp))
             .clickable(
                 interactionSource = interactionSource,
-                onClick = { uriHandler.openUri(uri) }
+                onClick = {
+                    if (uri.isNotBlank()) uriHandler.openUri(uri)
+                }
             )
             .background(
                 color = if (isPressed) MeemongTheme.colors.gray500 else MeemongTheme.colors.gray100,

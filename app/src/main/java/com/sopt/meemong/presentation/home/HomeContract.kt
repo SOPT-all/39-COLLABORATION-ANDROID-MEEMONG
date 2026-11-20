@@ -34,8 +34,7 @@ data class HomeUiState(
 
 sealed interface HomeUiEffect : BaseUiEffect {
     data object NavigateToQuickMatching : HomeUiEffect
-
-    data object NavigateToMatchingDetail : HomeUiEffect
+    data class NavigateToMatchingDetail(val postId: Long) : HomeUiEffect
 }
 
 private val dummyDesignerSections = listOf(

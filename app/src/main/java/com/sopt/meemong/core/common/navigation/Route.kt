@@ -9,4 +9,4 @@ data object Home
 data object QuickMatching
 
 @Serializable
-data object MatchingDetail
+data class MatchingDetail(val postId: Long)

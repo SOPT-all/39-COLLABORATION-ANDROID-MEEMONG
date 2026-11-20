@@ -24,8 +24,6 @@ fun ImageCarousel(
     urlList: List<String>,
     modifier: Modifier = Modifier,
 ) {
-    if (urlList.isEmpty()) return
-
     val pagerState = rememberPagerState(pageCount = { urlList.size })
 
     Box(

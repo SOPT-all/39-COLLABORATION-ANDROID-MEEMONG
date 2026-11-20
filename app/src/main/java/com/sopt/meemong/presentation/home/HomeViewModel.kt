@@ -19,7 +19,7 @@ class HomeViewModel(
     }
 
     fun onMatchingPostClick(item: HomeMatchingPostItem) {
-        sendEffect(HomeUiEffect.NavigateToMatchingDetail)
+        sendEffect(HomeUiEffect.NavigateToMatchingDetail(item.postId))
     }
 
     fun onMatchingPostLikeChange(item: HomeMatchingPostItem, isLiked: Boolean) {
