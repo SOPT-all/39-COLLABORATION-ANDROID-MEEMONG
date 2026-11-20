@@ -103,11 +103,13 @@ private fun Header(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                Text(
-                    text = "${discountRate?.toInt()}%",
-                    style = MeemongTheme.typography.title.sb20,
-                    color = MeemongTheme.colors.red,
-                )
+                discountRate?.let {
+                    Text(
+                        text = "${discountRate?.toInt()}%",
+                        style = MeemongTheme.typography.title.sb20,
+                        color = MeemongTheme.colors.red,
+                    )
+                }
                 Text(
                     text = it.toPriceFormat(),
                     style = MeemongTheme.typography.title.sb20,
@@ -257,9 +259,9 @@ private fun ServiceInfoCardPreview() {
                     title = "뭘 해야 될 지 두 번이나 진짜진짜로 모르겠다면??",
                     isLiked = secondLiked,
                     priceType = PriceType.FREE,
-                    discountRate = 50.0,
+                    discountRate = null,
                     originalPrice = null,
-                    displayPrice = null,
+                    displayPrice = 3000,
                     treatmentTypes = listOf(TreatmentType.PERM),
                     signatures = listOf(
                         TreatmentType.CUT,
