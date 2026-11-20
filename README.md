@@ -32,15 +32,13 @@
 
 ## 🎬 시연 영상
 
-Uploading KakaoTalk_20261121_000019650.mp4…
+https://github.com/user-attachments/assets/1bf8e18e-c31f-4be9-b062-f2f0b9e791d5
 
-https://github.com/user-attachments/assets/0033f3e4-60a3-43f4-80f2-24aec9a44f75
+https://github.com/user-attachments/assets/00847d1e-76a3-468f-9847-6462fbba824c
 
-https://github.com/user-attachments/assets/b27a4765-a6c5-4576-8fd9-68fa81a9fbb6
+https://github.com/user-attachments/assets/b5efb2d7-f66c-486e-a4ec-2061dbfb07b0
 
-https://github.com/user-attachments/assets/ed2e9651-97e9-4ca7-9ec6-6a01523db0cf
-
-https://github.com/user-attachments/assets/89eefcf0-3fc7-40fc-8201-557fbcc61695
+https://github.com/user-attachments/assets/a0628d50-cc5e-4be4-8afe-6179113d4a24
 
 <br>
 
