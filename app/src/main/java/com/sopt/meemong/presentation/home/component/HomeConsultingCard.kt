@@ -2,7 +2,6 @@ package com.sopt.meemong.presentation.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 import com.sopt.meemong.presentation.home.model.HomeConsultingItem
 
@@ -46,7 +46,7 @@ fun HomeConsultingCard(
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
-            .clickable(onClick = onClick)
+            .noRippleClickable(onClick = onClick)
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
