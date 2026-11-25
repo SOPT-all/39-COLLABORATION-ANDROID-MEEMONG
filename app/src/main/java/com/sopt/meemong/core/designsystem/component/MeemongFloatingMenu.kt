@@ -86,7 +86,8 @@ enum class MeemongFloatingMenuType(
  * 홈 및 빠른매칭 화면에서 사용하는 플로팅 메뉴입니다.
  *
  * 열림 상태는 호출부에서 관리합니다.
- * 항목을 선택하면 닫힘 이벤트를 전달한 뒤 선택 콜백을 호출합니다.
+ * 항목을 선택하면 선택 콜백만 호출하며, 열림 상태는 유지합니다.
+ * 항목 선택 후 메뉴를 닫아야 하는 경우 호출부에서 열림 상태를 변경합니다.
  * 실제 화면 이동과 화면 바깥 여백은 호출부에서 처리합니다.
  */
 
@@ -111,10 +112,7 @@ fun MeemongFloatingMenu(
         if (isExpanded) {
             FloatingMenuPanel(
                 items = type.items,
-                onItemClick = { item ->
-                    onExpandedChange(false)
-                    onItemClick(item)
-                },
+                onItemClick = onItemClick,
             )
         }
 
