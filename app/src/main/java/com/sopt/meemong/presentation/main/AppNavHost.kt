@@ -1,7 +1,8 @@
 package com.sopt.meemong.presentation.main
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
@@ -41,10 +42,12 @@ fun AppNavHost(
     NavHost(
         navController = navController,
         startDestination = Home,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-        popEnterTransition = { EnterTransition.None },
-        popExitTransition = { ExitTransition.None },
+        enterTransition = { fadeIn(tween(200)) },
+        exitTransition = { fadeOut(tween(200)) },
+        popEnterTransition = { fadeIn(tween(200)) },
+        popExitTransition = { fadeOut(tween(200)) },
+        predictivePopEnterTransition = { fadeIn(tween(200)) },
+        predictivePopExitTransition = { fadeOut(tween(200)) },
         modifier = modifier,
     ) {
         composable<Home> {
