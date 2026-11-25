@@ -2,7 +2,6 @@ package com.sopt.meemong.presentation.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +32,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
+import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
@@ -55,7 +55,7 @@ fun HomeProductCard(
             .clip(shape)
             .background(MeemongTheme.colors.white)
             .border(width = 1.dp, color = MeemongTheme.colors.gray300, shape = shape)
-            .clickable(onClick = onClick)
+            .noRippleClickable(onClick = onClick)
             // 테두리 두께(1dp)만큼 안쪽부터 콘텐츠 배치
             .padding(1.dp),
     ) {
