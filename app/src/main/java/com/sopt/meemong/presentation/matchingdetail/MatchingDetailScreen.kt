@@ -87,6 +87,7 @@ private fun MatchingDetailScreen(
                     serviceInfo = serviceInfo,
                     onLikeClick = onLikeClick,
                     isLikeEnabled = state.isPostLoaded && !state.isLikeLoading,
+                    isPostLoaded = state.isPostLoaded
                 )
 
                 DetailTab(
