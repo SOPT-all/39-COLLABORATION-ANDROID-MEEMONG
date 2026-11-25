@@ -49,7 +49,12 @@ fun QuickMatchingRoute(
         onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
         onPostClick = { postId ->
-            if (postId !in uiState.pendingLikePostIds) onPostClick(postId)
+            if (
+                uiState.selectedCategory == MatchingCategory.DESIGNER &&
+                postId !in uiState.pendingLikePostIds
+            ) {
+                onPostClick(postId)
+            }
         },
         onLikeChange = viewModel::onLikeChange,
         onMoreClick = {},
