@@ -139,7 +139,8 @@ private fun QuickMatchingScreen(
                 onItemClick = {},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = 116.dp),
+                    // 홈 바텀바 기본 높이 58.dp + 플로팅 버튼 하단 여백 22.dp
+                    .padding(end = 20.dp, bottom = 80.dp),
             )
         }
     }
