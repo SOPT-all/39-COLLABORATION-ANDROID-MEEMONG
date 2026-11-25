@@ -23,6 +23,7 @@ fun QuickMatchingGeneralSection(
     onPostClick: (Long) -> Unit,
     onLikeChange: (Long, Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    pendingLikePostIds: Set<Long> = emptySet(),
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -47,7 +48,7 @@ fun QuickMatchingGeneralSection(
                     availableTimes = post.availableTimes,
                     treatmentTypes = post.treatmentTypes.map { it.label },
                     isLiked = post.isLiked,
-                    isLikeLoading = false,
+                    isLikeLoading = post.postId in pendingLikePostIds,
                     onLikeChange = { isLiked ->
                         onLikeChange(post.postId, isLiked)
                     },

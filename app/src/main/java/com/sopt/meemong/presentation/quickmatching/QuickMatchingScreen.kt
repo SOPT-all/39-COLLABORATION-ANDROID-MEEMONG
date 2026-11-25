@@ -77,6 +77,12 @@ private fun QuickMatchingScreen(
             uiState.modelRecommendedPosts to uiState.modelGeneralPosts
     }
 
+    val pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
+        uiState.pendingLikePostIds
+    } else {
+        emptySet()
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -106,11 +112,7 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingRecommendedSection(
                         posts = recommendedPosts,
-                        pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
-                            uiState.pendingLikePostIds
-                        } else {
-                            emptySet()
-                        },
+                        pendingLikePostIds = pendingLikePostIds,
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         onMoreClick = onMoreClick,
@@ -125,6 +127,7 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingGeneralSection(
                         posts = generalPosts,
+                        pendingLikePostIds = pendingLikePostIds,
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         modifier = Modifier.padding(horizontal = 20.dp),
