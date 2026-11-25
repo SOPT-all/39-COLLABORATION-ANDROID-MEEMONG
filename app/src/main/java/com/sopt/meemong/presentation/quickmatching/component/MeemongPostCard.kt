@@ -48,6 +48,7 @@ import java.util.Locale
  * @param treatmentTypes 매퍼에서 한글로 변환한 시술 유형 목록입니다.
  * @param createdAtMillis createdAt을 변환한 밀리초 단위 Unix timestamp입니다.
  * @param isLikeLoading 해당 공고의 좋아요 요청 진행 여부입니다.
+ * @param wrapMetadata 가격 유형과 시술 가능 시간을 생략하지 않고 줄바꿈합니다.
  *
  * API 요청, 상태 갱신과 상세 화면 이동은 호출부에서 처리합니다.
  */
@@ -67,6 +68,7 @@ fun MeemongPostCard(
     onLikeChange: (Boolean) -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapMetadata: Boolean = false,
 ) {
     val likeInteractionSource = remember {
         MutableInteractionSource()
@@ -176,7 +178,7 @@ fun MeemongPostCard(
                 ) {
                     Text(
                         text = priceType.label,
-                        modifier = Modifier.widthIn(max = 88.dp),
+                        modifier = if (wrapMetadata) Modifier else Modifier.widthIn(max = 88.dp),
                         color = when (priceType) {
                             PriceType.FREE,
                             PriceType.REVIEW ->
@@ -189,8 +191,8 @@ fun MeemongPostCard(
                                 MeemongTheme.colors.green
                         },
                         style = MeemongTheme.typography.body2.sb14,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
+                        maxLines = if (wrapMetadata) Int.MAX_VALUE else 1,
+                        overflow = if (wrapMetadata) TextOverflow.Clip else TextOverflow.Ellipsis,
                     )
 
                     if (displayPrice != null) {
@@ -219,11 +221,11 @@ fun MeemongPostCard(
 
                             Text(
                                 text = availableTimes.joinToString(", ") { it.label },
-                                modifier = Modifier.widthIn(max = 88.dp),
+                                modifier = if (wrapMetadata) Modifier else Modifier.widthIn(max = 88.dp),
                                 color = MeemongTheme.colors.gray600,
                                 style = MeemongTheme.typography.body2.m14,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
+                                maxLines = if (wrapMetadata) Int.MAX_VALUE else 1,
+                                overflow = if (wrapMetadata) TextOverflow.Clip else TextOverflow.Ellipsis,
                             )
                         }
                     }

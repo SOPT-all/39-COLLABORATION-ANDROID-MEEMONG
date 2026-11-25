@@ -132,6 +132,7 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingGeneralSection(
                         posts = generalPosts,
+                        wrapMetadata = uiState.selectedCategory == MatchingCategory.MODEL,
                         pendingLikePostIds = pendingLikePostIds,
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
