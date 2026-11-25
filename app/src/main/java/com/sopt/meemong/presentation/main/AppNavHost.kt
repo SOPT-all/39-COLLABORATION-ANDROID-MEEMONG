@@ -67,7 +67,6 @@ fun AppNavHost(
 
             QuickMatchingRoute(
                 viewModel = viewModel,
-                onBackClick = { navController.popBackStack() },
                 onPostClick = { postId ->
                     navController.navigate(MatchingDetail(postId)) {
                         launchSingleTop = true
@@ -94,7 +93,6 @@ fun AppNavHost(
 
             MatchingDetailRoute(
                 viewModel = viewModel,
-                navigateToBack = { navController.popBackStack() },
             )
         }
     }
