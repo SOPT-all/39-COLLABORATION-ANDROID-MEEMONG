@@ -49,7 +49,12 @@ fun QuickMatchingRoute(
         onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
         onPostClick = { postId ->
-            if (postId !in uiState.pendingLikePostIds) onPostClick(postId)
+            if (
+                uiState.selectedCategory == MatchingCategory.DESIGNER &&
+                postId !in uiState.pendingLikePostIds
+            ) {
+                onPostClick(postId)
+            }
         },
         onLikeChange = viewModel::onLikeChange,
         onMoreClick = {},
@@ -75,6 +80,12 @@ private fun QuickMatchingScreen(
 
         MatchingCategory.MODEL ->
             uiState.modelRecommendedPosts to uiState.modelGeneralPosts
+    }
+
+    val pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
+        uiState.pendingLikePostIds
+    } else {
+        emptySet()
     }
 
     Column(
@@ -106,11 +117,7 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingRecommendedSection(
                         posts = recommendedPosts,
-                        pendingLikePostIds = if (uiState.selectedCategory == MatchingCategory.DESIGNER) {
-                            uiState.pendingLikePostIds
-                        } else {
-                            emptySet()
-                        },
+                        pendingLikePostIds = pendingLikePostIds,
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         onMoreClick = onMoreClick,
@@ -125,6 +132,8 @@ private fun QuickMatchingScreen(
                 item {
                     QuickMatchingGeneralSection(
                         posts = generalPosts,
+                        wrapMetadata = uiState.selectedCategory == MatchingCategory.MODEL,
+                        pendingLikePostIds = pendingLikePostIds,
                         onPostClick = onPostClick,
                         onLikeChange = onLikeChange,
                         modifier = Modifier.padding(horizontal = 20.dp),
@@ -139,7 +148,8 @@ private fun QuickMatchingScreen(
                 onItemClick = {},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = 116.dp),
+                    // 홈 바텀바 기본 높이 58.dp + 플로팅 버튼 하단 여백 22.dp
+                    .padding(end = 20.dp, bottom = 80.dp),
             )
         }
     }

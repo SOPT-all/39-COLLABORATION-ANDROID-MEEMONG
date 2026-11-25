@@ -39,14 +39,15 @@ class QuickMatchingViewModel(
 
     fun onLikeChange(postId: Long, isLiked: Boolean) {
         val state = currentState
-        val recommendedPost = state.designerRecommendedPosts
-            .firstOrNull { it.postId == postId }
-            .takeIf { state.selectedCategory == MatchingCategory.DESIGNER }
-
-        if (recommendedPost == null) {
-            updateLocalLikeState(postId, isLiked)
+        if (state.selectedCategory == MatchingCategory.MODEL) {
+            updateModelLikeState(postId, isLiked)
             return
         }
+
+        val previousIsLiked = state.designerRecommendedPosts
+            .firstOrNull { it.postId == postId }?.isLiked
+            ?: state.designerGeneralPosts.firstOrNull { it.postId == postId }?.isLiked
+            ?: return
 
         if (postId in state.pendingLikePostIds) return
 
@@ -59,8 +60,7 @@ class QuickMatchingViewModel(
             refreshAfterLike = true
         }
 
-        val previousIsLiked = recommendedPost.isLiked
-        updateRecommendedLikeState(postId, isLiked)
+        updateDesignerLikeState(postId, isLiked)
 
         viewModelScope.launch {
             try {
@@ -68,9 +68,9 @@ class QuickMatchingViewModel(
                     postId = postId,
                     isLiked = isLiked,
                 ).onSuccess { serverIsLiked ->
-                    updateRecommendedLikeState(postId, serverIsLiked)
+                    updateDesignerLikeState(postId, serverIsLiked)
                 }.onFailure { exception ->
-                    updateRecommendedLikeState(postId, previousIsLiked)
+                    updateDesignerLikeState(postId, previousIsLiked)
                     Log.e("QuickMatchingViewModel", "공고 찜 변경 실패", exception)
                 }
             } finally {
@@ -84,17 +84,7 @@ class QuickMatchingViewModel(
         }
     }
 
-    private fun updateRecommendedLikeState(postId: Long, isLiked: Boolean) {
-        updateState {
-            copy(
-                designerRecommendedPosts = designerRecommendedPosts.map { post ->
-                    if (post.postId == postId) post.copy(isLiked = isLiked) else post
-                },
-            )
-        }
-    }
-
-    private fun updateLocalLikeState(postId: Long, isLiked: Boolean) {
+    private fun updateDesignerLikeState(postId: Long, isLiked: Boolean) {
         updateState {
             copy(
                 designerRecommendedPosts = designerRecommendedPosts.map { post ->
@@ -103,6 +93,13 @@ class QuickMatchingViewModel(
                 designerGeneralPosts = designerGeneralPosts.map { post ->
                     if (post.postId == postId) post.copy(isLiked = isLiked) else post
                 },
+            )
+        }
+    }
+
+    private fun updateModelLikeState(postId: Long, isLiked: Boolean) {
+        updateState {
+            copy(
                 modelRecommendedPosts = modelRecommendedPosts.map { post ->
                     if (post.postId == postId) post.copy(isLiked = isLiked) else post
                 },
