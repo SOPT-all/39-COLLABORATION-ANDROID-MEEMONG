@@ -33,7 +33,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun QuickMatchingRoute(
     viewModel: QuickMatchingViewModel,
-    onBackClick: () -> Unit,
     onPostClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -46,7 +45,6 @@ fun QuickMatchingRoute(
 
     QuickMatchingScreen(
         uiState = uiState,
-        onBackClick = onBackClick,
         onCategoryClick = viewModel::onCategoryClick,
         onPostClick = { postId ->
             if (
@@ -65,7 +63,6 @@ fun QuickMatchingRoute(
 @Composable
 private fun QuickMatchingScreen(
     uiState: QuickMatchingUiState,
-    onBackClick: () -> Unit,
     onCategoryClick: (MatchingCategory) -> Unit,
     onPostClick: (Long) -> Unit,
     onLikeChange: (Long, Boolean) -> Unit,
@@ -95,7 +92,6 @@ private fun QuickMatchingScreen(
     ) {
         MeemongTopBar(
             title = "빠른 매칭",
-            onBackClick = onBackClick,
         )
 
         SegmentControlRow(
@@ -172,7 +168,6 @@ private fun QuickMatchingPreview(category: MatchingCategory) {
     MeemongTheme {
         QuickMatchingScreen(
             uiState = QuickMatchingUiState.dummy.copy(selectedCategory = category),
-            onBackClick = {},
             onCategoryClick = {},
             onPostClick = {},
             onLikeChange = { _, _ -> },

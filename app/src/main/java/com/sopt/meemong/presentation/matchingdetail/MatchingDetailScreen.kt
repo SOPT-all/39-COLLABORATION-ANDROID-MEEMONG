@@ -35,7 +35,6 @@ import com.sopt.meemong.presentation.matchingdetail.component.ServiceInfoCard
 @Composable
 fun MatchingDetailRoute(
     viewModel: MatchingDetailViewModel,
-    navigateToBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -44,7 +43,6 @@ fun MatchingDetailRoute(
 
     MatchingDetailScreen(
         state = uiState,
-        onBackClick = { if (!uiState.isLikeLoading) navigateToBack() },
         onLikeClick = viewModel::onLikeClick,
         onTabClick = viewModel::onTabClick,
         modifier = modifier,
@@ -54,7 +52,6 @@ fun MatchingDetailRoute(
 @Composable
 private fun MatchingDetailScreen(
     state: MatchingDetailUiState,
-    onBackClick: () -> Unit,
     onLikeClick: () -> Unit,
     onTabClick: (TabType) -> Unit,
     modifier: Modifier = Modifier,
@@ -75,28 +72,9 @@ private fun MatchingDetailScreen(
             modifier = Modifier.weight(1f),
         ) {
             item {
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    ImageCarousel(
-                        urlList = state.postImageUrls,
-                    )
-
-                    IconButton(
-                        onClick = onBackClick,
-                        modifier = Modifier
-                            .align(Alignment.TopStart)
-                            .padding(start = 6.dp, top = 64.dp)
-                            .size(44.dp),
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.ic_back_24),
-                            contentDescription = "뒤로가기",
-                            tint = if (state.postImageUrls.isEmpty()) MeemongTheme.colors.black else MeemongTheme.colors.white,
-                            modifier = Modifier.size(24.dp),
-                        )
-                    }
-                }
+                ImageCarousel(
+                    urlList = state.postImageUrls,
+                )
 
                 DesignerProfile(
                     profileImage = designerProfileInfo.designerProfileImageUrl,
@@ -109,6 +87,7 @@ private fun MatchingDetailScreen(
                     serviceInfo = serviceInfo,
                     onLikeClick = onLikeClick,
                     isLikeEnabled = state.isPostLoaded && !state.isLikeLoading,
+                    isPostLoaded = state.isPostLoaded
                 )
 
                 DetailTab(
@@ -146,7 +125,6 @@ private fun MatchingDetailScreenPreview() {
     MeemongTheme {
         MatchingDetailScreen(
             state = MatchingDetailUiState.dummy,
-            onBackClick = {},
             onLikeClick = {},
             onTabClick = {},
         )

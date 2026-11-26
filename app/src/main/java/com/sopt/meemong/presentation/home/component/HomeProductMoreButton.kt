@@ -1,6 +1,7 @@
 package com.sopt.meemong.presentation.home.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +20,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.meemong.R
-import com.sopt.meemong.core.common.extensions.noRippleClickable
 import com.sopt.meemong.core.designsystem.theme.MeemongTheme
 
 @Composable
@@ -33,7 +33,7 @@ fun HomeProductMoreButton(
             .heightIn(min = 38.dp)
             .clip(RoundedCornerShape(5.dp))
             .background(MeemongTheme.colors.background)
-            .noRippleClickable(onClick = onClick)
+            .clickable(onClick = onClick)
             .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,

@@ -40,6 +40,7 @@ fun ServiceInfoCard(
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
     isLikeEnabled: Boolean = true,
+    isPostLoaded: Boolean = true,
 ) {
     Column(
         modifier = modifier
@@ -57,6 +58,7 @@ fun ServiceInfoCard(
             displayPrice = serviceInfo.displayPrice,
             onLikeClick = onLikeClick,
             isLikeEnabled = isLikeEnabled,
+            isPostLoaded = isPostLoaded,
         )
 
         InfoSection(
@@ -79,7 +81,8 @@ private fun Header(
     onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
     isLikeEnabled: Boolean = true,
-) {
+    isPostLoaded: Boolean = true,
+    ) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -95,7 +98,7 @@ private fun Header(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            PriceTypeChip(label = priceType)
+            if (isPostLoaded) PriceTypeChip(label = priceType)
 
             originalPrice?.let {
                 PriceStrikethrough(price = it)
@@ -109,7 +112,7 @@ private fun Header(
             ) {
                 discountRate?.let {
                     Text(
-                        text = "${discountRate?.toInt()}%",
+                        text = "${discountRate.toInt()}%",
                         style = MeemongTheme.typography.title.sb20,
                         color = MeemongTheme.colors.red,
                     )
@@ -257,6 +260,30 @@ private fun ServiceInfoCardPreview() {
                     shopName = "아벨라움",
                 ),
                 onLikeClick = { firstLiked = !firstLiked },
+            )
+
+            ServiceInfoCard(
+                serviceInfo = ServiceInfo(
+                    title = "뭘 해야 될 지 모르겠다면?",
+                    isLiked = firstLiked,
+                    priceType = PriceType.REVIEW,
+                    discountRate = 50.0,
+                    originalPrice = 35_000,
+                    displayPrice = 5_000,
+                    treatmentTypes = listOf(TreatmentType.CUT),
+                    signatures = listOf(
+                        TreatmentType.CUT,
+                        TreatmentType.PERM,
+                        TreatmentType.COLORED
+                    ),
+                    shootingRanges = listOf(
+                        ShootingRangeType.FACE_EXPOSURE,
+                        ShootingRangeType.VIDEO
+                    ),
+                    shopName = "아벨라움",
+                ),
+                onLikeClick = { firstLiked = !firstLiked },
+                isPostLoaded = false,
             )
 
             ServiceInfoCard(
